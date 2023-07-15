@@ -20,9 +20,18 @@ export default class CountryAdd extends Command {
 
   public async run(): Promise<void> {
     await setup();
-    const {flags: {countries}} = await this.parse(CountryAdd)
-    const countriesArray = parseCliArray(countries);
-    await Location.insertMany(countriesArray.map((country) => ({country})))
+    const {flags: {cities}} = await this.parse(CountryAdd)
+    const countriesArray = parseCliArray(cities);
+    for (const country of countriesArray) {
+
+      const exists = await Location.exists({country: titlize(country)})
+      if (!exists) {
+        const location = new Location({country});
+        await location.save()
+      }
+
+    }
+    console.log(`Countries Added`)
 
     await cleanup();
 

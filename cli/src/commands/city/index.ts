@@ -2,7 +2,7 @@ import {Args, Command, Flags} from '@oclif/core'
 import {cleanup, setup} from "../../config/config";
 import {Location} from "../../models/locations.model";
 
-export default class Country extends Command {
+export default class City extends Command {
 
 
   protected async catch(err: Error): Promise<void> {
@@ -14,9 +14,11 @@ export default class Country extends Command {
 
     await setup();
 
-    const locations = await Location.find({},{country:true}).lean()
+    const locations = await Location.find().lean()
 
-    console.log(locations.map((doc) => doc.country));
+    locations.forEach((location) => {
+      console.log(`${location.country} : [${location.cities.join(" , ")}]`)
+    })
 
     await cleanup();
   }

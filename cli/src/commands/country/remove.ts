@@ -20,8 +20,9 @@ export default class CountryRemove extends Command {
     await setup();
     const {flags: {countries}} = await this.parse(CountryRemove)
     const countriesArray = parseCliArray(countries);
-    await Location.deleteMany({country: countriesArray.map((name) => titlize(name))})
+    await Location.deleteMany({country:countriesArray})
 
+    console.log(`Countries Removed`)
 
     await cleanup();
 
