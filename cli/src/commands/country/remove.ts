@@ -2,12 +2,13 @@ import {Args, Command, Flags} from '@oclif/core'
 import {cleanup, setup} from "../../config/config";
 import {Location} from "../../models/locations.model";
 import {titlize} from "../../utils/utils";
+import {parseCliArray} from "../../utils/parser";
 
 export default class CountryRemove extends Command {
 
 
   static flags = {
-    name: Flags.string({multiple: true, char: "n"}),
+    countries: Flags.string({required: true}),
   }
 
   protected async catch(err: Error): Promise<void> {
@@ -17,9 +18,9 @@ export default class CountryRemove extends Command {
 
   public async run(): Promise<void> {
     await setup();
-    const {flags: {name}} = await this.parse(CountryRemove)
-    if (name)
-      await Location.deleteMany({country: name.map((name) => titlize(name))})
+    const {flags: {countries}} = await this.parse(CountryRemove)
+    const countriesArray = parseCliArray(countries);
+    await Location.deleteMany({country: countriesArray.map((name) => titlize(name))})
 
 
     await cleanup();

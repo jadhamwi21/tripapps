@@ -2,12 +2,14 @@ import {Args, Command, Flags} from '@oclif/core'
 import {cleanup, setup} from "../../config/config";
 import {Location} from "../../models/locations.model";
 import {titlize} from "../../utils/utils";
+import {string} from "zod";
+import {parseCliArray} from "../../utils/parser";
 
 export default class CountryAdd extends Command {
 
 
   static flags = {
-    name: Flags.string({multiple: true, char: "n"}),
+    countries: Flags.string({required: true}),
   }
 
 
@@ -18,10 +20,9 @@ export default class CountryAdd extends Command {
 
   public async run(): Promise<void> {
     await setup();
-    const {flags: {name}} = await this.parse(CountryAdd)
-    if (name)
-      await Location.insertMany(name.map((country) => ({country})))
-
+    const {flags: {countries}} = await this.parse(CountryAdd)
+    const countriesArray = parseCliArray(countries);
+    await Location.insertMany(countriesArray.map((country) => ({country})))
 
     await cleanup();
 

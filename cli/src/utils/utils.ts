@@ -1,7 +1,9 @@
+export const titlize = (str: string) => {
+  const hasSpace = str.split(" ").length !== 0;
+  if (hasSpace) {
 
-
-
-
-export const titlize = (str:string) => {
-  return str[0].toUpperCase() + str.slice(1)
+    return str.split(" ").map((str) => str[0].toUpperCase() + str.slice(1).toLowerCase()).join(" ")
+  }else{
+    return str[0].toUpperCase() + str.slice(1).toLowerCase()
+  }
 }
