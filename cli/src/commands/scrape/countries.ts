@@ -6,8 +6,8 @@ import {CountriesScrapper} from "../../scrappers/countries.scrapper";
 import {saveCountriesApps} from "../../services/countries_apps.service";
 import {promptCitiesOrCountries} from "../../prompters/prompter";
 import {ICountriesScrapperConstructorArgs} from "../../ts/interfaces/scrappers.interfaces";
-import {saveApps} from "../../models/apps.model";
 import {AppsMap} from "../../scrappers/scrapper";
+import {saveApps} from "../../services/apps.service";
 
 const inquirer = require("inquirer")
 
@@ -31,7 +31,7 @@ export default class ScrapeCountries extends Command {
 
     const scrapeResults = await countriesScrapper.scrape();
 
-    await saveApps(AppsMap);
+    await saveApps();
     await saveCountriesApps(scrapeResults)
 
     await cleanup();
