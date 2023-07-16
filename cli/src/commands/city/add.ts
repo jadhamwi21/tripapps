@@ -1,6 +1,6 @@
 import {Args, Command, Flags} from '@oclif/core'
 import {cleanup, setup} from "../../config/config";
-import {Location} from "../../models/locations.model";
+import {Location} from "../../models/location.model";
 import {titlize} from "../../utils/utils";
 import {string} from "zod";
 import {parseCliArray} from "../../utils/parser";

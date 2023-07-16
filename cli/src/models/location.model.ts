@@ -18,6 +18,9 @@ locationSchema.pre("save", async function (next) {
 })
 
 
+
+
+
 export const Location = model("Locations", locationSchema)
 
 

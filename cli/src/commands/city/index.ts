@@ -1,6 +1,6 @@
 import {Args, Command, Flags} from '@oclif/core'
 import {cleanup, setup} from "../../config/config";
-import {Location} from "../../models/locations.model";
+import {Location} from "../../models/location.model";
 
 export default class City extends Command {
 

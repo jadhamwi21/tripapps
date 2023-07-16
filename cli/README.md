@@ -74,10 +74,10 @@ DESCRIPTION
 
 EXAMPLES
   $ oex hello friend --from oclif
-  hello friend from oclif! (./src/commands/hello/index.ts)
+  hello friend from oclif! (./src/commands/hello/countries.ts)
 ```
 
-_See code: [dist/commands/hello/index.ts](https://github.com/TripApps/hello-world/blob/v0.0.0/dist/commands/hello/index.ts)_
+_See code: [dist/commands/hello/countries.ts](https://github.com/TripApps/hello-world/blob/v0.0.0/dist/commands/hello/index.ts)_
 
 ## `tripapps-cli hello world`
 
@@ -377,10 +377,10 @@ DESCRIPTION
 
 EXAMPLES
   $ oex hello friend --from oclif
-  hello friend from oclif! (./src/commands/hello/index.ts)
+  hello friend from oclif! (./src/commands/hello/countries.ts)
 ```
 
-_See code: [dist/commands/hello/index.ts](https://github.com/oclif/hello-world/blob/v0.0.0/dist/commands/hello/index.ts)_
+_See code: [dist/commands/hello/countries.ts](https://github.com/oclif/hello-world/blob/v0.0.0/dist/commands/hello/index.ts)_
 
 ## `oex hello world`
 

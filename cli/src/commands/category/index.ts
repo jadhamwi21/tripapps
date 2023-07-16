@@ -1,6 +1,7 @@
 import {Args, Command, Flags} from '@oclif/core'
 import {cleanup, setup} from "../../config/config";
 import {Location} from "../../models/location.model";
+import {Category} from "../../models/category.model";
 
 export default class Country extends Command {
 
@@ -14,9 +15,9 @@ export default class Country extends Command {
 
     await setup();
 
-    const locations = await Location.find({},{country:true}).lean()
+    const categories = await Category.find({},{category:true}).lean()
 
-    console.log(locations.map((doc) => doc.country));
+    console.log(categories.map((doc) => doc.category));
 
     await cleanup();
   }

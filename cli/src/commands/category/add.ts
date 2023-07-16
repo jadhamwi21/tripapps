@@ -4,12 +4,13 @@ import {Location} from "../../models/location.model";
 import {titlize} from "../../utils/utils";
 import {string} from "zod";
 import {parseCliArray} from "../../utils/parser";
+import {Category} from "../../models/category.model";
 
-export default class CountryAdd extends Command {
+export default class CategoryAdd extends Command {
 
 
   static flags = {
-    countries: Flags.string({required: true}),
+    categories: Flags.string({required: true}),
   }
 
 
@@ -20,18 +21,17 @@ export default class CountryAdd extends Command {
 
   public async run(): Promise<void> {
     await setup();
-    const {flags: {countries}} = await this.parse(CountryAdd)
-    const countriesArray = parseCliArray(countries);
-    for (const country of countriesArray) {
-
-      const exists = await Location.exists({country: titlize(country)})
+    const {flags: {categories}} = await this.parse(CategoryAdd)
+    const categoriesArray = parseCliArray(categories);
+    for (const category of categoriesArray) {
+      const exists = await Location.exists({category: titlize(category)})
       if (!exists) {
-        const location = new Location({country});
+        const location = new Category({category});
         await location.save()
       }
 
     }
-    console.log(`Countries Added`)
+    console.log(`Categories Added`)
 
     await cleanup();
 

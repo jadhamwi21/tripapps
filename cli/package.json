@@ -20,13 +20,23 @@
     "@oclif/core": "^2",
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^2.4.7",
+    "app-store-scraper": "^0.17.0",
+    "cli-table": "^0.3.11",
+    "cli-table3": "^0.6.3",
+    "console-table-printer": "^2.11.2",
+    "files": "^2.2.2",
+    "google-play-scraper": "^9.1.1",
+    "inquirer": "^8.0.0",
+    "lodash": "^4.17.21",
     "mongoose": "^7.3.4",
     "zod": "^3.21.4"
   },
   "devDependencies": {
     "@oclif/test": "^2.3.28",
     "@types/chai": "^4",
+    "@types/cli-table": "^0.3.1",
     "@types/dotenv-flow": "^3.2.0",
+    "@types/inquirer": "^9.0.3",
     "@types/mocha": "^9.0.0",
     "@types/node": "^16.18.38",
     "chai": "^4",
@@ -50,8 +60,7 @@
       "@oclif/plugin-plugins"
     ],
     "topicSeparator": ":",
-    "topics": {
-    }
+    "topics": {}
   },
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",

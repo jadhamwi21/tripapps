@@ -3,12 +3,13 @@ import {cleanup, setup} from "../../config/config";
 import {Location} from "../../models/location.model";
 import {titlize} from "../../utils/utils";
 import {parseCliArray} from "../../utils/parser";
+import {Category} from "../../models/category.model";
 
-export default class CountryRemove extends Command {
+export default class CategoryRemove extends Command {
 
 
   static flags = {
-    countries: Flags.string({required: true}),
+    categories: Flags.string({required: true}),
   }
 
   protected async catch(err: Error): Promise<void> {
@@ -18,11 +19,11 @@ export default class CountryRemove extends Command {
 
   public async run(): Promise<void> {
     await setup();
-    const {flags: {countries}} = await this.parse(CountryRemove)
-    const countriesArray = parseCliArray(countries);
-    await Location.deleteMany({country:countriesArray})
+    const {flags: {categories}} = await this.parse(CategoryRemove)
+    const categoriesArray = parseCliArray(categories);
+    await Category.deleteMany({category:categoriesArray})
 
-    console.log(`Countries Removed`)
+    console.log(`Categories Removed`)
 
     await cleanup();
 
