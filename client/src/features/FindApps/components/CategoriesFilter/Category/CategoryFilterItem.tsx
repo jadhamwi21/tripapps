@@ -15,12 +15,21 @@ const CategoryFilterItem: FunctionComponent<Props> = ({
   checked = false,
   animationDelay = 0,
 }) => {
-  const [springs] = useSpring(() => ({
-    from: { opacity: 0, x: -5 },
-    to: { opacity: 1, x: 0 },
-    config: { duration: 1 },
-    delay: animationDelay,
-  }));
+  const [springs] = useSpring(() =>
+    checked
+      ? {
+          from: { opacity: 0, x: -5 },
+          to: { opacity: 1, x: 0 },
+          config: { duration: 0.15 * 1000 },
+          delay: animationDelay,
+        }
+      : {
+          from: { opacity: 0 },
+          to: { opacity: 1 },
+          config: { duration: 0.15 * 1000 },
+          delay: animationDelay,
+        },
+  );
   return (
     <S.Container
       style={springs}

@@ -19,7 +19,7 @@ const CategoriesFilter: FunctionComponent<Props> = ({ categories }) => {
     clearSubCategory,
   } = useCategoriesFilter(categories);
   const [containerSprings] = useSpring(
-    () => ({ from: { opacity: 0 }, to: { opacity: 1 } }),
+    () => ({ from: { opacity: 0 }, to: { opacity: 1 }, delay: 0.2 * 1000 }),
     [],
   );
   return (
