@@ -13,11 +13,31 @@ body {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth;
 }
 
 :root {
     --black: #0C1117;
-    --light-grey: #393E46;
+    --light-black: #393E46;
     --yellow: #FFD369;
     --grey: #EEEEEE;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--black);
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: var(--yellow);
+
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--grey);
 }

@@ -22,7 +22,7 @@ const Headline = () => {
           priority
           src={TravellingManImage}
           alt={"travelling_man"}
-          height={500}
+          height={400}
         />
       </S.TravellingMan>
     </S.Container>

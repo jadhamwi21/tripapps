@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { animated } from "@react-spring/web";
 
 const Container = styled.section`
-  height: 70vh;
+  height: calc(100vh - 75px);
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -10,7 +10,8 @@ const Container = styled.section`
 `;
 
 const TravellingMan = styled(animated.div)`
-  align-self: flex-end;
+  display: grid;
+  place-items: center;
 `;
 
 export const S = { TravellingMan, Container };

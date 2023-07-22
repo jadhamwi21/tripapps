@@ -16,10 +16,11 @@ export class CountriesScrapper {
   public async scrape() {
     const scrapeResults: ScrapeResults = {}
     for (const country of this.countries) {
-      ux.action.start(`Scrapping ${country} Apps`)
+
       scrapeResults[country] = {};
       const entries = Object.entries(this.categories);
       for (const [category, subcategories] of entries) {
+        ux.action.start(`Scrapping ${category} Apps in ${country}`)
         scrapeResults[country]![category] = {apps: [], subcategories: {}}
         scrapeResults[country]![category]!.apps = await scrapeApps(`${category} apps in ${country}`);
         scrapeResults[country]![category]!.subcategories = {}
@@ -28,7 +29,6 @@ export class CountriesScrapper {
         }
       }
     }
-    ux.action.stop()
     return scrapeResults;
   }
 }

@@ -1,12 +1,16 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import { S } from "@/layouts/Header/Header.styled";
 import Navigation from "@/layouts/Header/Navigation/Navigation";
+import { useSpring } from "@react-spring/web";
 
-type Props = {};
+const Header = () => {
+  const [props, api] = useSpring(() => ({
+    from: { y: -200, opacity: 0 },
+    to: { y: 0, opacity: 1 },
+  }));
 
-const Header: FunctionComponent<Props> = (props) => {
   return (
-    <S.Container>
+    <S.Container style={props}>
       <S.AppName>TripApps</S.AppName>
       <Navigation />
     </S.Container>

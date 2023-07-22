@@ -1,14 +1,18 @@
 import styled from "styled-components";
 import Link from "next/link";
+import { animated } from "@react-spring/web";
 
-const Container = styled.header`
-  background-color: transparent;
+const Container = styled(animated.header)`
+  background-color: var(--black);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   padding: 0 2em;
   height: 75px;
+  position: sticky;
+  top: 0;
+  width: 100%;
 `;
 
 const AppName = styled.p`

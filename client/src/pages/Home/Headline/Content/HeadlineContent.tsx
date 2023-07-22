@@ -38,7 +38,7 @@ const HeadlineContent = () => {
           , with ease.
           <Button
             variant={"primary"}
-            onClick={() => router.push("/find_apps")}
+            onClick={() => router.push("/apps")}
             styles={{ marginTop: "0.75em" }}
           >
             Start Packing

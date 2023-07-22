@@ -3,6 +3,8 @@
 import StyledComponentsRegistry from "@/lib/registry";
 import "./index.css";
 import Header from "@/layouts/Header/Header";
+import React from "react";
+import { AnimatePresence } from "framer-motion";
 
 export const metadata = {
   title: "Next.js",
@@ -19,7 +21,10 @@ export default function RootLayout({
       <body>
         <StyledComponentsRegistry>
           <Header />
-          {children}
+          <AnimatePresence mode="wait" initial={false}>
+            {children}
+          </AnimatePresence>
+          {/*<Footer />*/}
         </StyledComponentsRegistry>
       </body>
     </html>

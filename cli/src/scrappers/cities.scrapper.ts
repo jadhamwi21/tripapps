@@ -16,11 +16,11 @@ export class CitiesScrapper {
   public async scrape() {
     const scrapeResults: ScrapeResults = {}
     for (const city of this.cities) {
-      ux.action.start(`Scrapping ${city} Apps`)
+
       scrapeResults[city] = {};
       const entries = Object.entries(this.categories);
       for (const [category, subcategories] of entries) {
-
+        ux.action.start(`Scrapping ${category} Apps in ${city}`)
         scrapeResults[city]![category] = {apps: [], subcategories: {}}
         scrapeResults[city]![category]!.apps = await scrapeApps(`${category} apps in ${city}`);
         scrapeResults[city]![category]!.subcategories = {}

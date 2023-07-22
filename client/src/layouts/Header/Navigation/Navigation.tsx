@@ -9,16 +9,13 @@ type Props = {};
 
 const Navigation: FunctionComponent<Props> = (props) => {
   const pathname = usePathname();
-  const isLinkSelected = linkSelectedChecker(pathname);
+  const isLinkSelected = linkSelectedChecker(pathname!);
   return (
     <S.NavigationsContainer>
       <S.NavigationItem $selected={isLinkSelected("/")} href={"/"}>
         Home
       </S.NavigationItem>
-      <S.NavigationItem
-        $selected={isLinkSelected("/find_apps")}
-        href={"/find_apps"}
-      >
+      <S.NavigationItem $selected={isLinkSelected("/apps")} href={"/apps"}>
         Find Apps
       </S.NavigationItem>
       <S.NavigationItem $selected={isLinkSelected("/about")} href={"/about"}>
