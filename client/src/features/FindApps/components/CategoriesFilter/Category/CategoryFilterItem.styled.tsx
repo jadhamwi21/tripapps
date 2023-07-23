@@ -9,9 +9,14 @@ const Container = styled(animated.div)`
   gap: 0.5em;
   color: var(--grey);
   font-size: 15px;
-  width: fit-content;
   transition: all 0.2s ease;
   height: fit-content;
+  background-color: var(--light-black);
+  padding: 0.5em 1em;
+  width: 100%;
+  max-width: 200px;
+  flex: 1;
+  border-radius: 4px;
 
   &:hover {
     cursor: pointer;
@@ -19,16 +24,10 @@ const Container = styled(animated.div)`
   }
 `;
 
-const SelectBox = styled.div<{ $checked: boolean }>`
-  height: 10px;
-  width: 10px;
-  border-radius: 2px;
-  border: solid 1px var(--yellow);
-
-  background-color: ${({ $checked }) =>
-    $checked ? "var(--yellow)" : "transparent"};
-  display: grid;
-  place-items: center;
+const IconContainer = styled.div`
+  height: fit-content;
+  width: fit-content;
+  color: var(--yellow);
 `;
 
-export const S = { Container, SelectBox };
+export const S = { Container, IconContainer };

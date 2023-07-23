@@ -11,18 +11,17 @@ import {
 
 type Props = {};
 
-const CATEGORIES: ComponentProps<typeof CategoryItem>[] = [
+export const CATEGORIES_ICONS: ComponentProps<typeof CategoryItem>[] = [
   { name: "Transportation", icon: faCar },
   { name: "Shopping", icon: faCartShopping },
   { name: "Government", icon: faHandshake },
   { name: "Delivery", icon: faTruck },
   { name: "Dating", icon: faHeart },
 ];
-
 const Categories: FunctionComponent<Props> = () => {
   return (
     <S.Container>
-      {CATEGORIES.map((categoryProps, index) => (
+      {CATEGORIES_ICONS.map((categoryProps, index) => (
         <CategoryItem {...categoryProps} key={categoryProps.name} />
       ))}
     </S.Container>

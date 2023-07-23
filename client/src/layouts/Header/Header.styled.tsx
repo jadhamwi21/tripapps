@@ -13,6 +13,7 @@ const Container = styled(animated.header)`
   position: sticky;
   top: 0;
   width: 100%;
+  z-index: 20;
 `;
 
 const AppName = styled.p`

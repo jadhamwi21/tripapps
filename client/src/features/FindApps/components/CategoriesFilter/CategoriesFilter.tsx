@@ -6,8 +6,6 @@ import { useCategoriesFilter } from "@/features/FindApps/hooks/useCategoriesFilt
 import CategoryFilterItem from "@/features/FindApps/components/CategoriesFilter/Category/CategoryFilterItem";
 import { useSpring } from "@react-spring/web";
 
-interface OwnProps {}
-
 type Props = { categories: ISeeds["categories"] };
 
 const CategoriesFilter: FunctionComponent<Props> = ({ categories }) => {

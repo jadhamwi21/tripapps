@@ -21,6 +21,7 @@ body {
     --light-black: #393E46;
     --yellow: #FFD369;
     --grey: #EEEEEE;
+    --blue: #3282FF;
 }
 
 ::-webkit-scrollbar {

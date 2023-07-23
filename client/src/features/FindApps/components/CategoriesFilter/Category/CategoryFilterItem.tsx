@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from "react";
 import { S } from "@/features/FindApps/components/CategoriesFilter/Category/CategoryFilterItem.styled";
 import { useSpring } from "@react-spring/web";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 type Props = {
   name: string;
@@ -37,7 +39,9 @@ const CategoryFilterItem: FunctionComponent<Props> = ({
         onClick(name);
       }}
     >
-      <S.SelectBox $checked={checked} />
+      <S.IconContainer>
+        <FontAwesomeIcon icon={checked ? faMinus : faPlus} />
+      </S.IconContainer>
       <div>{name}</div>
     </S.Container>
   );
