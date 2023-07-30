@@ -1,8 +1,17 @@
 import { useMemo, useState } from "react";
 import { ISeeds } from "@/ts/interfaces/seeds.interfaces";
 
-export const useCategoriesFilter = (categories: ISeeds["categories"]) => {
-  const [filter, setFilter] = useState({ category: "", subcategory: "" });
+export const useCategoriesFilter = (
+  categories: ISeeds["categories"],
+  initialFilter?: {
+    category?: string;
+    subcategory?: string;
+  },
+) => {
+  const [filter, setFilter] = useState({
+    category: initialFilter?.category ?? "",
+    subcategory: initialFilter?.subcategory ?? "",
+  });
 
   const categoriesItems = useMemo(() => {
     if (filter.category && filter.subcategory) {

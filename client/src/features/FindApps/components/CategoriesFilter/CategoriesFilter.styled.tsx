@@ -27,17 +27,10 @@ const SelectedCategoriesContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   gap: 0.5em;
-  border-bottom: solid 1px rgba(255, 255, 255, 0.05);
-`;
-
-const AppliedFiltersText = styled.p`
-  color: var(--grey);
-  font-size: 14px;
 `;
 
 export const S = {
   Container,
   AvailableCategoriesContainer,
   SelectedCategoriesContainer,
-  AppliedFiltersText,
 };

@@ -2,16 +2,10 @@ import React from "react";
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import FindAppsSearch from "@/features/FindApps/components/Search/FindAppsSearch";
 import axios, { AxiosResponse } from "axios";
-import { ISeeds } from "@/ts/interfaces/seeds.interfaces";
 import CategoriesFilter from "@/features/FindApps/components/CategoriesFilter/CategoriesFilter";
 import { IApp } from "@/ts/interfaces/apps.interfaces";
 import AppsList from "@/features/FindApps/components/AppsList/AppsList";
-
-export const getSeeds = async () => {
-  return await axios
-    .get<{}, AxiosResponse<ISeeds>>("http://localhost:80/seeds")
-    .then(({ data }) => data);
-};
+import { getSeeds } from "@/api/seeds";
 
 export const getAllApps = async () => {
   return await axios

@@ -6,16 +6,27 @@ import { useCategoriesFilter } from "@/features/FindApps/hooks/useCategoriesFilt
 import CategoryFilterItem from "@/features/FindApps/components/CategoriesFilter/Category/CategoryFilterItem";
 import { useSpring } from "@react-spring/web";
 
-type Props = { categories: ISeeds["categories"] };
+type Props = {
+  categories: ISeeds["categories"];
+  initialCategory?: string;
+  initialSubcategory?: string;
+};
 
-const CategoriesFilter: FunctionComponent<Props> = ({ categories }) => {
+const CategoriesFilter: FunctionComponent<Props> = ({
+  categories,
+  initialCategory,
+  initialSubcategory,
+}) => {
   const {
     categoryOnClick,
     categoriesItems,
     filter,
     clearCategory,
     clearSubCategory,
-  } = useCategoriesFilter(categories);
+  } = useCategoriesFilter(categories, {
+    category: initialCategory,
+    subcategory: initialSubcategory,
+  });
   const [containerSprings] = useSpring(
     () => ({ from: { opacity: 0 }, to: { opacity: 1 }, delay: 0.2 * 1000 }),
     [],

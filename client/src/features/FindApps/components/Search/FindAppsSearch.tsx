@@ -7,11 +7,19 @@ import { useSearch } from "@/features/FindApps/hooks/useSearch";
 import { useSpring } from "@react-spring/web";
 import Button from "@/components/Button/Button";
 
-type Props = { locations: ISeeds["locations"] };
+type Props = {
+  locations: ISeeds["locations"];
+  initialCountry?: string;
+  initialCity?: string;
+};
 
-const FindAppsSearch: FunctionComponent<Props> = ({ locations }) => {
+const FindAppsSearch: FunctionComponent<Props> = ({
+  locations,
+  initialCity,
+  initialCountry,
+}) => {
   const { cityOnChange, countryOnChange, search, countries, cities } =
-    useSearch(locations);
+    useSearch(locations, { country: initialCountry, city: initialCity });
   const [citySprings] = useSpring(
     () => ({
       opacity: cities.length !== 0 ? 1 : 0,

@@ -1,8 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { ISeeds } from "@/ts/interfaces/seeds.interfaces";
 
-export const useSearch = (locations: ISeeds["locations"]) => {
-  const [search, setSearch] = useState({ country: "", city: "" });
+export const useSearch = (
+  locations: ISeeds["locations"],
+  initialValues?: { country?: string; city?: string },
+) => {
+  const [search, setSearch] = useState({
+    country: initialValues?.country ?? "",
+    city: initialValues?.city ?? "",
+  });
 
   const countryOnChange = (val: string) => {
     setSearch((prev) => ({ ...prev, country: val }));
