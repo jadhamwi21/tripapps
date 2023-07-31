@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { animated } from "@react-spring/web";
 
-const Container = styled.div`
+const Container = styled.div<{ $disabled: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -13,6 +13,9 @@ const Container = styled.div`
   min-width: 100px;
   font-size: 15px;
   user-select: none;
+  transition: all 0.5s ease;
+  opacity: ${({ $disabled }) => ($disabled ? "0.4" : "1")};
+  pointer-events: ${({ $disabled }) => ($disabled ? "none" : "initial")};
 `;
 
 const Label = styled.p`
@@ -56,16 +59,20 @@ const List = styled(animated.ul)`
   z-index: 5;
 `;
 
-const ListItem = styled.li`
+const ListItem = styled.li<{ $selected: boolean }>`
   color: var(--grey);
   padding: 0.5em;
   display: block;
   width: 100%;
+  background-color: ${({ $selected }) =>
+    $selected ? "var(--black)" : "initial"};
+  border-radius: 4px;
 
   &:hover {
     cursor: pointer;
-    background-color: var(--yellow);
-    color: var(--black);
+    background-color: ${({ $selected }) =>
+      $selected ? "var(--black)" : "var(--yellow)"};
+    color: ${({ $selected }) => ($selected ? "var(--grey)" : "var(--black)")};
   }
 `;
 

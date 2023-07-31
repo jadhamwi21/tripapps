@@ -6,28 +6,36 @@ import Select from "@/components/Select/Select";
 import { useSearch } from "@/features/FindApps/hooks/useSearch";
 import { useSpring } from "@react-spring/web";
 import Button from "@/components/Button/Button";
+import { useCategoriesFilter } from "@/features/FindApps/hooks/useCategoriesFilter";
+import CategoryFilterItem from "@/features/FindApps/components/CategoryFilterItem/CategoryFilterItem";
+import { useRouter } from "next/navigation";
 
 type Props = {
-  locations: ISeeds["locations"];
-  initialCountry?: string;
-  initialCity?: string;
+  seeds: ISeeds;
+  initials?: {
+    initialCountry?: string;
+    initialCity?: string;
+    initialCategory?: string;
+    initialSubcategory?: string;
+  };
 };
 
-const FindAppsSearch: FunctionComponent<Props> = ({
-  locations,
-  initialCity,
-  initialCountry,
-}) => {
+const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
   const { cityOnChange, countryOnChange, search, countries, cities } =
-    useSearch(locations, { country: initialCountry, city: initialCity });
-  const [citySprings] = useSpring(
-    () => ({
-      opacity: cities.length !== 0 ? 1 : 0,
-      y: cities.length !== 0 ? 0 : 4,
-      config: { tension: 300 },
-    }),
-    [cities],
-  );
+    useSearch(seeds.locations, {
+      country: initials?.initialCountry,
+      city: initials?.initialCity,
+    });
+  const {
+    categoryOnClick,
+    categoriesItems,
+    filter,
+    clearCategory,
+    clearSubCategory,
+  } = useCategoriesFilter(seeds.categories, {
+    category: initials?.initialCategory,
+    subcategory: initials?.initialSubcategory,
+  });
 
   const [containerSprings] = useSpring(
     () => ({
@@ -36,6 +44,26 @@ const FindAppsSearch: FunctionComponent<Props> = ({
     }),
     [],
   );
+
+  const router = useRouter();
+
+  const findHandler = () => {
+    const routePathArray = ["/apps"];
+    const { country, city } = search;
+    const { category, subcategory } = filter;
+    if (city) {
+      routePathArray.push(...["city", city]);
+    } else {
+      routePathArray.push(...["country", country]);
+    }
+    if (category) {
+      routePathArray.push(...["category", category]);
+      if (subcategory) {
+        routePathArray.push(subcategory);
+      }
+    }
+    router.push(routePathArray.join("/"));
+  };
 
   return (
     <S.Container style={containerSprings}>
@@ -49,19 +77,54 @@ const FindAppsSearch: FunctionComponent<Props> = ({
         value={search.country}
       />
 
-      {cities.length !== 0 && (
-        <Select
-          label={"City"}
-          list={cities.map((country) => ({
-            name: country,
-            value: country,
-          }))}
-          onChange={cityOnChange}
-          value={search.city}
-        />
-      )}
+      <Select
+        disabled={cities.length === 0}
+        label={"City"}
+        list={cities.map((country) => ({
+          name: country,
+          value: country,
+        }))}
+        onChange={cityOnChange}
+        value={search.city}
+      />
 
-      <Button variant={"primary"}>Find</Button>
+      <Button
+        variant={"primary"}
+        onClick={findHandler}
+        disabled={!search.country && !search.city}
+      >
+        Find
+      </Button>
+      <S.FiltersContainer>
+        {(filter.category || filter.subcategory) && (
+          <S.SelectedCategoriesContainer>
+            {filter.category && (
+              <CategoryFilterItem
+                name={filter.category}
+                onClick={clearCategory}
+                checked
+              />
+            )}
+            {filter.subcategory && (
+              <CategoryFilterItem
+                name={filter.subcategory}
+                onClick={clearSubCategory}
+                checked
+              />
+            )}
+          </S.SelectedCategoriesContainer>
+        )}
+        <S.AvailableCategoriesContainer>
+          {categoriesItems.map((category, index) => (
+            <CategoryFilterItem
+              name={category}
+              key={category}
+              onClick={categoryOnClick}
+              animationDelay={(index / 8) * 1000}
+            />
+          ))}
+        </S.AvailableCategoriesContainer>
+      </S.FiltersContainer>
     </S.Container>
   );
 };

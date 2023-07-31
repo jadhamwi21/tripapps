@@ -6,6 +6,7 @@ type Props = {
   onClick?: () => void;
   variant: "primary" | "secondary";
   styles?: React.CSSProperties;
+  disabled?: boolean;
 };
 
 const Button: FunctionComponent<Props> = ({
@@ -13,9 +14,15 @@ const Button: FunctionComponent<Props> = ({
   variant,
   children,
   onClick,
+  disabled = false,
 }) => {
   return (
-    <S.Button onClick={onClick} $variant={variant} style={styles}>
+    <S.Button
+      onClick={onClick}
+      $variant={variant}
+      style={styles}
+      $disabled={disabled}
+    >
       {children}
     </S.Button>
   );

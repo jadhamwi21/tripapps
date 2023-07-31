@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from "react";
-import { S } from "@/features/FindApps/components/CategoriesFilter/Category/CategoryFilterItem.styled";
+import { S } from "@/features/FindApps/components/CategoryFilterItem/CategoryFilterItem.styled";
 import { useSpring } from "@react-spring/web";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useIsFirstRender } from "usehooks-ts";
 
 type Props = {
   name: string;
@@ -17,6 +18,7 @@ const CategoryFilterItem: FunctionComponent<Props> = ({
   checked = false,
   animationDelay = 0,
 }) => {
+  const firstRender = useIsFirstRender();
   const [springs] = useSpring(() =>
     checked
       ? {
@@ -29,6 +31,7 @@ const CategoryFilterItem: FunctionComponent<Props> = ({
           from: { opacity: 0 },
           to: { opacity: 1 },
           config: { duration: 0.15 * 1000 },
+
           delay: animationDelay,
         },
   );

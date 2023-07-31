@@ -19,6 +19,7 @@ type Props = {
   styles?: React.CSSProperties;
   label?: string;
   list: IListItem[];
+  disabled?: boolean;
 };
 
 const Select: FunctionComponent<Props> = ({
@@ -27,6 +28,7 @@ const Select: FunctionComponent<Props> = ({
   label,
   styles,
   list,
+  disabled = false,
 }) => {
   const [toggled, setToggled] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -35,20 +37,30 @@ const Select: FunctionComponent<Props> = ({
   });
   useEffect(() => {
     if (toggled) {
-      api.start({ opacity: 1, y: 2, pointerEvents: "initial" });
+      api.start({
+        opacity: 1,
+        y: 5,
+        pointerEvents: "initial",
+        visibility: "visible",
+      });
     } else {
-      api.start({ opacity: 0, y: 5, pointerEvents: "none" });
+      api.start({
+        visibility: "hidden",
+        opacity: 0,
+        y: 10,
+        pointerEvents: "none",
+      });
     }
   }, [toggled]);
 
   const [springs, api] = useSpring(() => ({
     opacity: 0,
-    y: 20,
+    y: 10,
     pointerEvents: "none",
-    config: { tension: 200 },
+    visibility: "hidden",
   }));
   return (
-    <S.Container style={styles} ref={ref}>
+    <S.Container style={styles} ref={ref} $disabled={disabled}>
       {label && <S.Label>{label}</S.Label>}
       <S.Field onClick={() => setToggled((prev) => !prev)}>
         {list.find((listItem) => listItem.value === value)?.name}
@@ -63,6 +75,7 @@ const Select: FunctionComponent<Props> = ({
       <S.List style={springs as any}>
         {list.map((listItem) => (
           <S.ListItem
+            $selected={listItem.value === value}
             key={listItem.value}
             onClick={() => {
               onChange(listItem.value);

@@ -2,8 +2,10 @@ import React, { FunctionComponent } from "react";
 import { S } from "@/layouts/Header/Navigation/Navigation.styled";
 import { usePathname } from "next/navigation";
 
-const linkSelectedChecker = (currentRoute: string) => (linkRoute: string) =>
-  currentRoute === linkRoute;
+const linkSelectedChecker =
+  (currentRoute: string) =>
+  (linkRoute: string, partial = false) =>
+    !partial ? currentRoute === linkRoute : currentRoute.startsWith(linkRoute);
 
 type Props = {};
 
@@ -15,7 +17,10 @@ const Navigation: FunctionComponent<Props> = (props) => {
       <S.NavigationItem $selected={isLinkSelected("/")} href={"/"}>
         Home
       </S.NavigationItem>
-      <S.NavigationItem $selected={isLinkSelected("/apps")} href={"/apps"}>
+      <S.NavigationItem
+        $selected={isLinkSelected("/apps", true)}
+        href={"/apps"}
+      >
         Find Apps
       </S.NavigationItem>
       <S.NavigationItem $selected={isLinkSelected("/about")} href={"/about"}>

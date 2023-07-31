@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { ISeeds } from "@/ts/interfaces/seeds.interfaces";
+import { useIsFirstRender } from "usehooks-ts";
 
 export const useSearch = (
   locations: ISeeds["locations"],
@@ -23,8 +24,10 @@ export const useSearch = (
     return locations[search.country] ?? [];
   }, [search.country]);
 
+  const isFirstRender = useIsFirstRender();
+
   useEffect(() => {
-    cityOnChange("");
+    if (!isFirstRender) cityOnChange("");
   }, [search.country]);
 
   return { countryOnChange, cityOnChange, search, countries, cities };

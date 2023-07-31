@@ -2,7 +2,6 @@ import React from "react";
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import { getSeeds } from "@/api/seeds";
 import FindAppsSearch from "@/features/FindApps/components/Search/FindAppsSearch";
-import CategoriesFilter from "@/features/FindApps/components/CategoriesFilter/CategoriesFilter";
 import AppsList from "@/features/FindApps/components/AppsList/AppsList";
 import { getCountryAppsInCategory } from "@/api/apps";
 import { fixParams } from "@/utils/utils";
@@ -29,12 +28,11 @@ const page = async ({ params }: Props) => {
   return (
     <PageWrapper>
       <FindAppsSearch
-        locations={seeds.locations}
-        initialCountry={paramsFixed.country}
-      />
-      <CategoriesFilter
-        categories={seeds.categories}
-        initialCategory={paramsFixed.category}
+        seeds={seeds}
+        initials={{
+          initialCountry: params.country,
+          initialCategory: params.category,
+        }}
       />
       <AppsList apps={apps} />
     </PageWrapper>
