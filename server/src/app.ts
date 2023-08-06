@@ -7,9 +7,7 @@ import { ErrorMiddleware } from "./middlewares/error.middleware";
 import { CountriesRouter } from "./routers/countries.router";
 import cors from "cors";
 import { CitiesRouter } from "./routers/cities.router";
-import { App } from "./models/apps.model";
-import { IApp } from "./ts/interfaces/apps.interfaces";
-import { StatusCodes } from "http-status-codes";
+import { AppsRouter } from "./routers/apps.router";
 
 (async function () {
   dotenv.config({ path: path.join(__dirname, "../.env") });
@@ -22,11 +20,9 @@ import { StatusCodes } from "http-status-codes";
   app.use("/countries", CountriesRouter);
   app.use("/cities", CitiesRouter);
 
-  app.get("/apps", async (req, res, next) => {
-    const apps: IApp[] = await App.find({});
+  app.use("/apps", AppsRouter);
 
-    return res.status(StatusCodes.OK).send(apps);
-  });
+  app.use("/icons", express.static(path.join(__dirname, "./assets/icons")));
 
   app.use(ErrorMiddleware);
 

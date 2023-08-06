@@ -5,11 +5,22 @@ const Container = styled.footer`
   width: 100%;
   background-color: var(--black);
   color: var(--yellow);
-  filter: brightness(150%);
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  border-top: solid 1px var(--light-black);
+  padding: 0 2em;
+  gap: 1em;
+`;
+const Separator = styled.div`
+  height: 90%;
+  width: 1px;
+  background-color: var(--light-black);
+  margin: 0 2em;
 `;
 
 export const S = {
   Container,
+  Separator,
 };

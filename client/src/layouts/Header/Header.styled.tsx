@@ -14,6 +14,7 @@ const Container = styled(animated.header)`
   top: 0;
   width: 100%;
   z-index: 20;
+  border-bottom: solid 1px var(--light-black);
 `;
 
 const AppName = styled.p`

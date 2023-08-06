@@ -1,5 +1,5 @@
 import React from "react";
-import { S } from "@/pages/Home/Headline/Content/HeadlineContent.styled";
+import { S } from "@/modules/Home/Headline/Content/HeadlineContent.styled";
 import Button from "@/components/Button/Button";
 import { useRouter } from "next/navigation";
 import { useSpring } from "@react-spring/web";

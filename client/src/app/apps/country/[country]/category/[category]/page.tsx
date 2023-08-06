@@ -30,8 +30,8 @@ const page = async ({ params }: Props) => {
       <FindAppsSearch
         seeds={seeds}
         initials={{
-          initialCountry: params.country,
-          initialCategory: params.category,
+          initialCountry: paramsFixed.country,
+          initialCategory: paramsFixed.category,
         }}
       />
       <AppsList apps={apps} />

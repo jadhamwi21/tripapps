@@ -25,9 +25,12 @@ const Container = styled(animated.div)`
 `;
 
 const IconContainer = styled.div`
-  height: fit-content;
-  width: fit-content;
-  color: var(--yellow);
+  height: 15px;
+  width: 15px;
+
+  & svg {
+    fill: var(--yellow) !important;
+  }
 `;
 
 export const S = { Container, IconContainer };

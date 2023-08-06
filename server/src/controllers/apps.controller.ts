@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { LocationType } from "../ts/types/locations.types";
-import { getAppsService } from "../services/apps.service";
+import { getAppsService, GlobalAppsService } from "../services/apps.service";
 import { IAppsFilter } from "../ts/interfaces/apps.interfaces";
 import { titlize } from "../utils/utils";
 
@@ -22,11 +22,21 @@ const getAppsHandler = async (
   const { params, query } = req;
   const { country, city } = params;
   const filter = query;
-  const locationType: LocationType = country ? "country" : "city";
-  const location = titlize(country ?? city ?? "") as string;
+  const locationType: LocationType = country
+    ? "country"
+    : city
+    ? "city"
+    : "global";
+  const location =
+    country || city ? (titlize(country ?? city ?? "") as string) : undefined;
   try {
     const appsService = getAppsService(locationType);
-    const apps = await appsService.findApps(location, filter);
+    let apps: unknown;
+    if (appsService instanceof GlobalAppsService) {
+      apps = await appsService.findApps(filter);
+    } else {
+      apps = await appsService.findApps(location, filter);
+    }
     return res.status(200).send(apps);
   } catch (e) {
     next(e);

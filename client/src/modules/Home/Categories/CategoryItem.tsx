@@ -1,15 +1,13 @@
 import React, { FunctionComponent } from "react";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { S } from "@/pages/Home/Categories/Categories.styled";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { S } from "@/modules/Home/Categories/Categories.styled";
 import { useInView } from "@react-spring/web";
+import { useRouter } from "next/navigation";
 
 type Props = {
   name: string;
-  icon: IconProp;
 };
 
-const CategoryItem: FunctionComponent<Props> = ({ name, icon }) => {
+const CategoryItem: FunctionComponent<Props> = ({ name }) => {
   const [ref, springs] = useInView(
     () => ({
       from: {
@@ -25,9 +23,14 @@ const CategoryItem: FunctionComponent<Props> = ({ name, icon }) => {
       rootMargin: "100px",
     },
   );
+  const router = useRouter();
   return (
-    <S.CategoryContainer ref={ref} style={springs}>
-      <FontAwesomeIcon icon={icon} size={"2x"} color={"var(--yellow)"} />
+    <S.CategoryContainer
+      ref={ref}
+      style={springs}
+      onClick={() => router.push(`/apps/category/${name}`)}
+    >
+      <S.CategoryIcon src={`http://localhost:80/icons/${name}.svg`} />
       <S.CategoryName>{name}</S.CategoryName>
     </S.CategoryContainer>
   );

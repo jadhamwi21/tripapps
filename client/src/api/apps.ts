@@ -65,3 +65,19 @@ export const getCityAppsInCategoryAndSubcategory = async (
     )
     .then(({ data }) => data);
 };
+
+export const getAppsInCategory = async (category: string) => {
+  return await axios
+    .get<{}, AxiosResponse<IApp[]>>(
+      `http://localhost:80/apps?category=${category}`,
+    )
+    .then(({ data }) => data);
+};
+
+export const getAppsInSubCategory = async (subcategory: string) => {
+  return await axios
+    .get<{}, AxiosResponse<IApp[]>>(
+      `http://localhost:80/apps?subcategory=${subcategory}`,
+    )
+    .then(({ data }) => data);
+};

@@ -1,14 +1,14 @@
 "use client";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import { ISeeds } from "@/ts/interfaces/seeds.interfaces";
 import { S } from "@/features/FindApps/components/Search/FindAppsSearch.styled";
 import Select from "@/components/Select/Select";
 import { useSearch } from "@/features/FindApps/hooks/useSearch";
 import { useSpring } from "@react-spring/web";
-import Button from "@/components/Button/Button";
 import { useCategoriesFilter } from "@/features/FindApps/hooks/useCategoriesFilter";
 import CategoryFilterItem from "@/features/FindApps/components/CategoryFilterItem/CategoryFilterItem";
 import { useRouter } from "next/navigation";
+import { useIsFirstRender } from "usehooks-ts";
 
 type Props = {
   seeds: ISeeds;
@@ -46,24 +46,47 @@ const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
   );
 
   const router = useRouter();
-
-  const findHandler = () => {
-    const routePathArray = ["/apps"];
-    const { country, city } = search;
-    const { category, subcategory } = filter;
-    if (city) {
-      routePathArray.push(...["city", city]);
-    } else {
-      routePathArray.push(...["country", country]);
+  const isFirstRender = useIsFirstRender();
+  useEffect(() => {
+    if (
+      (search.city ||
+        search.country ||
+        filter.subcategory ||
+        filter.category) &&
+      !isFirstRender
+    ) {
+      const timeoutId = setTimeout(() => {
+        if (!search.country && !search.city) {
+          if (filter.subcategory) {
+            router.push(
+              `/apps/category/${filter.category}/${filter.subcategory}`,
+            );
+          } else {
+            router.push(`/apps/category/${filter.category}`);
+          }
+        } else {
+          const routePathArray = ["/apps"];
+          const { country, city } = search;
+          const { category, subcategory } = filter;
+          if (city) {
+            routePathArray.push(...["city", city]);
+          } else {
+            routePathArray.push(...["country", country]);
+          }
+          if (category) {
+            routePathArray.push(...["category", category]);
+            if (subcategory) {
+              routePathArray.push(subcategory);
+            }
+          }
+          router.push(routePathArray.join("/"));
+        }
+      }, 1000);
+      return () => {
+        clearTimeout(timeoutId);
+      };
     }
-    if (category) {
-      routePathArray.push(...["category", category]);
-      if (subcategory) {
-        routePathArray.push(subcategory);
-      }
-    }
-    router.push(routePathArray.join("/"));
-  };
+  }, [search, filter]);
 
   return (
     <S.Container style={containerSprings}>
@@ -88,13 +111,6 @@ const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
         value={search.city}
       />
 
-      <Button
-        variant={"primary"}
-        onClick={findHandler}
-        disabled={!search.country && !search.city}
-      >
-        Find
-      </Button>
       <S.FiltersContainer>
         {(filter.category || filter.subcategory) && (
           <S.SelectedCategoriesContainer>

@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from "react";
 import { S } from "@/features/FindApps/components/CategoryFilterItem/CategoryFilterItem.styled";
 import { useSpring } from "@react-spring/web";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useIsFirstRender } from "usehooks-ts";
+import { ReactSVG } from "react-svg";
 
 type Props = {
   name: string;
@@ -43,7 +42,7 @@ const CategoryFilterItem: FunctionComponent<Props> = ({
       }}
     >
       <S.IconContainer>
-        <FontAwesomeIcon icon={checked ? faMinus : faPlus} />
+        <ReactSVG src={`http://localhost:80/icons/${name}.svg`} />
       </S.IconContainer>
       <div>{name}</div>
     </S.Container>

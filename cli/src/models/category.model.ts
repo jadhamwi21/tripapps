@@ -16,6 +16,4 @@ categorySchema.pre("save", async function (next) {
   next();
 });
 
-export const Category = model("CategoriesFilter", categorySchema);
-
-
+export const Category = model("Category", categorySchema);

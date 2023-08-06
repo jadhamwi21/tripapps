@@ -7,8 +7,7 @@ const appSchema = new Schema({
   score: Number,
   downloads: String,
   ratings: Number,
+  keywords: [String],
 });
 
 export const App = model("Apps", appSchema);
-
-
