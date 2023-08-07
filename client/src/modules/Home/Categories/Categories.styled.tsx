@@ -7,6 +7,7 @@ const Container = styled.section`
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
   padding: 2em;
+  width: 100%;
 `;
 
 const CategoryContainer = styled(animated.div)`

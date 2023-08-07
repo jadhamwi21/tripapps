@@ -11,6 +11,7 @@ interface OwnProps {}
 interface IListItem {
   name: string;
   value: any;
+  icon?: string;
 }
 
 type Props = {
@@ -59,11 +60,19 @@ const Select: FunctionComponent<Props> = ({
     pointerEvents: "none",
     visibility: "hidden",
   }));
+
+  const selectedItem = list.find((listItem) => listItem.value === value);
+
   return (
     <S.Container style={styles} ref={ref} $disabled={disabled}>
       {label && <S.Label>{label}</S.Label>}
       <S.Field onClick={() => setToggled((prev) => !prev)}>
-        {list.find((listItem) => listItem.value === value)?.name}
+        {selectedItem && (
+          <S.Value>
+            {selectedItem.icon && <S.Icon src={selectedItem.icon} />}
+            <div>{selectedItem.value}</div>
+          </S.Value>
+        )}
         <S.ToggleContainer>
           {toggled ? (
             <FontAwesomeIcon icon={faCaretUp} />
@@ -82,7 +91,8 @@ const Select: FunctionComponent<Props> = ({
               setToggled(false);
             }}
           >
-            {listItem.name}
+            {listItem.icon && <S.Icon src={listItem.icon} />}
+            <div>{listItem.name}</div>
           </S.ListItem>
         ))}
       </S.List>

@@ -21,6 +21,7 @@ interface IProps {
 }
 
 const page = async ({ params }: IProps) => {
+  console.log(params);
   const paramsFixed = fixParams(params);
   const seeds = await getSeeds();
   const apps = await getAppsInCategory(paramsFixed.category);

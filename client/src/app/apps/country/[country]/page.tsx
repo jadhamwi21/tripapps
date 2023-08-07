@@ -22,7 +22,6 @@ const page = async ({ params }: Props) => {
   const paramsFixed = fixParams(params);
   const seeds = await getSeeds();
   const apps = await getCountryApps(paramsFixed.country);
-  console.log(paramsFixed);
   return (
     <PageWrapper>
       <FindAppsSearch

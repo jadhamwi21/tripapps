@@ -55,36 +55,31 @@ const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
         filter.category) &&
       !isFirstRender
     ) {
-      const timeoutId = setTimeout(() => {
-        if (!search.country && !search.city) {
-          if (filter.subcategory) {
-            router.push(
-              `/apps/category/${filter.category}/${filter.subcategory}`,
-            );
-          } else {
-            router.push(`/apps/category/${filter.category}`);
-          }
+      if (!search.country && !search.city) {
+        if (filter.subcategory) {
+          router.push(
+            `/apps/category/${filter.category.toLowerCase()}/${filter.subcategory.toLowerCase()}`,
+          );
         } else {
-          const routePathArray = ["/apps"];
-          const { country, city } = search;
-          const { category, subcategory } = filter;
-          if (city) {
-            routePathArray.push(...["city", city]);
-          } else {
-            routePathArray.push(...["country", country]);
-          }
-          if (category) {
-            routePathArray.push(...["category", category]);
-            if (subcategory) {
-              routePathArray.push(subcategory);
-            }
-          }
-          router.push(routePathArray.join("/"));
+          router.push(`/apps/category/${filter.category.toLowerCase()}`);
         }
-      }, 1000);
-      return () => {
-        clearTimeout(timeoutId);
-      };
+      } else {
+        const routePathArray = ["/apps"];
+        const { country, city } = search;
+        const { category, subcategory } = filter;
+        if (city) {
+          routePathArray.push(...["city", city.toLowerCase()]);
+        } else {
+          routePathArray.push(...["country", country.toLowerCase()]);
+        }
+        if (category) {
+          routePathArray.push(...["category", category.toLowerCase()]);
+          if (subcategory) {
+            routePathArray.push(subcategory.toLowerCase());
+          }
+        }
+        router.push(routePathArray.join("/"));
+      }
     }
   }, [search, filter]);
 
@@ -95,6 +90,7 @@ const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
         list={countries.map((country) => ({
           name: country,
           value: country,
+          icon: `http://localhost:80/icons/countries/${country}.svg`,
         }))}
         onChange={countryOnChange}
         value={search.country}

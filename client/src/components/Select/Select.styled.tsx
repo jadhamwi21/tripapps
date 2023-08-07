@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { animated } from "@react-spring/web";
+import { ReactSVG } from "react-svg";
 
 const Container = styled.div<{ $disabled: boolean }>`
   display: flex;
@@ -40,6 +41,14 @@ const Field = styled.div`
   align-items: center;
 `;
 
+const Value = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5em;
+`;
+
 const List = styled(animated.ul)`
   background-color: var(--light-black);
   position: absolute;
@@ -62,11 +71,15 @@ const List = styled(animated.ul)`
 const ListItem = styled.li<{ $selected: boolean }>`
   color: var(--grey);
   padding: 0.5em;
-  display: block;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
   width: 100%;
   background-color: ${({ $selected }) =>
     $selected ? "var(--black)" : "initial"};
   border-radius: 4px;
+  gap: 0.5em;
 
   &:hover {
     cursor: pointer;
@@ -83,4 +96,22 @@ const ToggleContainer = styled.div`
   transform: translateY(-50%) translateX(4%);
 `;
 
-export const S = { Container, Label, Field, List, ListItem, ToggleContainer };
+const Icon = styled(ReactSVG)`
+  & > div {
+    height: 15px;
+    width: 15px;
+    display: grid;
+    place-items: center;
+  }
+`;
+
+export const S = {
+  Container,
+  Label,
+  Field,
+  List,
+  ListItem,
+  ToggleContainer,
+  Icon,
+  Value,
+};
