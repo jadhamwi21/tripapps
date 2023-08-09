@@ -12,7 +12,7 @@ type Props = {
 const Countries: FunctionComponent<Props> = ({ countries }: Props) => {
   const router = useRouter();
   return (
-    <Section title={"Search By Countries"}>
+    <Section title={"Search By Country"}>
       <S.Container>
         {countries.map((country) => (
           <Card
