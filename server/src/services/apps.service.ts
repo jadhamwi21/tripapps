@@ -94,11 +94,15 @@ class CitiesAppsService implements IAppsInLocationService {
 
 export class GlobalAppsService {
   async findApps(filter: Partial<IAppsFilter>) {
-    return App.find({
-      keywords: [filter.category, filter.subcategory].filter(
-        (current) => current !== undefined,
-      ),
-    });
+    if (!filter.category && !filter.subcategory) {
+      return App.find();
+    } else {
+      return App.find({
+        keywords: [filter.category, filter.subcategory].filter(
+          (current) => current !== undefined,
+        ),
+      });
+    }
   }
 }
 
