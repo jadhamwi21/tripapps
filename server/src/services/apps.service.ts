@@ -8,6 +8,7 @@ import { AppsType } from "../ts/types/apps.types";
 import { App } from "../models/apps.model";
 import _ from "lodash";
 import { titlize } from "../utils/utils";
+import { Category } from "../models/category.model";
 
 const mapAppsDocumentsToAppsObjects = async (
   appsDocuments: AppsType | null,
@@ -97,10 +98,24 @@ export class GlobalAppsService {
     if (!filter.category && !filter.subcategory) {
       return App.find();
     } else {
+      let spreadSubcategories: string[] = [];
+      if (!filter.subcategory && filter.category) {
+        const categoryDoc = await Category.findOne({
+          category: filter.category,
+        });
+        if (categoryDoc) {
+          spreadSubcategories = categoryDoc.subcategories;
+        }
+      }
+      console.log(spreadSubcategories);
       return App.find({
-        keywords: [filter.category, filter.subcategory].filter(
-          (current) => current !== undefined,
-        ),
+        keywords: {
+          $in: [
+            filter.category,
+            filter.subcategory,
+            ...spreadSubcategories,
+          ].filter((current) => current !== undefined),
+        },
       });
     }
   }

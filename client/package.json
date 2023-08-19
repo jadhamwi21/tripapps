@@ -31,12 +31,16 @@
     "react-dom": "18.2.0",
     "react-simple-typewriter": "^5.0.1",
     "react-svg": "^16.1.20",
+    "react-virtualized": "^9.22.5",
     "react-waypoint": "^10.3.0",
+    "react-window": "^1.8.9",
     "styled-components": "^6.0.4",
     "typescript": "5.1.6",
     "usehooks-ts": "^2.9.1"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.196"
+    "@types/lodash": "^4.14.196",
+    "@types/react-virtualized": "^9.21.22",
+    "@types/react-window": "^1.8.5"
   }
 }

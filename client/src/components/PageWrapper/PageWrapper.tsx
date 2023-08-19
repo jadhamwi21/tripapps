@@ -9,7 +9,6 @@ type Props = { children: React.ReactNode };
 
 const initial = { opacity: 0 };
 const animate = { opacity: 1 };
-const exit = { opacity: 0 };
 const transition = { duration: 0.6, ease: "easeInOut" };
 
 const PageWrapper: FunctionComponent<Props> = ({ children }) => {
@@ -20,6 +19,7 @@ const PageWrapper: FunctionComponent<Props> = ({ children }) => {
       animate={animate}
       key={key}
       transition={transition}
+      style={{ padding: "1em" }}
     >
       {children}
     </motion.div>

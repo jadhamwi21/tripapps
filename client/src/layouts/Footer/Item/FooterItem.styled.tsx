@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const ListItem = styled.li`
-  color: var(--grey);
+  color: rgba(255, 255, 255, 0.6);
   font-size: 14px;
   cursor: pointer;
   transition: all 0.12s ease;

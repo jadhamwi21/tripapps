@@ -6,7 +6,7 @@ const Container = styled.section`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  padding: 2em;
+  padding: 1em;
   width: 100%;
 `;
 

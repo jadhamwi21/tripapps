@@ -12,7 +12,7 @@ const page = async () => {
   return (
     <PageWrapper>
       <FindAppsSearch seeds={seeds} />
-      <AppsList apps={apps} />
+      <AppsList apps={apps} isPortfolio />
     </PageWrapper>
   );
 };

@@ -28,7 +28,7 @@ const page = async ({ params }: Props) => {
         seeds={seeds}
         initials={{ initialCountry: paramsFixed.country }}
       />
-      <AppsList apps={apps} />
+      <AppsList apps={apps} isPortfolio />
     </PageWrapper>
   );
 };

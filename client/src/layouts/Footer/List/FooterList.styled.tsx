@@ -9,7 +9,8 @@ const Container = styled.ul`
 `;
 
 const Header = styled.p`
-  color: var(--yellow);
+  color: var(--grey);
+  font-size: 13px;
   font-weight: 600;
 `;
 

@@ -10,6 +10,7 @@ const Container = styled.section`
 
 const Title = styled.h4`
   color: var(--yellow);
+  text-align: center;
 `;
 
 export const S = { Container, Title };

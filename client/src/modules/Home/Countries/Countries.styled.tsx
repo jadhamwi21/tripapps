@@ -19,7 +19,7 @@ const CountryContainer = styled(animated.div)`
   gap: 0.5em;
   border: solid 1px var(--yellow);
   border-radius: 4px;
-  padding: 2em;
+  padding: 1em;
   cursor: pointer;
 `;
 

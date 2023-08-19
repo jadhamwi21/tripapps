@@ -1,0 +1,25 @@
+version: '3'
+services:
+  cli:
+    image: node:latest
+    container_name: app_main
+    ports:
+      - 8000:8000
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      MYSQL_HOST: localhost
+      MYSQL_USER: root
+      MYSQL_PASSWORD:
+      MYSQL_DB: test
+  db:
+    image: mongo
+    container_name: tripapps_db
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ~/mongo:/data/db
+volumes:
+  mongodb:

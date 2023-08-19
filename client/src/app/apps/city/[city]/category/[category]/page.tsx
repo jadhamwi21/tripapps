@@ -41,7 +41,7 @@ const page = async ({ params }: Props) => {
           initialCountry: country,
         }}
       />
-      <AppsList apps={apps} />
+      <AppsList apps={apps} isPortfolio category={paramsFixed.category} />
     </PageWrapper>
   );
 };

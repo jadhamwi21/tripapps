@@ -19,7 +19,9 @@ const Countries: FunctionComponent<Props> = ({ countries }: Props) => {
             name={country}
             key={country}
             icon={`http://localhost:80/icons/countries/${country}.svg`}
-            onClick={() => router.push(`/apps/country/${country}`)}
+            onClick={() =>
+              router.push(`/apps/country/${country.toLowerCase()}`)
+            }
             type={"flag"}
           />
         ))}

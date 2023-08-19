@@ -18,7 +18,9 @@ const Categories: FunctionComponent<Props> = ({ categories }: Props) => {
             name={category}
             key={category}
             icon={`http://localhost:80/icons/categories/${category}.svg`}
-            onClick={() => router.push(`/apps/category/${category}`)}
+            onClick={() =>
+              router.push(`/apps/category/${category.toLowerCase()}`)
+            }
             type={"category"}
           />
         ))}

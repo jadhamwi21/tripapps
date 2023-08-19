@@ -5,7 +5,6 @@ import "./index.css";
 import Header from "@/layouts/Header/Header";
 import React from "react";
 import { AnimatePresence } from "framer-motion";
-import Footer from "@/layouts/Footer/Footer";
 
 export default function RootLayout({
   children,
@@ -20,7 +19,7 @@ export default function RootLayout({
           <AnimatePresence mode="wait" initial={false}>
             {children}
           </AnimatePresence>
-          <Footer />
+          {/*<Footer />*/}
         </StyledComponentsRegistry>
       </body>
     </html>

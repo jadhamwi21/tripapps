@@ -32,7 +32,7 @@ const page = async ({ params }: IProps) => {
         seeds={seeds}
         initials={{ initialCategory: paramsFixed.category }}
       />
-      <AppsList apps={apps} />
+      <AppsList apps={apps} isPortfolio category={paramsFixed.category} />
     </PageWrapper>
   );
 };

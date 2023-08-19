@@ -5,4 +5,5 @@ export interface IApp {
   score?: number;
   downloads?: string;
   ratings?: number;
+  keywords: string[];
 }
