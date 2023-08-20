@@ -42,7 +42,9 @@ const CategoryFilterItem: FunctionComponent<Props> = ({
       }}
     >
       <S.IconContainer>
-        <ReactSVG src={`http://localhost:80/icons/categories/${name}.svg`} />
+        <ReactSVG
+          src={`${process.env.NEXT_PUBLIC_API_URL}/icons/categories/${name}.svg`}
+        />
       </S.IconContainer>
       <div>{name}</div>
     </S.Container>

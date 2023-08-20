@@ -1,8 +1,9 @@
-import axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import { ISeeds } from "@/ts/interfaces/seeds.interfaces";
+import { axiosInstance } from "@/api/index";
 
 export const getSeeds = async () => {
-  return await axios
-    .get<{}, AxiosResponse<ISeeds>>("http://localhost:80/seeds")
+  return await axiosInstance
+    .get<{}, AxiosResponse<ISeeds>>("/seeds")
     .then(({ data }) => data);
 };

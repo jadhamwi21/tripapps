@@ -90,7 +90,7 @@ const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
         list={countries.map((country) => ({
           name: country,
           value: country,
-          icon: `http://localhost:80/icons/countries/${country}.svg`,
+          icon: `${process.env.NEXT_PUBLIC_API_URL}/icons/countries/${country}.svg`,
         }))}
         onChange={countryOnChange}
         value={search.country}
