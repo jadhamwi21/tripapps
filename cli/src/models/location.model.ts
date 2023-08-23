@@ -14,6 +14,4 @@ locationSchema.pre("save", async function (next) {
   next();
 });
 
-export const Location = model("Countries", locationSchema);
-
-
+export const Location = model("Locations", locationSchema);

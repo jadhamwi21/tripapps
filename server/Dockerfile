@@ -6,12 +6,12 @@ RUN npm install -g npm@9.8.1
 
 COPY ./*.json ./
 
-RUN npm ci
+RUN npm i
+
+RUN npm i -g typescript
 
 COPY ./ ./
 
-ENV PORT=80
-ENV MONGODB_URL=mongodb:27017/tripapps
 
 RUN npm run build
 

@@ -11,5 +11,7 @@ COPY . .
 
 RUN npm run build
 
+RUN npm link
+
 
 ENTRYPOINT ["tail","-f","/dev/null"]

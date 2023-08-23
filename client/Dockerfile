@@ -12,6 +12,7 @@ COPY ./ ./
 
 ENV NEXT_PUBLIC_API_URL=http://node_app:80
 
-RUN npm run build
+CMD ["npm","run","build"]
 
 CMD ["npm","start"]
+
