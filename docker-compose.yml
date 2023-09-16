@@ -5,8 +5,6 @@ services:
     environment:
       PORT: 80
       MONGODB_URL: mongodb://db:27017/tripapps
-    networks:
-      - tripapps_network
     ports:
       - 80:80
   db:
@@ -16,18 +14,10 @@ services:
     restart: always
     volumes:
       - tripapps_volume:/data/db
-    networks:
-      - tripapps_network
-  cli:
-    build:
-      context: ./cli
-      args:
-        MONGODB_URL: mongodb://db:27017/tripapps
-    networks:
-      - tripapps_network
 volumes:
   tripapps_volume:
 
 networks:
-  tripapps_network:
+  default:
+    name: tripapps_network
     driver: bridge

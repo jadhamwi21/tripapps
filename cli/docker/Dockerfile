@@ -12,8 +12,6 @@ RUN npm run build
 
 RUN ln -s /cli/bin/run /usr/local/bin/tripapps-cli
 
-ARG MONGODB_URL
-
-ENV MONGODB_URL=$MONGODB_URL
+ENV MONGODB_URL=mongodb://db:27017/tripapps
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]
