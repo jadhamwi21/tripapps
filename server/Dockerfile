@@ -1,18 +1,26 @@
-FROM node:20-alpine3.17
+FROM node:20-alpine3.18 AS build
 
 WORKDIR /app
 
-RUN npm install -g npm@9.8.1
-
-COPY ./*.json ./
+COPY *.json .
 
 RUN npm i
 
-RUN npm i -g typescript
-
-COPY ./ ./
-
+COPY . .
 
 RUN npm run build
 
-CMD ["npm","start"]
+FROM node:20-alpine3.18 AS final
+
+WORKDIR /app
+
+COPY --from=build /app/*.json .
+RUN npm ci
+
+COPY --from=build /app/build ./build
+
+USER node
+
+EXPOSE 80
+
+CMD ["node","./build/app.js"]

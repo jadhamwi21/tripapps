@@ -11,25 +11,25 @@ import { AppsRouter } from "./routers/apps.router";
 import morgan from "morgan";
 
 (async function () {
-  dotenv.config({ path: path.join(__dirname, "../.env") });
-  await connectToDatabase();
-  const app = express();
+	dotenv.config({ path: path.join(__dirname, "../.env") });
+	await connectToDatabase();
+	const app = express();
 
-  app.use(morgan("combined"));
-  app.use(cors({ origin: "http://localhost:3000" }));
+	app.use(morgan("combined"));
+	app.use(cors({ origin: "http://localhost:3000" }));
 
-  app.get("/seeds", SeedsController.getSeedsHandler);
+	app.get("/seeds", SeedsController.getSeedsHandler);
 
-  app.use("/countries", CountriesRouter);
-  app.use("/cities", CitiesRouter);
+	app.use("/countries", CountriesRouter);
+	app.use("/cities", CitiesRouter);
 
-  app.use("/apps", AppsRouter);
+	app.use("/apps", AppsRouter);
 
-  app.use("/icons", express.static(path.join(__dirname, "./assets/icons")));
+	app.use("/icons", express.static(path.join(__dirname, "./assets/icons")));
 
-  app.use(ErrorMiddleware);
+	app.use(ErrorMiddleware);
 
-  app.listen(process.env.PORT, () => {
-    console.log(`Listening on port ${process.env.PORT}`);
-  });
+	app.listen(process.env.PORT, () => {
+		console.log(`Listening on port ${process.env.PORT}`);
+	});
 })();

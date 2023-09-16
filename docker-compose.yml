@@ -1,46 +1,33 @@
-version: "3.3"
-
+version: "3"
 services:
-  node_app:
-    container_name: tripapps_nodeapp_c
+  server:
     build: ./server
-    restart: always
     environment:
-      - PORT=80
-      - MONGODB_URL=mongo_db://mongo_db:27017/tripapps
+      PORT: 80
+      MONGODB_URL: mongodb://db:27017/tripapps
     networks:
-      - tripapps-network
+      - tripapps_network
     ports:
-      - "80:80"
-  cli_tool:
-    container_name: tripapps_cli_tool_c
-    build: ./cli
-    restart: always
-    environment:
-      - MONGODB_URL=mongo_db://mongo_db:27017/tripapps
-    depends_on:
-      - "mongo_db"
-    networks:
-      - tripapps-network
-  client:
-    container_name: tripapps_client_c
-    build: ./client
-    restart: always
-    environment:
-      - NEXT_PUBLIC_API_URL=http://node_app:80
-    depends_on:
-      - "node_app"
-    networks:
-      - tripapps-network
-  mongo_db:
-    image: mongo
-    container_name: tripapps_mongodb_c
+      - 80:80
+  db:
+    image: mongo:latest
+    ports:
+      - 27017:27017
     restart: always
     volumes:
-      - /data:/data/db
+      - tripapps_volume:/data/db
     networks:
-      - tripapps-network
+      - tripapps_network
+  cli:
+    build:
+      context: ./cli
+      args:
+        MONGODB_URL: mongodb://db:27017/tripapps
+    networks:
+      - tripapps_network
+volumes:
+  tripapps_volume:
 
 networks:
-  tripapps-network:
+  tripapps_network:
     driver: bridge

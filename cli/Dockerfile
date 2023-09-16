@@ -1,17 +1,19 @@
 FROM node:20-alpine3.18
 
+WORKDIR /cli
 
-WORKDIR /app
+COPY *.json .
 
-COPY ./*.json ./
-
-RUN npm ci
+RUN npm i
 
 COPY . .
 
 RUN npm run build
 
-RUN npm link
+RUN ln -s /cli/bin/run /usr/local/bin/tripapps-cli
 
+ARG MONGODB_URL
 
-ENTRYPOINT ["tail","-f","/dev/null"]
+ENV MONGODB_URL=$MONGODB_URL
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]
