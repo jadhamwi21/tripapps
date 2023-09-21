@@ -1,17 +1,17 @@
 import React, { FunctionComponent } from "react";
-import { S } from "./Section.styled";
+import classes from "./Section.module.scss";
 
 interface OwnProps {}
 
 type Props = { children: React.ReactNode; title: string };
 
 const Section: FunctionComponent<Props> = ({ children, title }) => {
-  return (
-    <S.Container>
-      <S.Title>{title}</S.Title>
-      {children}
-    </S.Container>
-  );
+	return (
+		<div className={classes.container}>
+			<p className={classes.title}>{title}</p>
+			{children}
+		</div>
+	);
 };
 
 export default Section;
