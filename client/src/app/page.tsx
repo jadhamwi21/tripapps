@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Headline from "@/modules/Home/Headline/Headline";
 import Categories from "@/modules/Home/Categories/Categories";

@@ -1,7 +1,5 @@
-import styled from "styled-components";
-import { animated } from "@react-spring/web";
 
-const Container = styled(animated.div)`
+.container{
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -22,15 +20,14 @@ const Container = styled(animated.div)`
     cursor: pointer;
     color: var(--yellow);
   }
-`;
+}
 
-const IconContainer = styled.div`
-  height: 15px;
+.icon{
+   height: 15px;
   width: 15px;
 
   & svg {
     fill: var(--yellow) !important;
   }
-`;
+}
 
-export const S = { Container, IconContainer };

@@ -1,33 +1,52 @@
 import React, { FunctionComponent } from "react";
-import { S } from "@/layouts/Header/Navigation/Navigation.styled";
+import classes from "./Navigation.module.scss";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const linkSelectedChecker =
-  (currentRoute: string) =>
-  (linkRoute: string, partial = false) =>
-    !partial ? currentRoute === linkRoute : currentRoute.startsWith(linkRoute);
+	(currentRoute: string) =>
+	(linkRoute: string, partial = false) =>
+		!partial ? currentRoute === linkRoute : currentRoute.startsWith(linkRoute);
 
 type Props = {};
 
 const Navigation: FunctionComponent<Props> = (props) => {
-  const pathname = usePathname();
-  const isLinkSelected = linkSelectedChecker(pathname!);
-  return (
-    <S.NavigationsContainer>
-      <S.NavigationItem $selected={isLinkSelected("/")} href={"/"}>
-        Home
-      </S.NavigationItem>
-      <S.NavigationItem
-        $selected={isLinkSelected("/apps", true)}
-        href={"/apps"}
-      >
-        Find Apps
-      </S.NavigationItem>
-      <S.NavigationItem $selected={isLinkSelected("/about")} href={"/about"}>
-        About
-      </S.NavigationItem>
-    </S.NavigationsContainer>
-  );
+	const pathname = usePathname();
+	const isLinkSelected = linkSelectedChecker(pathname!);
+	return (
+		<nav className={classes.nav}>
+			<Link
+				className={
+					isLinkSelected("/")
+						? [classes.nav_item, classes.selected].join(" ")
+						: classes.nav_item
+				}
+				href={"/"}
+			>
+				Home
+			</Link>
+			<Link
+				className={
+					isLinkSelected("/apps")
+						? [classes.nav_item, classes.selected].join(" ")
+						: classes.nav_item
+				}
+				href={"/apps"}
+			>
+				Find Apps
+			</Link>
+			<Link
+				className={
+					isLinkSelected("/about")
+						? [classes.nav_item, classes.selected].join(" ")
+						: classes.nav_item
+				}
+				href={"/about"}
+			>
+				About
+			</Link>
+		</nav>
+	);
 };
 
 export default Navigation;

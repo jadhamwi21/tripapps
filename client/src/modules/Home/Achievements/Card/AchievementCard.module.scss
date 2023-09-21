@@ -1,0 +1,26 @@
+.container {
+	height: 300px;
+	width: 250px;
+	border-radius: 4px;
+	padding: 1em;
+	background-color: transparent;
+	border: solid 1px var(--yellow);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.children {
+	color: var(--yellow);
+}
+
+.icon {
+	margin: 1em auto;
+	width: fit-content;
+}
+
+.content {
+	font-size: 14px;
+	color: var(--grey);
+}

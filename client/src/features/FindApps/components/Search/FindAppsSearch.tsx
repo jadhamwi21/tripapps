@@ -1,10 +1,10 @@
 "use client";
 import React, { FunctionComponent, useEffect } from "react";
 import { ISeeds } from "@/ts/interfaces/seeds.interfaces";
-import { S } from "@/features/FindApps/components/Search/FindAppsSearch.styled";
+import classes from "./FindAppsSearch.module.scss";
 import Select from "@/components/Select/Select";
 import { useSearch } from "@/features/FindApps/hooks/useSearch";
-import { useSpring } from "@react-spring/web";
+import { animated, useSpring } from "@react-spring/web";
 import { useCategoriesFilter } from "@/features/FindApps/hooks/useCategoriesFilter";
 import CategoryFilterItem from "@/features/FindApps/components/CategoryFilterItem/CategoryFilterItem";
 import { useRouter } from "next/navigation";
@@ -84,7 +84,7 @@ const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
 	}, [search, filter]);
 
 	return (
-		<S.Container style={containerSprings}>
+		<animated.div style={containerSprings as any} className={classes.container}>
 			<Select
 				label={"Country"}
 				list={countries.map((country) => ({
@@ -107,9 +107,9 @@ const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
 				value={search.city}
 			/>
 
-			<S.FiltersContainer>
+			<div className={classes.filters_container}>
 				{(filter.category || filter.subcategory) && (
-					<S.SelectedCategoriesContainer>
+					<div className={classes.selected_categories}>
 						{filter.category && (
 							<CategoryFilterItem
 								name={filter.category}
@@ -124,9 +124,9 @@ const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
 								checked
 							/>
 						)}
-					</S.SelectedCategoriesContainer>
+					</div>
 				)}
-				<S.AvailableCategoriesContainer>
+				<div className={classes.available_categories}>
 					{categoriesItems.map((category, index) => (
 						<CategoryFilterItem
 							name={category}
@@ -135,9 +135,9 @@ const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
 							animationDelay={(index / 8) * 1000}
 						/>
 					))}
-				</S.AvailableCategoriesContainer>
-			</S.FiltersContainer>
-		</S.Container>
+				</div>
+			</div>
+		</animated.div>
 	);
 };
 

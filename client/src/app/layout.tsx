@@ -1,5 +1,4 @@
 "use client";
-import StyledComponentsRegistry from "@/lib/registry";
 import "./index.css";
 import Header from "@/layouts/Header/Header";
 import React from "react";
@@ -13,13 +12,10 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body>
-				<StyledComponentsRegistry>
-					<Header />
-					<AnimatePresence mode="wait" initial={false}>
-						{children}
-					</AnimatePresence>
-					{/*<Footer />*/}
-				</StyledComponentsRegistry>
+				<Header />
+				<AnimatePresence mode="wait" initial={false}>
+					{children}
+				</AnimatePresence>
 			</body>
 		</html>
 	);

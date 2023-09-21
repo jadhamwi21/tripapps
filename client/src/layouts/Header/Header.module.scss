@@ -1,0 +1,23 @@
+
+.container{
+  background-color: var(--black);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2em;
+  height: 75px;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 20;
+  border-bottom: solid 1px var(--light-black);
+}
+
+.app_name{
+    color: var(--yellow);
+  user-select: none;
+  font-size: 1.5em;
+}
+
+

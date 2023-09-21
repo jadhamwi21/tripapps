@@ -1,20 +1,20 @@
 import React from "react";
-import { S } from "@/layouts/Header/Header.styled";
+import classes from "./Header.module.scss";
 import Navigation from "@/layouts/Header/Navigation/Navigation";
-import { useSpring } from "@react-spring/web";
+import { animated, useSpring } from "@react-spring/web";
 
 const Header = () => {
-  const [props, api] = useSpring(() => ({
-    from: { y: -200, opacity: 0 },
-    to: { y: 0, opacity: 1 },
-  }));
+	const [props, api] = useSpring(() => ({
+		from: { y: -200, opacity: 0 },
+		to: { y: 0, opacity: 1 },
+	}));
 
-  return (
-    <S.Container style={props}>
-      <S.AppName>TripApps</S.AppName>
-      <Navigation />
-    </S.Container>
-  );
+	return (
+		<animated.div className={classes.container} style={props}>
+			<p className={classes.app_name}>TripApps</p>
+			<Navigation />
+		</animated.div>
+	);
 };
 
 export default Header;
