@@ -21,8 +21,8 @@
 
 .selected {
 	color: var(--yellow);
-	pointer-events: none;
+	border-bottom-color: var(--yellow);
 	&:hover {
-		border-bottom-color: transparent;
+		border-bottom-color: var(--yellow);
 	}
 }

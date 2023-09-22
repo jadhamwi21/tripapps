@@ -4,7 +4,9 @@ import { ISeeds } from "@/ts/interfaces/seeds.interfaces";
 import { axiosInstance } from "@/api/index";
 
 export const getSeeds = async () => {
-	return await axiosInstance
+	const seeds = await axiosInstance
 		.get<{}, AxiosResponse<ISeeds>>("/seeds")
 		.then(({ data }) => data);
+
+	return seeds;
 };

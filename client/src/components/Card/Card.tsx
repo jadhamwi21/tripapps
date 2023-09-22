@@ -1,8 +1,7 @@
-import React, { FunctionComponent } from "react";
-import classes from "./Card.module.scss";
-import { useRouter } from "next/navigation";
-import AnimationOnScroll from "@/components/AnimationOnScroll/AnimationOnScroll";
+"use client";
+import { FunctionComponent } from "react";
 import { ReactSVG } from "react-svg";
+import classes from "./Card.module.scss";
 
 type Props = {
 	name: string;
@@ -12,18 +11,15 @@ type Props = {
 };
 
 const Card: FunctionComponent<Props> = ({ name, icon, onClick, type }) => {
-	const router = useRouter();
 	return (
-		<AnimationOnScroll>
-			<div className={classes.container} onClick={onClick}>
-				{icon && type === "flag" ? (
-					<ReactSVG className={classes.flag} src={icon} />
-				) : (
-					<ReactSVG src={icon} className={classes.category} />
-				)}
-				<p className={classes.name}>{name}</p>
-			</div>
-		</AnimationOnScroll>
+		<div className={classes.container} onClick={onClick}>
+			{icon && type === "flag" ? (
+				<ReactSVG className={classes.flag} src={icon} />
+			) : (
+				<ReactSVG src={icon} className={classes.category} />
+			)}
+			<p className={classes.name}>{name}</p>
+		</div>
 	);
 };
 

@@ -1,4 +1,3 @@
-"use client";
 import React, { FunctionComponent } from "react";
 import { IApp } from "@/ts/interfaces/apps.interfaces";
 import classes from "./AppItem.module.css";

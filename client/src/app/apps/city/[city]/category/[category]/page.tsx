@@ -5,45 +5,49 @@ import FindAppsSearch from "@/features/FindApps/components/Search/FindAppsSearch
 import AppsList from "@/features/FindApps/components/AppsList/AppsList";
 import { getCityAppsInCategory } from "@/api/apps";
 import { fixParams } from "@/utils/utils";
+import "server-only";
 
-export const generateStaticParams = async () => {
-  const seeds = await getSeeds();
-  return Object.keys(seeds.categories).flat();
-};
+export async function generateStaticParams() {
+	const seeds = await getSeeds();
+
+	return Object.keys(seeds.categories).map((category) => ({
+		category: category.toLowerCase(),
+	}));
+}
 
 interface Props {
-  params: { category: string; city: string };
+	params: { category: string; city: string };
 }
 
 const page = async ({ params }: Props) => {
-  const paramsFixed = fixParams(params);
-  const seeds = await getSeeds();
-  const apps = await getCityAppsInCategory(
-    paramsFixed.city,
-    paramsFixed.category,
-  );
-  const country = (() => {
-    for (const country of Object.keys(seeds.locations)) {
-      const countryCities = seeds.locations[country];
-      if (countryCities.indexOf(paramsFixed.city) >= 0) {
-        return country;
-      }
-    }
-    return "";
-  })();
-  return (
-    <PageWrapper>
-      <FindAppsSearch
-        seeds={seeds}
-        initials={{
-          initialCity: paramsFixed.city,
-          initialCategory: paramsFixed.category,
-          initialCountry: country,
-        }}
-      />
-      <AppsList apps={apps} isPortfolio category={paramsFixed.category} />
-    </PageWrapper>
-  );
+	const paramsFixed = fixParams(params);
+	const seeds = await getSeeds();
+	const apps = await getCityAppsInCategory(
+		paramsFixed.city,
+		paramsFixed.category
+	);
+	const country = (() => {
+		for (const country of Object.keys(seeds.locations)) {
+			const countryCities = seeds.locations[country];
+			if (countryCities.indexOf(paramsFixed.city) >= 0) {
+				return country;
+			}
+		}
+		return "";
+	})();
+	return (
+		<PageWrapper>
+			<FindAppsSearch
+				seeds={seeds}
+				initials={{
+					initialCity: paramsFixed.city,
+					initialCategory: paramsFixed.category,
+					initialCountry: country,
+				}}
+			/>
+			<AppsList apps={apps} isPortfolio category={paramsFixed.category} />
+		</PageWrapper>
+	);
 };
 
 export default page;

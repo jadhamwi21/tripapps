@@ -5,33 +5,36 @@ import FindAppsSearch from "@/features/FindApps/components/Search/FindAppsSearch
 import AppsList from "@/features/FindApps/components/AppsList/AppsList";
 import { getAppsInSubCategory } from "@/api/apps";
 import { fixParams } from "@/utils/utils";
+import "server-only";
+export async function generateStaticParams() {
+	const seeds = await getSeeds();
 
-export const generateStaticParams = async () => {
-  const seeds = await getSeeds();
-  return Object.values(seeds.categories).flat();
-};
+	return Object.values(seeds.categories)
+		.flat()
+		.map((subcategory) => ({ subcategory: subcategory.toLowerCase() }));
+}
 
 interface Props {
-  params: { subcategory: string; category: string };
+	params: { subcategory: string; category: string };
 }
 
 const page = async ({ params }: Props) => {
-  const paramsFixed = fixParams(params);
-  const seeds = await getSeeds();
-  const apps = await getAppsInSubCategory(paramsFixed.subcategory);
+	const paramsFixed = fixParams(params);
+	const seeds = await getSeeds();
+	const apps = await getAppsInSubCategory(paramsFixed.subcategory);
 
-  return (
-    <PageWrapper>
-      <FindAppsSearch
-        seeds={seeds}
-        initials={{
-          initialSubcategory: paramsFixed.subcategory,
-          initialCategory: paramsFixed.category,
-        }}
-      />
-      <AppsList apps={apps} />
-    </PageWrapper>
-  );
+	return (
+		<PageWrapper>
+			<FindAppsSearch
+				seeds={seeds}
+				initials={{
+					initialSubcategory: paramsFixed.subcategory,
+					initialCategory: paramsFixed.category,
+				}}
+			/>
+			<AppsList apps={apps} />
+		</PageWrapper>
+	);
 };
 
 export default page;

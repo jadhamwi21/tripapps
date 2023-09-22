@@ -1,3 +1,4 @@
+import "server-only";
 import React from "react";
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import { getSeeds } from "@/api/seeds";
@@ -6,37 +7,38 @@ import AppsList from "@/features/FindApps/components/AppsList/AppsList";
 import { getCountryAppsInCategory } from "@/api/apps";
 import { fixParams } from "@/utils/utils";
 
-export const generateStaticParams = async () => {
-  const seeds = await getSeeds();
-  return Object.keys(seeds.categories).map((category) => ({
-    category,
-  }));
-};
+export async function generateStaticParams() {
+	const seeds = await getSeeds();
+
+	return Object.keys(seeds.categories).map((category) => ({
+		category: category.toLowerCase(),
+	}));
+}
 
 interface Props {
-  params: { category: string; country: string };
+	params: { category: string; country: string };
 }
 
 const page = async ({ params }: Props) => {
-  const paramsFixed = fixParams(params);
-  const seeds = await getSeeds();
-  const apps = await getCountryAppsInCategory(
-    paramsFixed.country,
-    paramsFixed.category,
-  );
+	const paramsFixed = fixParams(params);
+	const seeds = await getSeeds();
+	const apps = await getCountryAppsInCategory(
+		paramsFixed.country,
+		paramsFixed.category
+	);
 
-  return (
-    <PageWrapper>
-      <FindAppsSearch
-        seeds={seeds}
-        initials={{
-          initialCountry: paramsFixed.country,
-          initialCategory: paramsFixed.category,
-        }}
-      />
-      <AppsList apps={apps} isPortfolio category={paramsFixed.category} />
-    </PageWrapper>
-  );
+	return (
+		<PageWrapper>
+			<FindAppsSearch
+				seeds={seeds}
+				initials={{
+					initialCountry: paramsFixed.country,
+					initialCategory: paramsFixed.category,
+				}}
+			/>
+			<AppsList apps={apps} isPortfolio category={paramsFixed.category} />
+		</PageWrapper>
+	);
 };
 
 export default page;

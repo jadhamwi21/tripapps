@@ -1,3 +1,4 @@
+"use client";
 import React, { FunctionComponent } from "react";
 import classes from "./Navigation.module.scss";
 import { usePathname } from "next/navigation";
@@ -27,7 +28,7 @@ const Navigation: FunctionComponent<Props> = (props) => {
 			</Link>
 			<Link
 				className={
-					isLinkSelected("/apps")
+					isLinkSelected("/apps", true)
 						? [classes.nav_item, classes.selected].join(" ")
 						: classes.nav_item
 				}

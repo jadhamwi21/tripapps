@@ -1,14 +1,15 @@
 "use client";
-import React, { FunctionComponent, useEffect } from "react";
+import React, { FunctionComponent, useEffect, useMemo } from "react";
 import { ISeeds } from "@/ts/interfaces/seeds.interfaces";
 import classes from "./FindAppsSearch.module.scss";
 import Select from "@/components/Select/Select";
 import { useSearch } from "@/features/FindApps/hooks/useSearch";
-import { animated, useSpring } from "@react-spring/web";
 import { useCategoriesFilter } from "@/features/FindApps/hooks/useCategoriesFilter";
 import CategoryFilterItem from "@/features/FindApps/components/CategoryFilterItem/CategoryFilterItem";
 import { useRouter } from "next/navigation";
 import { useIsFirstRender } from "usehooks-ts";
+import Link from "next/link";
+import Button from "@/components/Button/Button";
 
 type Props = {
 	seeds: ISeeds;
@@ -37,31 +38,18 @@ const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
 		subcategory: initials?.initialSubcategory,
 	});
 
-	const [containerSprings] = useSpring(
-		() => ({
-			from: { opacity: 0 },
-			to: { opacity: 1 },
-		}),
-		[]
-	);
-
-	const router = useRouter();
-	const isFirstRender = useIsFirstRender();
-	useEffect(() => {
+	const linkTo = useMemo(() => {
 		if (
-			(search.city ||
-				search.country ||
-				filter.subcategory ||
-				filter.category) &&
-			!isFirstRender
+			search.city ||
+			search.country ||
+			filter.subcategory ||
+			filter.category
 		) {
 			if (!search.country && !search.city) {
 				if (filter.subcategory) {
-					router.push(
-						`/apps/category/${filter.category.toLowerCase()}/${filter.subcategory.toLowerCase()}`
-					);
+					return `/apps/category/${filter.category.toLowerCase()}/${filter.subcategory.toLowerCase()}`;
 				} else {
-					router.push(`/apps/category/${filter.category.toLowerCase()}`);
+					return `/apps/category/${filter.category.toLowerCase()}`;
 				}
 			} else {
 				const routePathArray = ["/apps"];
@@ -78,13 +66,14 @@ const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
 						routePathArray.push(subcategory.toLowerCase());
 					}
 				}
-				router.push(routePathArray.join("/"));
+				return routePathArray.join("/");
 			}
 		}
+		return "";
 	}, [search, filter]);
 
 	return (
-		<animated.div style={containerSprings as any} className={classes.container}>
+		<div className={classes.container}>
 			<Select
 				label={"Country"}
 				list={countries.map((country) => ({
@@ -114,14 +103,12 @@ const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
 							<CategoryFilterItem
 								name={filter.category}
 								onClick={clearCategory}
-								checked
 							/>
 						)}
 						{filter.subcategory && (
 							<CategoryFilterItem
 								name={filter.subcategory}
 								onClick={clearSubCategory}
-								checked
 							/>
 						)}
 					</div>
@@ -132,12 +119,14 @@ const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
 							name={category}
 							key={category}
 							onClick={categoryOnClick}
-							animationDelay={(index / 8) * 1000}
 						/>
 					))}
 				</div>
 			</div>
-		</animated.div>
+			<Link href={linkTo}>
+				<Button variant="primary">Search</Button>
+			</Link>
+		</div>
 	);
 };
 

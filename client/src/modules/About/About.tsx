@@ -1,4 +1,3 @@
-"use client";
 import React, { FunctionComponent } from "react";
 import classes from "./About.module.scss";
 
