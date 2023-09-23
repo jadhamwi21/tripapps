@@ -1,33 +1,84 @@
+.container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5em;
+	color: var(--grey);
+	font-size: 15px;
+	transition: all 0.2s ease;
+	height: fit-content;
+	background-color: var(--light-black);
+	padding: 0.5em 1em;
+	width: 100%;
 
-.container{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5em;
-  color: var(--grey);
-  font-size: 15px;
-  transition: all 0.2s ease;
-  height: fit-content;
-  background-color: var(--light-black);
-  padding: 0.5em 1em;
-  width: 100%;
-  max-width: 200px;
-  flex: 1;
-  border-radius: 4px;
+	flex: 1;
+	border-radius: 4px;
 
-  &:hover {
-    cursor: pointer;
-    color: var(--yellow);
-  }
+	&:hover {
+		cursor: pointer;
+		color: var(--yellow);
+	}
 }
 
-.icon{
-   height: 15px;
-  width: 15px;
+.icon {
+	height: 15px;
+	width: 15px;
 
-  & svg {
-    fill: var(--yellow) !important;
-  }
+	& svg {
+		fill: var(--yellow) !important;
+	}
 }
 
+.wrapper {
+	position: relative;
+}
+
+.list_wrapper {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 5;
+	width: 100%;
+}
+
+.list_separator {
+	height: 5px;
+	background-color: transparent;
+}
+
+.list {
+	background-color: var(--light-black);
+
+	list-style: none;
+	border-radius: 0.2em;
+	width: 100%;
+	height: fit-content;
+	user-select: none;
+	gap: 0.2em;
+	max-height: 150px;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0.5em;
+}
+
+.list_item {
+	color: var(--grey);
+	padding: 0.5em;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+	border-radius: 4px;
+	gap: 0.5em;
+	font-size: 14px;
+
+	&:hover {
+		cursor: pointer;
+		background-color: var(--black);
+		color: var(--yellow);
+	}
+}

@@ -1,11 +1,14 @@
 import React from "react";
 import classes from "./Header.module.scss";
 import Navigation from "@/layouts/Header/Navigation/Navigation";
+import Link from "next/link";
 
 const Header = () => {
 	return (
 		<div className={classes.container}>
-			<p className={classes.app_name}>TripApps</p>
+			<Link href={"/"}>
+				<p className={classes.app_name}>TripApps</p>
+			</Link>
 			<Navigation />
 		</div>
 	);

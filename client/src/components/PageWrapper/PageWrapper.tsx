@@ -5,7 +5,7 @@ interface OwnProps {}
 type Props = { children: React.ReactNode };
 
 const PageWrapper: FunctionComponent<Props> = ({ children }) => {
-	return <div>{children}</div>;
+	return <div className="page">{children}</div>;
 };
 
 export default PageWrapper;

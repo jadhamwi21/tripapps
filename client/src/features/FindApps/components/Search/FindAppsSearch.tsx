@@ -27,16 +27,13 @@ const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
 			country: initials?.initialCountry,
 			city: initials?.initialCity,
 		});
-	const {
-		categoryOnClick,
-		categoriesItems,
-		filter,
-		clearCategory,
-		clearSubCategory,
-	} = useCategoriesFilter(seeds.categories, {
-		category: initials?.initialCategory,
-		subcategory: initials?.initialSubcategory,
-	});
+	const { categoryOnClick, categoriesItems, filter } = useCategoriesFilter(
+		seeds.categories,
+		{
+			category: initials?.initialCategory,
+			subcategory: initials?.initialSubcategory,
+		}
+	);
 
 	const linkTo = useMemo(() => {
 		if (
@@ -97,35 +94,15 @@ const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
 			/>
 
 			<div className={classes.filters_container}>
-				{(filter.category || filter.subcategory) && (
-					<div className={classes.selected_categories}>
-						{filter.category && (
-							<CategoryFilterItem
-								name={filter.category}
-								onClick={clearCategory}
-							/>
-						)}
-						{filter.subcategory && (
-							<CategoryFilterItem
-								name={filter.subcategory}
-								onClick={clearSubCategory}
-							/>
-						)}
-					</div>
-				)}
-				<div className={classes.available_categories}>
-					{categoriesItems.map((category, index) => (
-						<CategoryFilterItem
-							name={category}
-							key={category}
-							onClick={categoryOnClick}
-						/>
-					))}
-				</div>
+				{categoriesItems.map((category, index) => (
+					<CategoryFilterItem
+						name={category}
+						key={category}
+						onClick={categoryOnClick}
+						subcategories={seeds.categories[category] ?? []}
+					/>
+				))}
 			</div>
-			<Link href={linkTo}>
-				<Button variant="primary">Search</Button>
-			</Link>
 		</div>
 	);
 };
