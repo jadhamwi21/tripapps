@@ -21,9 +21,6 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile.nginx
-    environment:
-      NEXTJS_APP: nextjs
-      NODE_APP: server
     ports:
       - 80:80
   db:
