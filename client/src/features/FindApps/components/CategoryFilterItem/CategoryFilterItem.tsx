@@ -6,35 +6,45 @@ import { useHover } from "usehooks-ts";
 
 type Props = {
 	name: string;
-	onClick: (category: string) => void;
+	onClick: (category: string, subcategory?: string) => void;
 	subcategories: string[];
+	categorySelected: string;
+	subcategorySelected: string;
 };
 
 const CategoryFilterItem: FunctionComponent<Props> = ({
 	name,
 	onClick,
 	subcategories,
+	categorySelected,
+	subcategorySelected,
 }) => {
 	const [showSubcategories, setShowSubcategories] = useState(false);
 	const showSubcategoriesTimerRef = useRef<NodeJS.Timer>();
 	const wrapperRef = useRef<HTMLDivElement>(null);
-	const isHovered = useHover(wrapperRef);
-	useEffect(() => {
-		if (isHovered) {
-			showSubcategoriesTimerRef.current = setTimeout(() => {
-				setShowSubcategories(true);
-			}, 300);
-		} else {
-			if (showSubcategories) setShowSubcategories(false);
-			clearTimeout(showSubcategoriesTimerRef.current);
-		}
-	}, [isHovered]);
+
 	return (
-		<div ref={wrapperRef} className={classes.wrapper}>
+		<div
+			ref={wrapperRef}
+			className={classes.wrapper}
+			onMouseEnter={() => {
+				showSubcategoriesTimerRef.current = setTimeout(() => {
+					setShowSubcategories(true);
+				}, 200);
+			}}
+			onMouseLeave={() => {
+				if (showSubcategories) setShowSubcategories(false);
+				clearTimeout(showSubcategoriesTimerRef.current);
+			}}
+		>
 			<div
 				className={classes.container}
 				onClick={() => {
 					onClick(name);
+				}}
+				style={{
+					backgroundColor:
+						categorySelected === name ? "var(--blue)" : "var(--light-black)",
 				}}
 			>
 				<div className={classes.icon}>
@@ -46,7 +56,6 @@ const CategoryFilterItem: FunctionComponent<Props> = ({
 			</div>
 			{subcategories.length !== 0 && showSubcategories && (
 				<div className={classes.list_wrapper}>
-					<div className={classes.list_separator} />
 					<div
 						className={classes.list}
 						style={
@@ -60,7 +69,14 @@ const CategoryFilterItem: FunctionComponent<Props> = ({
 								className={classes.list_item}
 								key={subcategory}
 								onClick={() => {
+									onClick(name, subcategory);
 									setShowSubcategories(false);
+								}}
+								style={{
+									backgroundColor:
+										subcategorySelected === subcategory
+											? "var(--blue)"
+											: "var(--light-black)",
 								}}
 							>
 								<div className={classes.icon}>

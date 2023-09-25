@@ -1,5 +1,5 @@
 "use client";
-import React, { FunctionComponent, useMemo, useRef } from "react";
+import React, { FunctionComponent, useMemo, useRef, useState } from "react";
 import { IApp } from "@/ts/interfaces/apps.interfaces";
 import classes from "./AppsList.module.css";
 import AppItem from "@/features/FindApps/components/AppsList/AppItem/AppItem";
@@ -33,6 +33,7 @@ const AppsList: FunctionComponent<Props> = ({
 				allKeywords.map((keyword) => {
 					const list = apps.filter((app) => app.keywords.includes(keyword));
 					const listRef = useRef<HTMLDivElement>(null);
+
 					return (
 						<React.Fragment key={keyword}>
 							<div className={classes.keyword}>{keyword}</div>

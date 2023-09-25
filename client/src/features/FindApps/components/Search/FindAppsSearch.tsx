@@ -1,15 +1,12 @@
 "use client";
-import React, { FunctionComponent, useEffect, useMemo } from "react";
-import { ISeeds } from "@/ts/interfaces/seeds.interfaces";
-import classes from "./FindAppsSearch.module.scss";
 import Select from "@/components/Select/Select";
-import { useSearch } from "@/features/FindApps/hooks/useSearch";
-import { useCategoriesFilter } from "@/features/FindApps/hooks/useCategoriesFilter";
 import CategoryFilterItem from "@/features/FindApps/components/CategoryFilterItem/CategoryFilterItem";
-import { useRouter } from "next/navigation";
-import { useIsFirstRender } from "usehooks-ts";
-import Link from "next/link";
+import { useSearch as useLocationFilters } from "@/features/FindApps/hooks/useSearch";
+import { ISeeds } from "@/ts/interfaces/seeds.interfaces";
+import { FunctionComponent, useMemo, useState } from "react";
+import classes from "./FindAppsSearch.module.scss";
 import Button from "@/components/Button/Button";
+import Link from "next/link";
 
 type Props = {
 	seeds: ISeeds;
@@ -23,17 +20,19 @@ type Props = {
 
 const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
 	const { cityOnChange, countryOnChange, search, countries, cities } =
-		useSearch(seeds.locations, {
+		useLocationFilters(seeds.locations, {
 			country: initials?.initialCountry,
 			city: initials?.initialCity,
 		});
-	const { categoryOnClick, categoriesItems, filter } = useCategoriesFilter(
-		seeds.categories,
-		{
-			category: initials?.initialCategory,
-			subcategory: initials?.initialSubcategory,
-		}
-	);
+
+	const [filter, setFilter] = useState({
+		category: initials?.initialCategory || "",
+		subcategory: initials?.initialSubcategory || "",
+	});
+
+	const categoryOnClick = (category: string, subcategory?: string) => {
+		setFilter({ category, subcategory: subcategory || "" });
+	};
 
 	const linkTo = useMemo(() => {
 		if (
@@ -94,15 +93,20 @@ const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
 			/>
 
 			<div className={classes.filters_container}>
-				{categoriesItems.map((category, index) => (
+				{Object.keys(seeds.categories).map((category, index) => (
 					<CategoryFilterItem
 						name={category}
 						key={category}
 						onClick={categoryOnClick}
 						subcategories={seeds.categories[category] ?? []}
+						categorySelected={filter.category}
+						subcategorySelected={filter.subcategory}
 					/>
 				))}
 			</div>
+			<Link href={linkTo}>
+				<Button variant="primary">Find</Button>
+			</Link>
 		</div>
 	);
 };

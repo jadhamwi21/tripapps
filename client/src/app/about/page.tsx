@@ -8,7 +8,7 @@ const page = async () => {
 		<PageWrapper>
 			<About
 				content={
-					"Welcome to our website! We are a team of individuals passionate about technology and its impact on our daily lives. Our mission is to provide you with the most accurate and up-to-date information on the latest apps and software available on your location.\n" +
+					"Welcome to our website! We are a team of individuals passionate about technology and its impact on our daily lives. Our mission is to provide you with the most accurate and up-to-date information on the latest apps and software available in your location.\n" +
 					"\n" +
 					"Our team consists of experts in various fields, including software development, marketing, and content creation. Each of us brings a unique set of skills and experience to the table, allowing us to work collaboratively to deliver top-notch content and services to our users.\n" +
 					"\n" +
