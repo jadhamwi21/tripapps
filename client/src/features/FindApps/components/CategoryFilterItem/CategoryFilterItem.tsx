@@ -52,7 +52,13 @@ const CategoryFilterItem: FunctionComponent<Props> = ({
 						src={`${process.env.NEXT_PUBLIC_API_URL}/icons/categories/${name}.svg`}
 					/>
 				</div>
-				<div>{name}</div>
+				<div>
+					{name}
+					{subcategorySelected !== "" &&
+					subcategories.find((category) => category === subcategorySelected)
+						? `/${subcategorySelected}`
+						: ``}
+				</div>
 			</div>
 			{subcategories.length !== 0 && showSubcategories && (
 				<div className={classes.list_wrapper}>

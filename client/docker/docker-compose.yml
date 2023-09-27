@@ -1,36 +1,30 @@
 version: "3"
 services:
   node:
-    build: ./server
-    depends_on:
-      - db
+    build: ../../server
+    container_name: tripapps_node
     environment:
       PORT: 5000
       MONGODB_URL: mongodb://db:27017/tripapps
   nextjs:
     build:
-      context: ./client
-      dockerfile: Dockerfile.nextjs
+      context: ../
+      dockerfile: ./docker/Dockerfile.nextjs
+    container_name: tripapps_nextjs
     depends_on:
       - node
-      - nginx
     environment:
       BUILDTIME_API_URL: http://node:5000
       NEXT_PUBLIC_API_URL: /api
   nginx:
+    container_name: tripapps_nginx
     build:
-      context: ./client
-      dockerfile: Dockerfile.nginx
+      context: ../
+      dockerfile: ./docker/Dockerfile.nginx
+    depends_on:
+      - nextjs
     ports:
       - 80:80
-  db:
-    image: mongo:latest
-    restart: always
-    volumes:
-      - tripapps_volume:/data/db
-volumes:
-  tripapps_volume:
-
 networks:
   default:
     name: tripapps_network
