@@ -1,0 +1,20 @@
+version: "3"
+services:
+  cli:
+    build: ./
+    container_name: tripapps_cli
+    environment:
+      MONGODB_URL: mongodb://db:27017/tripapps
+  db:
+    image: mongo:latest
+    restart: always
+    container_name: tripapps_db
+    volumes:
+      - tripapps_volume:/data/db
+volumes:
+  tripapps_volume:
+
+networks:
+  default:
+    name: tripapps_network
+    driver: bridge
