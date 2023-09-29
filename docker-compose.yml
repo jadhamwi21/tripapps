@@ -1,9 +1,7 @@
 version: "3"
 services:
   cli:
-    build:
-      context: ../
-      dockerfile: ./docker/Dockerfile
+    build: ./
     container_name: tripapps_cli
     environment:
       MONGODB_URL: mongodb://db:27017/tripapps
