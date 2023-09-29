@@ -1,0 +1,23 @@
+version: "3"
+services:
+  nextjs:
+    build:
+      dockerfile: ./Dockerfile.nextjs
+    container_name: tripapps_nextjs
+    depends_on:
+      - node
+    environment:
+      BUILDTIME_API_URL: http://node:5000
+      NEXT_PUBLIC_API_URL: /api
+  nginx:
+    container_name: tripapps_nginx
+    build:
+      dockerfile: ./Dockerfile.nginx
+    depends_on:
+      - nextjs
+    ports:
+      - 80:80
+networks:
+  default:
+    name: tripapps_network
+    driver: bridge
