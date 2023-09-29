@@ -28,7 +28,7 @@
     "google-play-scraper": "^9.1.1",
     "inquirer": "^8.0.0",
     "lodash": "^4.17.21",
-    "mongoose": "^7.3.4",
+    "mongoose": "^7.5.3",
     "zod": "^3.21.4"
   },
   "devDependencies": {
