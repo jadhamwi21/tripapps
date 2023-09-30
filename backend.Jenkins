@@ -2,7 +2,7 @@ pipeline{
     agent any
     stages {
         stage("cli") {
-            when { changeset "cli/**"}
+            
             steps {
                 withCredentials([usernamePassword(credentialsId: 'tripapps-ssh',usernameVariable: "USER",passwordVariable:"PASS")]) {
                     echo "${USER} ${PASS}"
