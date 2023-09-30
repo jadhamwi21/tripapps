@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage("build") {
             steps {
-                docker
+                sh "docker"
                 dir("./cli") {
                     sh "docker build -t jadhamwi21/tripapps:cli ."
                 }
