@@ -7,7 +7,7 @@ pipeline {
         stage("build") {
             steps {
                 dir("./cli") {
-                    docker build -t jadhamwi21/tripapps:cli .
+                    sh "docker build -t jadhamwi21/tripapps:cli ."
                 }
             }
         }
