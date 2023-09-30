@@ -6,20 +6,20 @@ pipeline {
     stages {
         stage("build") {
             steps {
-                docker --version
+                "docker --version"
                 dir("./cli") {
-                    docker build -t jadhamwi21/tripapps:cli .
+                    "docker build -t jadhamwi21/tripapps:cli ."
                 }
             }
         }
         stage("login") {
             steps {
-                echo ${DOCKERHUB_CREDS_PSW} | docker login -u ${DOCKERHUB_CREDS.USR} --password-stdin
+                "echo ${DOCKERHUB_CREDS_PSW} | docker login -u ${DOCKERHUB_CREDS.USR} --password-stdin"
             }
         }
         stage("push") {
             steps {
-                docker push jadhamwi21/tripapps:cli
+                "docker push jadhamwi21/tripapps:cli"
             }
         }
         stage("deploy"){
