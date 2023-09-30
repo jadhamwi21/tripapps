@@ -1,14 +1,12 @@
-#!groovy​
 pipeline {
     agent any
-    environment {
-        MY_VAR = '1.4.3'
-        CREDS = credentials("tripapps-github")
+    environment{
+        MY_ENV = 'jad is learning jenkins'
     }
     stages {
         stage("build") {
             steps {
-                echo "building for ${CREDS_USR} ${CREDS_PSW}"
+                echo "${MY_ENV}"
             }
         }
     }
