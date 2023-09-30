@@ -13,12 +13,12 @@ pipeline {
         }
         stage("login") {
             steps {
-                echo ${DOCKERHUB_CREDS_PSW} | docker login -u ${DOCKERHUB_CREDS.USR} --password-stdin
+                """echo ${DOCKERHUB_CREDS_PSW} | docker login -u ${DOCKERHUB_CREDS.USR} --password-stdin"""
             }
         }
         stage("push") {
             steps {
-                docker push jadhamwi21/tripapps:cli
+                sh "docker push jadhamwi21/tripapps:cli"
             }
         }
         stage("deploy"){
