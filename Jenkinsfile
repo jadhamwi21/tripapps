@@ -13,7 +13,7 @@ pipeline {
         }
         stage("login") {
             steps {
-                """echo ${DOCKERHUB_CREDS_PSW} | docker login -u ${DOCKERHUB_CREDS.USR} --password-stdin"""
+                sh """echo ${DOCKERHUB_CREDS_PSW} | docker login -u ${DOCKERHUB_CREDS.USR} --password-stdin"""
             }
         }
         stage("push") {
