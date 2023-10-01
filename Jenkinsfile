@@ -10,10 +10,10 @@ pipeline {
         dir("./cli") {
           script {
             docker.withTool('docker'){
-            def dockerImage = docker.build registry + "/cli:latest"
-            }
             docker.withRegistry('', registryCredentials) {
+            def dockerImage = docker.build registry + "/cli:latest"
               dockerImage.push()
+            }
             }
           }
         }
