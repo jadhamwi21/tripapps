@@ -2,11 +2,11 @@ FROM node:20-alpine3.18
 
 WORKDIR /cli
 
-COPY *.json .
+COPY *.json ./
 
 RUN npm i
 
-COPY . .
+COPY . ./
 
 RUN npm run build
 
