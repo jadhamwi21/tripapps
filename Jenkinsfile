@@ -44,7 +44,7 @@ pipeline {
           // Cleanup
           script {
             def COMMANDS = """
-            docker rm --force $(docker ps -aq);
+            sh 'docker rm --force $(docker ps -aq)';
             """
             sh "ssh -o StrictHostKeyChecking=no $TripAppsVpsIpAddress -l jad $COMMANDS"
           }
