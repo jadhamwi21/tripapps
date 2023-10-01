@@ -9,11 +9,11 @@ pipeline {
       steps {
         dir("./cli") {
           script {
-            docker.withTool('docker'){
-            docker.withRegistry('', registryCredentials) {
-              def dockerImage = docker.build "$registry:cli"
-              dockerImage.push()
-            }
+            docker.withTool('docker') {
+              docker.withRegistry('', registryCredentials) {
+                def dockerImage = docker.build "$registry:cli"
+                dockerImage.push()
+              }
             }
           }
         }
