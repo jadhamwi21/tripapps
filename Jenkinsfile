@@ -20,7 +20,8 @@ pipeline {
       steps {
         dir("./cli") {
           script {
-            cliScript.buildCli()
+            cliScript.buildCliImage()
+            cliScript.pushCliImage()
           }
         }
       }
