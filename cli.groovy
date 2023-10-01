@@ -7,3 +7,5 @@ def pushCliImage() {
     dockerImage.push()
   }
 }
+
+return this
