@@ -2,7 +2,7 @@ def cliScript;
 pipeline {
   agent any
   environment {
-    registryCredentials = 'tripapps-dockerhub'
+    registryCredentials = 'dockerhub'
     registry = 'jadhamwi21/tripapps'
   }
   stages {
