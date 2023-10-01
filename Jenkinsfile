@@ -25,7 +25,7 @@ pipeline {
       steps {
         sshagent ([VPS_SSH]) {
             sh """ssh -o StrictHostKeyChecking=no 212.227.47.195 -l jad << EOF
-            docker login -u jadhamwi21 -p \${DOCKERHUB_ACCESS_TOKEN}
+            docker login -u jadhamwi21 -p dckr_pat_egDXk0YTStYxOMaGO-IwLj3T8Ug
             docker pull jadhamwi21/tripapps:cli
             docker run jadhamwi21/tripapps:cli
             EOF
