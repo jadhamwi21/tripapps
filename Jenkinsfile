@@ -15,13 +15,15 @@ pipeline {
         }
       }
     }
-    
+
     stage("build:cli") {
       steps {
         dir("./cli") {
           script {
-            def dockerImage = cliScript.buildCliImage()
-            cliScript.pushCliImage(dockerImage)
+            def dockerImage = docker.build registry + "/cli:latest"
+            docker.withRegistry('', registryCredentials) {
+              dockerImage.push()
+            }
           }
         }
       }
