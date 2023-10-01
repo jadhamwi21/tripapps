@@ -45,8 +45,8 @@ pipeline {
           script {
             def COMMANDS = """
             docker pull $DockerHubRepo:cli;
-            docker rm --force $DockerHubRepo:cli;
-            docker run --name -e MONGODB_URL $MongodbUrl tripapps-cli -d --network $TripAppsDockerNetwork $DockerHubRepo:cli;
+            docker rm --force tripapps-cli;
+            docker run --name tripapps-cli -e MONGODB_URL $MongodbUrl tripapps-cli -d --network $TripAppsDockerNetwork $DockerHubRepo:cli;
             """
             sh "ssh -o StrictHostKeyChecking=no $TripAppsVpsIpAddress -l jad $COMMANDS"
           }
@@ -54,8 +54,8 @@ pipeline {
           script {
             def COMMANDS = """
             docker pull $DockerHubRepo:server;
-            docker rm --force $DockerHubRepo:server;
-            docker run --name -e MONGODB_URL $MongodbUrl -e PORT $ServerPort $MongodbUrl tripapps-server -d --network $TripAppsDockerNetwork $DockerHubRepo:server;
+            docker rm --force tripapps-server;
+            docker run --name tripapps-server -e MONGODB_URL $MongodbUrl -e PORT $ServerPort $MongodbUrl tripapps-server -d --network $TripAppsDockerNetwork $DockerHubRepo:server;
             """
             sh "ssh -o StrictHostKeyChecking=no $TripAppsVpsIpAddress -l jad $COMMANDS"
           }
