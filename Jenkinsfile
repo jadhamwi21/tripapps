@@ -24,12 +24,12 @@ pipeline {
         }
       }
     }
-    stage("build:server") {
+    stage("build:node") {
       steps {
         dir("./server") {
           script {
             docker.withTool('docker') {
-              def dockerImage = docker.build "$DockerHubRepo:server"
+              def dockerImage = docker.build "$DockerHubRepo:node"
               docker.withRegistry('', DockerHubCredentialsID) {
                 dockerImage.push()
               }
@@ -46,16 +46,16 @@ pipeline {
             def COMMANDS = """
             docker pull $DockerHubRepo:cli;
             docker kill tripapps-cli 2> /dev/null;
-            docker run --name tripapps-cli -e MONGODB_URL $MongodbUrl -d --network $TripAppsDockerNetwork $DockerHubRepo:cli;
+            docker run --name tripapps-cli -e MONGODB_URL=$MongodbUrl -d --network $TripAppsDockerNetwork $DockerHubRepo:cli;
             """
             sh "ssh -o StrictHostKeyChecking=no $TripAppsVpsIpAddress -l jad $COMMANDS"
           }
-          // Server Deployment
+          // Node Server Deployment
           script {
             def COMMANDS = """
-            docker pull $DockerHubRepo:server;
-            docker rm --force tripapps-server 2> /dev/null;
-            docker run --hostname node --name tripapps-server -e MONGODB_URL $MongodbUrl -e PORT $ServerPort $MongodbUrl tripapps-server -d --network $TripAppsDockerNetwork $DockerHubRepo:server;
+            docker pull $DockerHubRepo:node;
+            docker rm --force tripapps-node 2> /dev/null;
+            docker run --hostname node --name tripapps-node -e MONGODB_URL=$MongodbUrl -e PORT=$ServerPort -d --network $TripAppsDockerNetwork $DockerHubRepo:node;
             """
             sh "ssh -o StrictHostKeyChecking=no $TripAppsVpsIpAddress -l jad $COMMANDS"
           }
