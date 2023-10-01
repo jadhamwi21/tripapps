@@ -5,6 +5,7 @@ pipeline {
     TripAppsVpsCredentialsID = 'tripapps-vps-ssh'
     DockerHubRepo = 'jadhamwi21/tripapps'
     TripAppsDockerNetwork = 'tripapps_network'
+    TripAppsVpsIpAddress = '212.227.47.195'
   }
   stages {
     stage("build:cli") {
@@ -29,7 +30,7 @@ pipeline {
             docker pull $DockerHubRepo:cli;
             docker run -d --network $TripAppsDockerNetwork $DockerHubRepo:cli;
             """
-            sh "ssh -o StrictHostKeyChecking=no 212.227.47.195 -l jad $COMMANDS"
+            sh "ssh -o StrictHostKeyChecking=no $TripAppsVpsIpAddress -l jad $COMMANDS"
           }
         }
       }
