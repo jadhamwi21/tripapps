@@ -1,8 +1,8 @@
 pipeline {
   agent any
   environment {
-    registryCredentials = 'dockerhub'
-    registry = 'jadhamwi21/tripapps'
+    REGISTRY_CREDENTIALS = 'dockerhub'
+    REPO = 'jadhamwi21/tripapps'
   }
   stages {
     stage("build:cli") {
@@ -10,8 +10,8 @@ pipeline {
         dir("./cli") {
           script {
             docker.withTool('docker') {
-              def dockerImage = docker.build "$registry:cli"
-              docker.withRegistry('', registryCredentials) {
+              def dockerImage = docker.build "$REPO:cli"
+              docker.withRegistry('', REGISTRY_CREDENTIALS) {
                 dockerImage.push()
               }
             }
