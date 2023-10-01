@@ -1,4 +1,3 @@
-def cliScript;
 pipeline {
   agent any
   environment {
@@ -11,7 +10,7 @@ pipeline {
         script {
           def dockerHome = tool 'docker'
           env.PATH = "${dockerHome}/bin:${env.PATH}"
-          cliScript = load "./cli.groovy"
+
         }
       }
     }
