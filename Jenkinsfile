@@ -3,7 +3,11 @@ pipeline {
     stages {
         stage("build") {
             steps {
-               docker service ls
+              script {
+                    
+                        sh 'docker --version'
+                   
+                }
             }
         }
     }
