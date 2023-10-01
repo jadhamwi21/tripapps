@@ -54,7 +54,7 @@ pipeline {
           script {
             def COMMANDS = """
             docker pull $DockerHubRepo:node;
-            docker rm --force tripapps-node 2> /dev/null;
+            docker kill tripapps-node 2> /dev/null;
             docker run --hostname node --name tripapps-node -e MONGODB_URL=$MongodbUrl -e PORT=$ServerPort -d --network $TripAppsDockerNetwork $DockerHubRepo:node;
             """
             sh "ssh -o StrictHostKeyChecking=no $TripAppsVpsIpAddress -l jad $COMMANDS"
