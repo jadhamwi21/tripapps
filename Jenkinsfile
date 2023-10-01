@@ -20,8 +20,8 @@ pipeline {
       steps {
         dir("./cli") {
           script {
-            cliScript.buildCliImage()
-            cliScript.pushCliImage()
+            def dockerImage = cliScript.buildCliImage()
+            cliScript.pushCliImage(dockerImage)
           }
         }
       }
