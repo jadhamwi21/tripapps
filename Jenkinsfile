@@ -11,7 +11,7 @@ pipeline {
           script {
             docker.withTool('docker'){
             docker.withRegistry('', registryCredentials) {
-              def dockerImage = docker.build("$registry:/cli")
+              def dockerImage = docker.build("$registry/cli")
               dockerImage.push()
             }
             }
