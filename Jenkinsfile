@@ -12,7 +12,7 @@ pipeline {
             docker.withTool('docker'){
             docker.withRegistry('', registryCredentials) {
               def dockerImage = docker.build("$registry")
-              dockerImage.tag("cli:latest")
+              dockerImage.tag("cli")
               dockerImage.push()
             }
             }
