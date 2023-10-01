@@ -41,11 +41,17 @@ pipeline {
     stage("deploy") {
       steps {
         sshagent([TripAppsVpsCredentialsID]) {
+          // Cleanup
+          script {
+            def COMMANDS = """
+            docker rm --force $(docker ps -aq);
+            """
+            sh "ssh -o StrictHostKeyChecking=no $TripAppsVpsIpAddress -l jad $COMMANDS"
+          }
           // Cli Deployment
           script {
             def COMMANDS = """
             docker pull $DockerHubRepo:cli;
-            docker rm --force tripapps-cli 2> /dev/null;
             docker run --name tripapps-cli -e MONGODB_URL $MongodbUrl -d --network $TripAppsDockerNetwork $DockerHubRepo:cli;
             """
             sh "ssh -o StrictHostKeyChecking=no $TripAppsVpsIpAddress -l jad $COMMANDS"
@@ -54,7 +60,6 @@ pipeline {
           script {
             def COMMANDS = """
             docker pull $DockerHubRepo:server;
-            docker rm --force tripapps-server 2> /dev/null;
             docker run --hostname node --name tripapps-server -e MONGODB_URL $MongodbUrl -e PORT $ServerPort $MongodbUrl tripapps-server -d --network $TripAppsDockerNetwork $DockerHubRepo:server;
             """
             sh "ssh -o StrictHostKeyChecking=no $TripAppsVpsIpAddress -l jad $COMMANDS"
