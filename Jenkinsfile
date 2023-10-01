@@ -23,15 +23,15 @@ pipeline {
     }
     stage("deploy:cli") {
       steps {
-        sshagent ([VPS_SSH]) {
-            script{
-              def COMMANDS = """
-            docker pull jadhamwi21/tripapps:cli;
-            docker run -d jadhamwi21/tripapps:cli;
+        sshagent([VPS_SSH]) {
+          script {
+            def COMMANDS = """
+            docker pull $REPO:cli;
+            docker run -d --network tripapps_network $REPO:cli;
             """
             sh "ssh -o StrictHostKeyChecking=no 212.227.47.195 -l jad $COMMANDS"
-            }
           }
+        }
       }
     }
   }
