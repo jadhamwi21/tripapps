@@ -23,17 +23,15 @@ pipeline {
     }
     stage("deploy:cli") {
       steps {
-        script {
-          def remoteCommand = """
-            docker login -u jadhamwi21 -p ${DOCKERHUB_ACCESS_TOKEN}
-            docker pull ${REPO}:cli
-            docker run ${REPO}:cli
-            echo 'complete'
-          """
-          sshagent([VPS_SSH]) {
-            sh "ssh -o StrictHostKeyChecking=no 212.227.47.195 -l jad << EOF\n${remoteCommand}\nEOF"
+        sshagent ([VPS_SSH]) {
+            sh """ssh -o StrictHostKeyChecking=no 212.227.47.195 -l jad << EOF\n
+            docker login -u jadhamwi21 -p dckr_pat_egDXk0YTStYxOMaGO-IwLj3T8Ug
+            docker pull jadhamwi21/tripapps:cli
+            docker run jadhamwi21/tripapps:cli
+            echo "complete"\n
+            EOF
+            """
           }
-        }
       }
     }
   }
