@@ -1,10 +1,10 @@
 pipeline {
   agent any
   environment {
-    REGISTRY_CREDENTIALS = 'dockerhub'
-    DOCKERHUB_ACCESS_TOKEN = credentials("dockerhub")
-    REPO = 'jadhamwi21/tripapps'
-    VPS_SSH = 'tripapps-vps-ssh'
+    DockerHubCredentialsID = 'dockerhub'
+    TripAppsVpsCredentialsID = 'tripapps-vps-ssh'
+    DockerHubRepo = 'jadhamwi21/tripapps'
+    TripAppsDockerNetwork = 'tripapps_network'
   }
   stages {
     stage("build:cli") {
@@ -12,8 +12,8 @@ pipeline {
         dir("./cli") {
           script {
             docker.withTool('docker') {
-              def dockerImage = docker.build "$REPO:cli"
-              docker.withRegistry('', REGISTRY_CREDENTIALS) {
+              def dockerImage = docker.build "$DockerHubRepo:cli"
+              docker.withRegistry('', DockerHubCredentialsID) {
                 dockerImage.push()
               }
             }
@@ -23,11 +23,11 @@ pipeline {
     }
     stage("deploy:cli") {
       steps {
-        sshagent([VPS_SSH]) {
+        sshagent([TripAppsVpsCredentialsID]) {
           script {
             def COMMANDS = """
-            docker pull $REPO:cli;
-            docker run -d --network tripapps_network $REPO:cli;
+            docker pull $DockerHubRepo:cli;
+            docker run -d --network $TripAppsDockerNetwork $DockerHubRepo:cli;
             """
             sh "ssh -o StrictHostKeyChecking=no 212.227.47.195 -l jad $COMMANDS"
           }
