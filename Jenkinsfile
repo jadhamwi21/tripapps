@@ -30,10 +30,10 @@ pipeline {
             docker run ${REPO}:cli
             echo 'complete'
           """
+        }
           sshagent([credentialsId: VPS_SSH]) {
             sh "ssh -o StrictHostKeyChecking=no 212.227.47.195 -l jad << EOF\n${remoteCommand}\nEOF"
           }
-        }
       }
     }
   }
