@@ -9,6 +9,7 @@ pipeline {
   stages {
     stage("build:cli") {
       steps {
+        echo "$DOCKERHUB_ACCESS_TOKEN"
         dir("./cli") {
           script {
             docker.withTool('docker') {
