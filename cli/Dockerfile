@@ -12,4 +12,6 @@ RUN npm run build
 
 RUN ln -s /cli/bin/run /usr/local/bin/tripapps-cli
 
+RUN chmod a+x /usr/local/bin/tripapps-cli
+
 ENTRYPOINT ["tail", "-f", "/dev/null"]
