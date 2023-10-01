@@ -22,7 +22,7 @@ pipeline {
     }
     stage("deploy:cli") {
       steps {
-        sshagent (credentials: [VPS_SSH]) {
+        sshagent ([VPS_SSH]) {
             sh """ssh -o StrictHostKeyChecking=no 212.227.47.195 -l jad << EOF
             echo 'from remote server'
             """
