@@ -9,7 +9,7 @@ pipeline {
             steps{
                 script {
                   
-                    def dockerImage = docker.build registry + ":cli:latest"
+                    def dockerImage = docker.build registry + "/cli:latest"
                     docker.withRegistry('',registryCredentials){
                         dockerImage.push()
                     }
