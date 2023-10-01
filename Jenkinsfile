@@ -46,7 +46,7 @@ pipeline {
             def COMMANDS = """
             docker pull $DockerHubRepo:cli;
             docker rm --force tripapps-cli;
-            docker run --name tripapps-cli -e MONGODB_URL $MongodbUrl tripapps-cli -d --network $TripAppsDockerNetwork $DockerHubRepo:cli;
+            docker run --name tripapps-cli -e MONGODB_URL $MongodbUrl -d --network $TripAppsDockerNetwork $DockerHubRepo:cli;
             """
             sh "ssh -o StrictHostKeyChecking=no $TripAppsVpsIpAddress -l jad $COMMANDS"
           }
