@@ -8,8 +8,8 @@ pipeline {
     TripAppsVpsIpAddress = '212.227.47.195'
     MongodbUrl = "mongodb://db:27017/tripapps"
     ServerPort = 80
-    BuildTimeApiUrl = http://node:5000
-    RuntimeApiUrl = /api
+    BuildTimeApiUrl = "http://node:5000"
+    RuntimeApiUrl = "/api"
   }
   stages {
     stage("build:cli") {
