@@ -7,7 +7,7 @@ pipeline {
     TripAppsDockerNetwork = 'tripapps_network'
     TripAppsVpsIpAddress = '212.227.47.195'
     MongodbUrl = "mongodb://db:27017/tripapps"
-    ServerPort = 80
+    ServerPort = 5000
     BuildTimeApiUrl = "http://node:5000"
     RuntimeApiUrl = "/api"
   }
