@@ -14,7 +14,7 @@ pipeline {
   }
   stages {
     stage("build:cli") {
-      when { changeset "./cli/*"}
+     
       steps {
         dir("./cli") {
           script {
@@ -29,7 +29,7 @@ pipeline {
       }
     }
     stage("build:node") {
-      when { changeset "./server/*"}
+
       steps {
         dir("./server") {
           script {
@@ -44,7 +44,7 @@ pipeline {
       }
     }
     stage("build:nextjs") {
-      when { changeset "./client/*"}
+  
       steps {
           dir("./client"){
             script {
@@ -59,7 +59,7 @@ pipeline {
       }
     }
     stage("build:nginx") {
-      when { changeset "./client/*"}
+
       steps {
           dir("./client"){
             script {
