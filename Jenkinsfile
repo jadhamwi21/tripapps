@@ -9,8 +9,8 @@ pipeline {
     MongodbUrl = "mongodb://db:27017/tripapps"
     ServerPort = 5000
     NginxPort = 80
-    BuildTimeApiUrl = "http://node:5000"
-    RuntimeApiUrl = "/api"
+    NextjsServerSideApiUrl = "http://node:5000"
+    NextjsClientSideApiUrl = "/api"
   }
   stages {
     stage("build:cli") {
@@ -108,7 +108,7 @@ pipeline {
             def COMMANDS = """
             docker pull $DockerHubRepo:nextjs;
             docker rm --force tripapps-nextjs 2> /dev/null || echo 'No Container';
-            docker run --hostname nextjs --name tripapps-nextjs -e BUILDTIME_API_URL=$BuildTimeApiUrl -e NEXT_PUBLIC_API_URL=$RuntimeApiUrl -d --network $TripAppsDockerNetwork $DockerHubRepo:nextjs;
+            docker run --hostname nextjs --name tripapps-nextjs -e SERVER_API_URL=$NextjsServerSideApiUrl -e NEXT_PUBLIC_API_URL=$NextjsClientSideApiUrl -d --network $TripAppsDockerNetwork $DockerHubRepo:nextjs;
             """
             sh "ssh -o StrictHostKeyChecking=no $TripAppsVpsIpAddress -l jad $COMMANDS"
           }

@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	output: "export",
-	images: { domains: ["play-lh.googleusercontent.com"], unoptimized: true },
+	images: { domains: ["play-lh.googleusercontent.com"] },
 	typescript: { ignoreBuildErrors: true },
 
 	eslint: {

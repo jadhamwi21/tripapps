@@ -8,14 +8,6 @@ import { getCityApps } from "@/api/apps";
 import { fixParams } from "@/utils/utils";
 import "server-only";
 
-export async function generateStaticParams() {
-	const seeds = await getSeeds();
-
-	return Object.values(seeds.locations)
-		.flat()
-		.map((city) => ({ city: city.toLowerCase() }));
-}
-
 interface Props {
 	params: { city: string };
 }

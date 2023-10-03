@@ -7,14 +7,6 @@ import AppsList from "@/features/FindApps/components/AppsList/AppsList";
 import { getCountryAppsInCategory } from "@/api/apps";
 import { fixParams } from "@/utils/utils";
 
-export async function generateStaticParams() {
-	const seeds = await getSeeds();
-
-	return Object.keys(seeds.categories).map((category) => ({
-		category: category.toLowerCase(),
-	}));
-}
-
 interface Props {
 	params: { category: string; country: string };
 }

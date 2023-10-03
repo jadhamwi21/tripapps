@@ -7,14 +7,6 @@ import { getCityAppsInCategoryAndSubcategory } from "@/api/apps";
 import { fixParams } from "@/utils/utils";
 import "server-only";
 
-export async function generateStaticParams() {
-	const seeds = await getSeeds();
-
-	return Object.values(seeds.categories)
-		.flat()
-		.map((subcategory) => ({ subcategory: subcategory.toLowerCase() }));
-}
-
 interface Props {
 	params: { category: string; city: string; subcategory: string };
 }

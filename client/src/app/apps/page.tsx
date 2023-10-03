@@ -9,7 +9,7 @@ import { getAllApps } from "@/api/apps";
 const page = async () => {
 	const seeds = await getSeeds();
 	const apps = await getAllApps();
-  
+
 	return (
 		<PageWrapper>
 			<FindAppsSearch seeds={seeds} />
