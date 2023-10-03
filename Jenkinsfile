@@ -8,6 +8,7 @@ pipeline {
     TripAppsVpsIpAddress = '212.227.47.195'
     MongodbUrl = "mongodb://db:27017/tripapps"
     ServerPort = 5000
+    NginxPort = 80
     BuildTimeApiUrl = "http://node:5000"
     RuntimeApiUrl = "/api"
   }
@@ -98,7 +99,7 @@ pipeline {
             def COMMANDS = """
             docker pull $DockerHubRepo:nginx;
             docker rm --force tripapps-nginx 2> /dev/null || echo 'No Container';
-            docker run --hostname nginx --restart -p 80:80 always --name tripapps-nginx -d --network $TripAppsDockerNetwork $DockerHubRepo:nginx;
+            docker run --hostname nginx --restart always -p $NginxPort:$NginxPort --name tripapps-nginx -d --network $TripAppsDockerNetwork $DockerHubRepo:nginx;
             """
             sh "ssh -o StrictHostKeyChecking=no $TripAppsVpsIpAddress -l jad $COMMANDS"
           }
