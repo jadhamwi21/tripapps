@@ -4,4 +4,4 @@ cd /app
 
 npm run build
 
-npx serve@latest out
+npm start
