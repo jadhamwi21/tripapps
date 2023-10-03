@@ -94,7 +94,7 @@ pipeline {
             def COMMANDS = """
             docker pull $DockerHubRepo:nginx;
             docker rm --force tripapps-nginx 2> /dev/null || echo 'No Container';
-            docker run --hostname nginx --name tripapps-nginx -d --network $TripAppsDockerNetwork $DockerHubRepo:nginx;
+            docker run --hostname nginx --restart always --name tripapps-nginx -d --network $TripAppsDockerNetwork $DockerHubRepo:nginx;
             """
             sh "ssh -o StrictHostKeyChecking=no $TripAppsVpsIpAddress -l jad $COMMANDS"
           }
