@@ -42,7 +42,7 @@ pipeline {
     }
     stage("build:nextjs") {
       steps {
-          dir("./client/docker"){
+          dir("./client"){
             script {
               docker.withTool("docker") {
                 def dockerImage = docker.build("$DockerHubRepo:nextjs","-f Dockerfile.nextjs .")
@@ -56,7 +56,7 @@ pipeline {
     }
     stage("build:nginx") {
       steps {
-          dir("./client/docker"){
+          dir("./client"){
             script {
               docker.withTool("docker") {
                 def dockerImage = docker.build("$DockerHubRepo:nginx","-f Dockerfile.nginx .")
