@@ -13,6 +13,7 @@ pipeline {
   }
   stages {
     stage("build:cli") {
+      when { changeset "./cli/*"}
       steps {
         dir("./cli") {
           script {
@@ -27,6 +28,7 @@ pipeline {
       }
     }
     stage("build:node") {
+      when { changeset "./server/*"}
       steps {
         dir("./server") {
           script {
@@ -41,6 +43,7 @@ pipeline {
       }
     }
     stage("build:nextjs") {
+      when { changeset "./client/*"}
       steps {
           dir("./client"){
             script {
@@ -55,6 +58,7 @@ pipeline {
       }
     }
     stage("build:nginx") {
+      when { changeset "./client/*"}
       steps {
           dir("./client"){
             script {
@@ -94,7 +98,7 @@ pipeline {
             def COMMANDS = """
             docker pull $DockerHubRepo:nginx;
             docker rm --force tripapps-nginx 2> /dev/null || echo 'No Container';
-            docker run --hostname nginx --restart always --name tripapps-nginx -d --network $TripAppsDockerNetwork $DockerHubRepo:nginx;
+            docker run --hostname nginx --restart -p 80:80 always --name tripapps-nginx -d --network $TripAppsDockerNetwork $DockerHubRepo:nginx;
             """
             sh "ssh -o StrictHostKeyChecking=no $TripAppsVpsIpAddress -l jad $COMMANDS"
           }
