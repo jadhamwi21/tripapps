@@ -14,7 +14,7 @@ pipeline {
   }
   stages {
     stage("build:cli") {
-     
+    
       steps {
         dir("./cli") {
           script {
