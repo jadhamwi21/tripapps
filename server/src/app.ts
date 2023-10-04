@@ -30,6 +30,6 @@ import morgan from "morgan";
 	app.use(ErrorMiddleware);
 
 	app.listen(process.env.PORT, () => {
-		console.log(`Listening on port ${process.env.PORT}`);
+		console.log(`Listening on ${process.env.PORT}`);
 	});
 })();
