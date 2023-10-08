@@ -4,21 +4,27 @@ from typing import Annotated
 from fastapi import HTTPException, Query, FastAPI
 from selenium import webdriver
 from urllib.parse import quote
+from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
 GOOGLE_SEARCH_URL = "https://www.google.com/search"
 
-STORES = ["playstore", "appstore"]
 
-STORES_SITES = {"playstore": "play.google.com", "appstore": "apple.com"}
+class STORESENUM(str, Enum):
+    PLAYSTORE = "playstore"
+    APPSTORE = "appstore"
+
+
+STORES = [STORESENUM.PLAYSTORE, STORESENUM.APPSTORE]
+
+STORES_SITES = {STORESENUM.PLAYSTORE: "play.google.com",
+                STORESENUM.APPSTORE: "apple.com"}
 
 
 class AppsEngine:
-    def __init__(self):
-        options = webdriver.ChromeOptions()
-        options.add_argument("--headless")
-        self.__driver = webdriver.Chrome(options=options)
+    def __init__(self, webdriver: webdriver.Chrome):
+        self.__driver = webdriver
 
     def getRelatedLinks(self, links: list[str], site: str):
         relatedLinks = []
@@ -38,25 +44,3 @@ class AppsEngine:
             "href"), anchorLinks)
         links_related_to_site = self.getRelatedLinks(links, site)
         return links_related_to_site
-
-    def __del__(self):
-        self.__driver.quit()
-
-
-app = FastAPI()
-
-
-class StoreEnum(str, Enum):
-    PLAYSTORE = "playstore"
-    APPSTORE = "appstore"
-
-
-@app.get("/apps")
-async def getAppsLinks(category: str, location: str, store: str):
-    if store not in STORES:
-        raise HTTPException(
-            status_code=422, detail="invalid value for store parameter, it's 'playstore' or 'appstore'")
-    engine = AppsEngine()
-    links = engine.getAppsLinks(category, store, location)
-    del engine
-    return links
