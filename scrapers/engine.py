@@ -19,7 +19,7 @@ class STORESENUM(str, Enum):
 STORES = [STORESENUM.PLAYSTORE, STORESENUM.APPSTORE]
 
 STORES_SITES = {STORESENUM.PLAYSTORE: "play.google.com",
-                STORESENUM.APPSTORE: "apple.com"}
+                STORESENUM.APPSTORE: "apps.apple.com"}
 
 
 class AppsEngine:
@@ -42,5 +42,6 @@ class AppsEngine:
         anchorLinks = self.__driver.find_elements(By.CSS_SELECTOR, "#search a")
         links = map(lambda x: x.get_attribute(
             "href"), anchorLinks)
+
         links_related_to_site = self.getRelatedLinks(links, site)
-        return links_related_to_site
+        return list(set(links_related_to_site))

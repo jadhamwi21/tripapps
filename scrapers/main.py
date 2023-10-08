@@ -9,6 +9,7 @@ from selenium.webdriver.common.by import By
 import engine
 from selenium.webdriver.chrome.options import Options
 import playstore_scrapper
+import appstore_scrapper
 
 
 WEBDRIVER_OPTIONS = Options()
@@ -16,7 +17,7 @@ WEBDRIVER_OPTIONS.add_argument("--headless")
 
 
 def createWebdriver():
-    webDriver = webdriver.Chrome(options=WEBDRIVER_OPTIONS)
+    webDriver = webdriver.Chrome()
     webDriver.maximize_window()
     return webDriver
 
@@ -32,13 +33,21 @@ async def getApps(category: str, location: str, store: str):
     webDriver = createWebdriver()
 
     appsEngine = engine.AppsEngine(webDriver)
-    links = list(set(appsEngine.getAppsLinks(category, store, location)))
+    links = appsEngine.getAppsLinks(category, store, location)
+    print(links)
     try:
+        apps = []
         if store == engine.STORESENUM.PLAYSTORE:
-            playstoreScrapper = playstore_scrapper.PlaystoreScrapper(
+            playstoreScraper = playstore_scrapper.PlaystoreScraper(
                 links, webDriver)
-            apps = playstoreScrapper.scrap()
-            webDriver.quit()
+            apps = playstoreScraper.scrap()
+            return apps
+        else:
+            appstoreScraper = appstore_scrapper.AppstoreScraper(
+                links, webDriver)
+            apps = appstoreScraper.scrap()
             return apps
     except:
         raise HTTPException(status_code=500, detail="Internal Server Error")
+    finally:
+        webDriver.quit()
