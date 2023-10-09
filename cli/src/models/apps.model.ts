@@ -1,15 +1,20 @@
 import { model, Schema } from "mongoose";
 
-const appSchema = new Schema({
-  appId: String,
+const playstoreAppSchema = new Schema({
+  id: String,
   name: String,
-  icon: String,
-  score: Number,
-  downloads: String,
-  ratings: Number,
+  link: String,
+  image: String,
   keywords: [String],
 });
 
-export const App = model("Apps", appSchema);
+const appstoreAppSchema = new Schema({
+  id: String,
+  name: String,
+  link: String,
+  image: String,
+  keywords: [String],
+});
 
-
+export const PlaystoreApp = model("playstore_apps", appstoreAppSchema);
+export const AppstoreApp = model("appstore_apps", playstoreAppSchema);

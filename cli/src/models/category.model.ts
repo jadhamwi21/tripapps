@@ -10,10 +10,10 @@ categorySchema.pre("save", async function (next) {
   this.category = titlize(this.category);
   if (this.subcategories) {
     this.subcategories = this.subcategories.map((subcategory: string) =>
-      titlize(subcategory),
+      titlize(subcategory)
     );
   }
   next();
 });
 
-export const Category = model("Category", categorySchema);
+export const Category = model("categories", categorySchema);
