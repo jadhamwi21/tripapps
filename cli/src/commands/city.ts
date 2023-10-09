@@ -1,21 +1,9 @@
-import { Args, Command, Flags } from "@oclif/core";
-import { Location } from "../../models/location.model";
-import { cleanup, setup } from "../../config/config";
-import _ from "lodash";
-import {
-  addCountries,
-  deleteCountries,
-  getCountries,
-} from "../../services/country_service";
-import {
-  addCities,
-  deleteCities,
-  getCities,
-} from "../../services/city_service";
+import { Command, Flags } from "@oclif/core";
+import { cleanup, setup } from "../config/config";
+import { addCities, deleteCities, getCities } from "../services/city_service";
 
-export default class CountryAdd extends Command {
-  static description =
-    "country add command: accepts a list of countries as arguments";
+export default class City extends Command {
+  static description = "city -v='add | view | delete'[-c='country'] ...cities";
   static strict = false;
 
   static flags = {
@@ -27,7 +15,7 @@ export default class CountryAdd extends Command {
     const {
       argv,
       flags: { action, country },
-    } = await this.parse(CountryAdd);
+    } = await this.parse(City);
 
     const cities = Object.values(argv) as string[];
     if (["add", "delete", "view"].indexOf(action) < 0) {

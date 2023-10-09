@@ -14,7 +14,7 @@ export const addCities = async (country?: string, cities: string[] = []) => {
   if (cities.length === 0) {
     throw new Error("you should pass at least one city");
   }
-  location.cities = cities;
+  location.cities = Array.from(new Set([...location.cities, ...cities]));
   await location.save();
 };
 
