@@ -7,7 +7,7 @@ pipeline {
     TripAppsDockerNetwork = 'tripapps_network'
     TripAppsVpsIpAddress = '212.227.47.195'
     MongodbUrl = "mongodb://db:27017/tripapps"
-    ScrappersApiUrl = "http://scrapper:8000"
+    ScrapersApiUrl = "http://scrapper:8000"
   }
   stages {
     stage("build") {
@@ -31,7 +31,7 @@ pipeline {
             def COMMANDS = """
             docker pull $DockerHubRepo:cli;
             docker rm --force tripapps-cli 2> /dev/null || echo 'No Container';
-            docker run --name tripapps-cli -e MONGODB_URL=$MongodbUrl -e SCRAPPERS_API_URL=$ScrappersApiUrl -d --network $TripAppsDockerNetwork $DockerHubRepo:cli;
+            docker run --name tripapps-cli -e MONGODB_URL=$MongodbUrl -e SCRAPERS_API_URL=$ScrapersApiUrl -d --network $TripAppsDockerNetwork $DockerHubRepo:cli;
             """
             sh "ssh -o StrictHostKeyChecking=no $TripAppsVpsIpAddress -l jad $COMMANDS"
           }
