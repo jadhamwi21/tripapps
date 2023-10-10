@@ -10,7 +10,7 @@ RUN wget -nc https://dl.google.com/linux/direct/google-chrome-stable_current_amd
 
 RUN apt update
 
-RUN apt install --allow -f ./google-chrome-stable_current_amd64.deb
+RUN apt install -y --force-yes -f ./google-chrome-stable_current_amd64.deb
 
 COPY ./ ./
 
