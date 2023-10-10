@@ -1,18 +1,16 @@
-import { categories } from "google-play-scraper";
-import { EnLocation, EnStores } from "../ts/enums";
-import { Categories, LocationsType, ScrapAnswers } from "../ts/types";
-import { IApp } from "../ts/interfaces";
-import { AppstoreApp, PlaystoreApp } from "../models/apps.model";
 import axios from "axios";
-import {
-  CountriesAppstoreApps,
-  CountriesPlaystoreApps,
-} from "../models/countries_apps.model";
+import { AppstoreApp, PlaystoreApp } from "../models/apps.model";
 import {
   CitiesAppstoreApps,
   CitiesPlaystoreApps,
 } from "../models/cities_apps.model";
-import { Model } from "mongoose";
+import {
+  CountriesAppstoreApps,
+  CountriesPlaystoreApps,
+} from "../models/countries_apps.model";
+import { EnLocation, EnStores } from "../ts/enums";
+import { IApp } from "../ts/interfaces";
+import { Categories, LocationsType, ScrapAnswers } from "../ts/types";
 
 type AppsModelType = typeof PlaystoreApp | typeof AppstoreApp;
 
@@ -72,7 +70,8 @@ const saveApps = async (
   }
 };
 
-const SCRAPPER_URL = "http://127.0.0.1:8000/apps";
+const SCRAPPER_API_URL =
+  process.env.SCRAPPER_API_URL || "http://127.0.0.1:8000/apps";
 
 const scrapStore = async (
   categories: Categories,
@@ -99,14 +98,14 @@ const scrapStore = async (
     for (const [category, subcategories] of Object.entries(categories)) {
       const apps: IApp[] = await axios
         .get(
-          `${SCRAPPER_URL}?category=${category}&store=${storeType}&location=${location}`
+          `${SCRAPPER_API_URL}/apps?category=${category}&store=${storeType}&location=${location}`
         )
         .then((res) => res.data);
       await saveApps(location, category, apps, appsModel, locationAppsModel!);
       for (const subcategory of subcategories) {
         const apps: IApp[] = await axios
           .get(
-            `${SCRAPPER_URL}?category=${subcategory}&store=${storeType}&location=${location}`
+            `${SCRAPPER_API_URL}/apps?category=${subcategory}&store=${storeType}&location=${location}`
           )
           .then((res) => res.data);
         await saveApps(
