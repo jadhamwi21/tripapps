@@ -3,22 +3,11 @@ import { Args, Command, Flags } from "@oclif/core";
 import { Category } from "../models/category.model";
 import { cleanup, setup } from "../config/config";
 import { Location } from "../models/location.model";
+import { scrap } from "../services/scrap_service";
+import { PhaseOne, Categories, ScrapAnswers } from "../ts/types";
+import { EnLocation } from "../ts/enums";
+const _ = require("lodash");
 const inquirer = require("inquirer");
-
-type StoreType = "Playstore" | "Appstore";
-type LocationsType = string[];
-
-interface PhaseOne {
-  _categories: string[];
-  stores: StoreType[];
-  locations: LocationsType;
-}
-
-type PhaseTwo = Record<string, string[]>;
-
-type IScrapAnswers = Pick<PhaseOne, "stores" | "locations"> & {
-  categories: PhaseTwo;
-};
 
 export default class Scrap extends Command {
   static description = "scrap command";
@@ -29,10 +18,13 @@ export default class Scrap extends Command {
   };
 
   public async run(): Promise<void> {
-    const { args, flags } = await this.parse(Scrap);
+    const { flags } = await this.parse(Scrap);
     const { countries, cities } = flags;
     if (!countries && !cities) {
       throw new Error("pass country or city");
+    }
+    if (countries && cities) {
+      throw new Error("pass ONLY one (country or city)");
     }
     await setup();
     const allCategories = await Category.find();
@@ -65,7 +57,7 @@ export default class Scrap extends Command {
       },
     ]);
 
-    const categories: PhaseTwo = await inquirer.prompt(
+    const categories: Categories = await inquirer.prompt(
       _categories
         .map((category) => ({
           type: "checkbox",
@@ -78,12 +70,16 @@ export default class Scrap extends Command {
         .filter((prompts) => prompts.choices?.length !== 0)
     );
 
-    const answers: IScrapAnswers = {
+    const answers: ScrapAnswers = {
       stores,
-      categories: categories,
+      categories: !_.isEmpty(categories)
+        ? categories
+        : Object.fromEntries(_categories.map((cat) => [cat, []])),
       locations,
+      locationType: countries ? EnLocation.COUNTRIES : EnLocation.CITIES,
     };
-    console.log(answers);
+
+    await scrap(answers);
 
     await cleanup();
   }

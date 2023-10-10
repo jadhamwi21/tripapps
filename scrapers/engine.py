@@ -12,8 +12,8 @@ GOOGLE_SEARCH_URL = "https://www.google.com/search"
 
 
 class STORESENUM(str, Enum):
-    PLAYSTORE = "playstore"
-    APPSTORE = "appstore"
+    PLAYSTORE = "Playstore"
+    APPSTORE = "Appstore"
 
 
 STORES = [STORESENUM.PLAYSTORE, STORESENUM.APPSTORE]
