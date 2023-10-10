@@ -8,8 +8,12 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 import engine
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 import playstore_scrapper
 import appstore_scrapper
+
+
+WEBDRIVER_SERVICE = Service(ChromeDriverManager().install())
 
 
 WEBDRIVER_OPTIONS = Options()
@@ -19,7 +23,7 @@ WEBDRIVER_OPTIONS.add_argument("--headless")
 
 
 def createWebdriver():
-    webDriver = webdriver.Chrome(options=WEBDRIVER_OPTIONS)
+    webDriver = webdriver.Chrome(service=Webdriver, options=WEBDRIVER_OPTIONS)
     webDriver.maximize_window()
     return webDriver
 
