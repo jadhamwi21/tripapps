@@ -70,8 +70,8 @@ const saveApps = async (
   }
 };
 
-const SCRAPPER_API_URL =
-  process.env.SCRAPPER_API_URL || "http://127.0.0.1:8000/apps";
+const SCRAPPERS_API_URL =
+  process.env.SCRAPPERS_API_URL || "http://127.0.0.1:8000/apps";
 
 const scrapStore = async (
   categories: Categories,
@@ -98,14 +98,14 @@ const scrapStore = async (
     for (const [category, subcategories] of Object.entries(categories)) {
       const apps: IApp[] = await axios
         .get(
-          `${SCRAPPER_API_URL}/apps?category=${category}&store=${storeType}&location=${location}`
+          `${SCRAPPERS_API_URL}/apps?category=${category}&store=${storeType}&location=${location}`
         )
         .then((res) => res.data);
       await saveApps(location, category, apps, appsModel, locationAppsModel!);
       for (const subcategory of subcategories) {
         const apps: IApp[] = await axios
           .get(
-            `${SCRAPPER_API_URL}/apps?category=${subcategory}&store=${storeType}&location=${location}`
+            `${SCRAPPERS_API_URL}/apps?category=${subcategory}&store=${storeType}&location=${location}`
           )
           .then((res) => res.data);
         await saveApps(
