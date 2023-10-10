@@ -23,7 +23,8 @@ WEBDRIVER_OPTIONS.add_argument("--headless")
 
 
 def createWebdriver():
-    webDriver = webdriver.Chrome(service=Webdriver, options=WEBDRIVER_OPTIONS)
+    webDriver = webdriver.Chrome(
+        service=WEBDRIVER_SERVICE, options=WEBDRIVER_OPTIONS)
     webDriver.maximize_window()
     return webDriver
 
