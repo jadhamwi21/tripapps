@@ -2,9 +2,11 @@ FROM python:latest
 
 WORKDIR /app
 
-COPY ./ ./
+COPY ./requirements.txt ./
 
 RUN pip install -r ./requirements.txt
+
+COPY ./ ./
 
 RUN wget -nc https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 
