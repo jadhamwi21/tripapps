@@ -3,4 +3,4 @@ import { AppsController } from "../controllers/apps.controller";
 
 export const AppsRouter = Router();
 
-AppsRouter.get("/", AppsController.getAppsHandler);
+AppsRouter.use("/:store/:locationType?/:location?", AppsController.getApps);

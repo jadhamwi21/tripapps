@@ -1,1 +1,1 @@
-export type LocationType = "country" | "city" | "global";
+export type LocationType = "countries" | "cities";

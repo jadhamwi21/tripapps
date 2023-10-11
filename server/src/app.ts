@@ -4,9 +4,9 @@ import * as path from "path";
 import { connectToDatabase } from "./models";
 import { SeedsController } from "./controllers/seeds.controller";
 import { ErrorMiddleware } from "./middlewares/error.middleware";
-import { CountriesRouter } from "./routers/countries.router";
+
 import cors from "cors";
-import { CitiesRouter } from "./routers/cities.router";
+
 import { AppsRouter } from "./routers/apps.router";
 import morgan from "morgan";
 
@@ -19,9 +19,6 @@ import morgan from "morgan";
 	app.use(cors({ origin: "http://localhost:3000" }));
 
 	app.get("/seeds", SeedsController.getSeedsHandler);
-
-	app.use("/countries", CountriesRouter);
-	app.use("/cities", CitiesRouter);
 
 	app.use("/apps", AppsRouter);
 
