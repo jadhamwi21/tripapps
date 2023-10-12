@@ -8,21 +8,29 @@ import {
 	CountriesAppstoreApps,
 	CountriesPlaystoreApps,
 } from "../models/countries_apps.model";
+import { IApp } from "../ts/interfaces/apps.interfaces";
 import { LocationType } from "../ts/types/locations.types";
 import { StoreType } from "../ts/types/store.types";
 
-const getAllApps = async (store: StoreType) => {
+const getStoreAllApps = async (store: StoreType, category?: string) => {
+	let apps: IApp[] = [];
 	if (store === "playstore") {
-		return await PlaystoreApp.find().lean();
+		apps = await PlaystoreApp.find().lean();
 	}
 	if (store === "appstore") {
-		return await AppstoreApp.find().lean();
+		apps = await AppstoreApp.find().lean();
+	}
+	if (category) {
+		return apps.filter((app) => app.keywords.indexOf(category) >= 0);
+	} else {
+		return apps;
 	}
 };
 
-const getAllAppsInLocationType = async (
+const getAllAppsInLocation = async (
 	store: StoreType,
-	locationType: LocationType
+	locationType: LocationType,
+	location?: string
 ) => {
 	const StoreAppsModel = store === "playstore" ? PlaystoreApp : AppstoreApp;
 	const LocationTypeAppsModel = (function () {
@@ -39,9 +47,7 @@ const getAllAppsInLocationType = async (
 		new Set(
 			(
 				await LocationTypeAppsModel?.find(
-					{},
-					{},
-					{ projection: { all: true } }
+					location ? { name: location } : {}
 				).lean()
 			)
 				?.map((doc) => doc.all)
@@ -56,13 +62,53 @@ const getAllAppsInLocationType = async (
 	return apps;
 };
 
+const getAllAppsInLocationWithQuery = async (
+	store: StoreType,
+	locationType: LocationType,
+	location: string,
+	category: string
+) => {
+	const StoreAppsModel = store === "playstore" ? PlaystoreApp : AppstoreApp;
+	const LocationTypeAppsModel = (function () {
+		if (locationType === "countries") {
+			return store === "playstore"
+				? CountriesPlaystoreApps
+				: CountriesAppstoreApps;
+		}
+		if (locationType === "cities") {
+			return store === "playstore" ? CitiesPlaystoreApps : CitiesAppstoreApps;
+		}
+	})();
+
+	const _allAppsReferences = await LocationTypeAppsModel?.findOne({
+		name: location,
+	}).lean();
+
+	const allAppsReferences = _allAppsReferences?.apps[category] || [];
+
+	const apps = await StoreAppsModel.find()
+		.lean()
+		.where("id")
+		.in(allAppsReferences)
+		.exec();
+	return apps;
+};
+
 const getApps = async (params: IGetAppsParams, query: IGetAppsQuery) => {
-	if (false) {
-	} else if (params.location && params.locationType) {
-		return await getAllAppsInLocationType(params.store, params.locationType);
-	} else {
-		return await getAllApps(params.store);
+	if (params.location && query.category) {
+		return await getAllAppsInLocationWithQuery(
+			params.store,
+			params.locationType,
+			params.location,
+			query.category
+		);
+	} else if (params.locationType) {
+		return await getAllAppsInLocation(
+			params.store,
+			params.locationType,
+			params.location
+		);
 	}
 };
 
-export const AppsService = { getApps };
+export const AppsService = { getApps, getStoreAllApps };

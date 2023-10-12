@@ -4,21 +4,20 @@ import z from "zod";
 import { StoreType } from "../ts/types/store.types";
 import { LocationType } from "../ts/types/locations.types";
 
-const schema = z.object({
+const GET_APPS_SCHEMA = z.object({
 	store: z.enum(["playstore", "appstore"]),
-	locationType: z.enum(["countries", "cities"]).optional(),
+	locationType: z.enum(["countries", "cities"]),
 	location: z.string().optional(),
 });
 
 export interface IGetAppsParams {
 	store: StoreType;
-	locationType?: LocationType;
+	locationType: LocationType;
 	location?: string;
 }
 
 export interface IGetAppsQuery {
 	category?: string;
-	subcategory?: string;
 }
 
 const getApps = async (
@@ -28,8 +27,34 @@ const getApps = async (
 ) => {
 	const { params, query } = req;
 	try {
-		schema.parse(params);
+		GET_APPS_SCHEMA.parse(params);
 		const apps = await AppsService.getApps(params, query);
+		return res.status(200).send(apps);
+	} catch (e) {
+		next(e);
+	}
+};
+
+interface IGetStoreAppsParams {
+	store: StoreType;
+}
+
+const GET_STOREAPPS_SCHEMA = z.object({
+	store: z.enum(["playstore", "appstore"]),
+});
+
+const getStoreApps = async (
+	req: Request<IGetStoreAppsParams, {}, {}, IGetAppsQuery>,
+	res: Response,
+	next: NextFunction
+) => {
+	const { params, query } = req;
+	try {
+		GET_STOREAPPS_SCHEMA.parse(params);
+		const apps = await AppsService.getStoreAllApps(
+			params.store,
+			query.category
+		);
 		return res.status(200).send(apps);
 	} catch (e) {
 		next(e);
@@ -38,4 +63,5 @@ const getApps = async (
 
 export const AppsController = {
 	getApps,
+	getStoreApps,
 };

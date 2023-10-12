@@ -12,6 +12,7 @@ import morgan from "morgan";
 
 (async function () {
 	dotenv.config({ path: path.join(__dirname, "../.env") });
+
 	await connectToDatabase();
 	const app = express();
 

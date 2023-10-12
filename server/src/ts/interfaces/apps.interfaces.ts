@@ -1,16 +1,7 @@
-export interface IAppsFilter {
-    category: string;
-     subcategory: string;
-}
-
-
 export interface IApp {
-    appId: string,
-    name: string,
-    icon: string,
-    score: number,
-    downloads: string,
-    ratings: number
+	id: string;
+	name: string;
+	link: string;
+	image: string;
+	keywords: string[];
 }
-
-
