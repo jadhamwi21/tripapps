@@ -32,7 +32,7 @@ pipeline {
             def COMMANDS = """
             docker pull $DockerHubRepo:node;
             docker rm --force tripapps-node 2> /dev/null || echo 'No Container';
-            docker run --hostname node --name tripapps-node -e MONGODB_URL=$MongodbUrl -e PORT=$ServerPort -d --network $TripAppsDockerNetwork $DockerHubRepo:node;
+            docker run -p 5000:$ServerPort --hostname node --name tripapps-node -e MONGODB_URL=$MongodbUrl -e PORT=$ServerPort -d --network $TripAppsDockerNetwork $DockerHubRepo:node;
             """
             sh "ssh -o StrictHostKeyChecking=no $TripAppsVpsIpAddress -l jad $COMMANDS"
           }
