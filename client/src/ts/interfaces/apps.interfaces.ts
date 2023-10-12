@@ -1,9 +1,7 @@
 export interface IApp {
-  appId: string;
-  name: string;
-  icon?: string;
-  score?: number;
-  downloads?: string;
-  ratings?: number;
-  keywords: string[];
+	id: string;
+	name: string;
+	link: string;
+	image: string;
+	keywords: string[];
 }

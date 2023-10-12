@@ -3,9 +3,10 @@ import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import { getSeeds } from "@/api/seeds";
 import FindAppsSearch from "@/features/FindApps/components/Search/FindAppsSearch";
 import AppsList from "@/features/FindApps/components/AppsList/AppsList";
-import { getCityAppsInCategoryAndSubcategory } from "@/api/apps";
+
 import { fixParams } from "@/utils/utils";
 import "server-only";
+import { getCityAppsInCategory } from "@/api/apps";
 
 interface Props {
 	params: { category: string; city: string; subcategory: string };
@@ -14,9 +15,8 @@ interface Props {
 const page = async ({ params }: Props) => {
 	const paramsFixed = fixParams(params);
 	const seeds = await getSeeds();
-	const apps = await getCityAppsInCategoryAndSubcategory(
+	const apps = await getCityAppsInCategory(
 		paramsFixed.city,
-		paramsFixed.category,
 		paramsFixed.subcategory
 	);
 	const country = (() => {

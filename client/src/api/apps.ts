@@ -5,13 +5,13 @@ import { axiosInstance } from "@/api/index";
 
 export const getAllApps = async () => {
 	return await axiosInstance
-		.get<{}, AxiosResponse<IApp[]>>("/apps")
+		.get<{}, AxiosResponse<IApp[]>>("/apps/playstore")
 		.then(({ data }) => data);
 };
 
 export const getCountryApps = async (country: string) => {
 	return await axiosInstance
-		.get<{}, AxiosResponse<IApp[]>>(`/countries/${country}/apps`)
+		.get<{}, AxiosResponse<IApp[]>>(`/apps/playstore/countries/${country}`)
 		.then(({ data }) => data);
 };
 
@@ -21,55 +21,27 @@ export const getCountryAppsInCategory = async (
 ) => {
 	return await axiosInstance
 		.get<{}, AxiosResponse<IApp[]>>(
-			`/countries/${country}/apps?category=${category}`
+			`/apps/playstore/countries/${country}?category=${category}`
 		)
 		.then(({ data }) => data);
 };
 
-export const getCountryAppsInCategoryAndSubcategory = async (
-	country: string,
-	category: string,
-	subcategory: string
-) => {
+export const getCityApps = async (city: string) => {
 	return await axiosInstance
-		.get<{}, AxiosResponse<IApp[]>>(
-			`/countries/${country}/apps?category=${category}&subcategory=${subcategory}`
-		)
-		.then(({ data }) => data);
-};
-
-export const getCityApps = async (country: string) => {
-	return await axiosInstance
-		.get<{}, AxiosResponse<IApp[]>>(`/cities/${country}/apps`)
+		.get<{}, AxiosResponse<IApp[]>>(`/apps/playstore/cities/${city}`)
 		.then(({ data }) => data);
 };
 
 export const getCityAppsInCategory = async (city: string, category: string) => {
 	return await axiosInstance
-		.get<{}, AxiosResponse<IApp[]>>(`/cities/${city}/apps?category=${category}`)
-		.then(({ data }) => data);
-};
-
-export const getCityAppsInCategoryAndSubcategory = async (
-	city: string,
-	category: string,
-	subcategory: string
-) => {
-	return await axiosInstance
 		.get<{}, AxiosResponse<IApp[]>>(
-			`/cities/${city}/apps?category=${category}&subcategory=${subcategory}`
+			`/apps/playstore/cities/${city}?category=${category}`
 		)
 		.then(({ data }) => data);
 };
 
 export const getAppsInCategory = async (category: string) => {
 	return await axiosInstance
-		.get<{}, AxiosResponse<IApp[]>>(`/apps?category=${category}`)
-		.then(({ data }) => data);
-};
-
-export const getAppsInSubCategory = async (subcategory: string) => {
-	return await axiosInstance
-		.get<{}, AxiosResponse<IApp[]>>(`/apps?subcategory=${subcategory}`)
+		.get<{}, AxiosResponse<IApp[]>>(`/apps/playstore?category=${category}`)
 		.then(({ data }) => data);
 };
