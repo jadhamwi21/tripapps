@@ -33,7 +33,7 @@ export const deleteSubcategories = async (
   if (!category) {
     throw new Error("country is required");
   }
-  const categoryDocument = await Category.findOne({ country: category });
+  const categoryDocument = await Category.findOne({ category });
   if (!categoryDocument) throw new Error("country not found");
   if (subcategories.length === 0) {
     throw new Error("you should pass at least one city");

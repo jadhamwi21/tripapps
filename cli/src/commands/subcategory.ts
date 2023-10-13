@@ -1,13 +1,5 @@
-import { Args, Command, Flags } from "@oclif/core";
-import { Location } from "../models/location.model";
+import { Command, Flags } from "@oclif/core";
 import { cleanup, setup } from "../config/config";
-import _ from "lodash";
-import {
-  addCountries,
-  deleteCountries,
-  getCountries,
-} from "../services/country_service";
-import { addCities, deleteCities, getCities } from "../services/city_service";
 import {
   addSubcategories,
   deleteSubcategories,
