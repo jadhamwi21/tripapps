@@ -7,8 +7,6 @@ from urllib.parse import quote
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 GOOGLE_SEARCH_URL = "https://www.google.com/search"
 
@@ -41,9 +39,12 @@ class AppsEngine:
         url = "{}?q={}".format(GOOGLE_SEARCH_URL, query)
 
         self.__driver.get(url)
-        anchorLinks = WebDriverWait(self.__driver, 10).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "#search a"))
-        )
+        for _ in range(100):
+            self.__driver.execute_script(
+                "window.scrollTo(0, document.body.scrollHeight);")
+        print(self.__driver.page_source)
+        anchorLinks = self.__driver.find_elements(
+            By.CSS_SELECTOR, "#search a")
 
         links = map(lambda x: x.get_attribute(
             "href"), anchorLinks)
