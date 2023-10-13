@@ -9,6 +9,8 @@
 	align-items: center;
 	justify-content: flex-start;
 	gap: 0.5em;
+	height: 250px;
+	width: 250px;
 }
 
 .image {
@@ -42,6 +44,6 @@
 	font-size: 14px;
 }
 .link:hover {
-	color:var(--blue);
-	border-bottom-color:var(--blue);
+	color: var(--blue);
+	border-bottom-color: var(--blue);
 }
