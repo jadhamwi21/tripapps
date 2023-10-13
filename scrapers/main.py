@@ -14,16 +14,13 @@ import appstore_scrapper
 from fake_useragent import UserAgent
 
 WEBDRIVER_SERVICE = Service(ChromeDriverManager().install())
+WEBDRIVER_OPTIONS = Options()
+WEBDRIVER_OPTIONS.add_argument('--no-sandbox')
+WEBDRIVER_OPTIONS.add_argument('--disable-dev-shm-usage')
+WEBDRIVER_OPTIONS.add_argument("--headless")
 
 
 def createWebdriver():
-    ua = UserAgent()
-    user_agent = ua.random
-    WEBDRIVER_OPTIONS = Options()
-    WEBDRIVER_OPTIONS.add_argument('--no-sandbox')
-    WEBDRIVER_OPTIONS.add_argument(f'--user-agent={user_agent}')
-    WEBDRIVER_OPTIONS.add_argument('--disable-dev-shm-usage')
-    WEBDRIVER_OPTIONS.add_argument("--headless")
     webDriver = webdriver.Chrome(options=WEBDRIVER_OPTIONS)
     webDriver.maximize_window()
     return webDriver
