@@ -44,5 +44,5 @@ class AppsEngine:
         query = quote("site:{} {} apps in {}".format(site, category, location))
         response = requests.get('{}?q={}&key={}&cx={}'.format(
             BASE_URL, query, API_KEY, SEARCH_ENGINE_ID))
-        links = [x.link for x in response.items]
+        links = [x.link for x in response.json().items]
         return links
