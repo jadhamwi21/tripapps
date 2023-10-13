@@ -43,5 +43,7 @@ class AppsEngine:
         links = map(lambda x: x.get_attribute(
             "href"), anchorLinks)
 
+        print(links)
+
         links_related_to_site = self.getRelatedLinks(links, site)
         return list(set(links_related_to_site))
