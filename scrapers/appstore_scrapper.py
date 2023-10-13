@@ -35,9 +35,9 @@ class AppstoreScraper:
                 link = link[0:link.find("?l")]
 
                 id = link[link.find("/id")+3:]
-
-                apps.append({"image": image, "name": name, "id": id,
-                            "link": link})
+                if not any(app['name'] == name for app in apps):
+                    apps.append({"image": image, "name": name,
+                                "id": id, "link": link})
             except Exception as e:
                 print("Error scraping link {} from appstore".format(link), e)
         return apps

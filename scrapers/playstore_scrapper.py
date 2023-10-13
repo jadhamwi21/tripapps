@@ -27,8 +27,9 @@ class PlaystoreScraper:
 
                 link = link[0:link.find("&hl")]
 
-                apps.append({"image": image, "name": name, "id": id,
-                            "link": link})
+                if not any(app['name'] == name for app in apps):
+                    apps.append({"image": image, "name": name,
+                                "id": id, "link": link})
             except:
                 print("Error scraping link {} from playstore".format(link))
         return apps
