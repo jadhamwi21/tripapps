@@ -37,7 +37,7 @@ class AppsEngine:
         site = STORES_SITES[store]
         query = quote("site:{} {} apps in {}".format(site, category, location))
         url = "{}?q={}".format(GOOGLE_SEARCH_URL, query)
-
+        print(url)
         self.__driver.get(url)
         anchorLinks = self.__driver.find_elements(By.CSS_SELECTOR, "#search a")
         links = map(lambda x: x.get_attribute(
