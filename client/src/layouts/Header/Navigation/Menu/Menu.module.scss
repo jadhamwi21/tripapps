@@ -11,6 +11,7 @@
 	width: 100%;
 	opacity: 0;
 	transition: all 0.2s ease;
+	pointer-events: none;
 }
 
 .hamburger {
@@ -19,4 +20,6 @@
 
 .toggled {
 	opacity: 1;
+
+	pointer-events: all;
 }

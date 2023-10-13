@@ -20,7 +20,12 @@ const Button: FunctionComponent<Props> = ({
 		? [classes.button, classes[variant], classes.disabled].join(" ")
 		: [classes.button, classes[variant]].join(" ");
 	return (
-		<button onClick={onClick} className={buttonClasses} style={styles}>
+		<button
+			onClick={onClick}
+			onTouchStart={onClick}
+			className={buttonClasses}
+			style={styles}
+		>
 			{children}
 		</button>
 	);
