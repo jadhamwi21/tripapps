@@ -26,8 +26,8 @@ const AppsList: FunctionComponent<Props> = ({
 		<div className={classes.container}>
 			{isPortfolio ? (
 				allKeywords.map((keyword) => {
-					const _list = apps.filter((app) => app.keywords.includes(keyword));
-					const list = [..._list, ..._list];
+					const list = apps.filter((app) => app.keywords.includes(keyword));
+
 					return (
 						<React.Fragment key={keyword}>
 							<div className={classes.keyword}>{keyword}</div>
