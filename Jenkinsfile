@@ -11,6 +11,7 @@ pipeline {
     NginxPort = 80
     NextjsServerSideApiUrl = "http://node:5000"
     NextjsClientSideApiUrl = "/api"
+    ScrapersApiUrl = "http://scrapers:5000"
   }
   stages {
     stage("build:cli") {
@@ -80,7 +81,7 @@ pipeline {
             def COMMANDS = """
             docker pull $DockerHubRepo:cli;
             docker rm --force tripapps-cli 2> /dev/null || echo 'No Container';
-            docker run --name tripapps-cli -e MONGODB_URL=$MongodbUrl -d --network $TripAppsDockerNetwork $DockerHubRepo:cli;
+            docker run --name tripapps-cli -e -e SCRAPERS_API_URL=$ScrapersApiUrl MONGODB_URL=$MongodbUrl -d --network $TripAppsDockerNetwork $DockerHubRepo:cli;
             """
             sh "ssh -o StrictHostKeyChecking=no $TripAppsVpsIpAddress -l jad $COMMANDS"
           }

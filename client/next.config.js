@@ -6,7 +6,7 @@ const nextConfig = {
 				hostname: "play-lh.googleusercontent.com",
 			},
 			{
-				hostname: "apps.apple.com",
+				hostname: "s1-ssl.mzstatic.com",
 			},
 		],
 	},

@@ -11,6 +11,8 @@ import {
 import { EnLocation, EnStores } from "../ts/enums";
 import { IApp } from "../ts/interfaces";
 import { Categories, LocationsType, ScrapAnswers } from "../ts/types";
+const SCRAPERS_API_URL =
+  process.env.SCRAPERS_API_URL || "http://127.0.0.1:8000";
 
 type AppsModelType = typeof PlaystoreApp | typeof AppstoreApp;
 
@@ -69,9 +71,6 @@ const saveApps = async (
     }
   }
 };
-
-const SCRAPERS_API_URL =
-  process.env.SCRAPERS_API_URL || "http://127.0.0.1:8000";
 
 const scrapStore = async (
   categories: Categories,
