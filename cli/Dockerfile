@@ -10,6 +10,8 @@ COPY . ./
 
 RUN npm run build
 
+RUN chmod a+x /cli/bin/run
+
 RUN ln -s /cli/bin/run /usr/local/bin/tripapps-cli
 
 RUN chmod a+x /usr/local/bin/tripapps-cli
