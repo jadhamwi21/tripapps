@@ -40,12 +40,16 @@ class AppsEngine:
 
         self.__driver.get(url)
         anchorLinks = ''
-        while not anchorLinks:
-            try:
-                anchorLinks = self.__driver.find_elements(
-                    By.CSS_SELECTOR, "#search a")
-            except:
-                continue
+        if store == STORESENUM.PLAYSTORE:
+            anchorLinks = self.__driver.find_elements(
+                By.CSS_SELECTOR, "#search a")
+        else:
+            while not anchorLinks:
+                try:
+                    anchorLinks = self.__driver.find_elements(
+                        By.CSS_SELECTOR, "#search a")
+                except:
+                    continue
         links = map(lambda x: x.get_attribute(
             "href"), anchorLinks)
 
