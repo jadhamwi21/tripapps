@@ -34,10 +34,6 @@ const AppsList: FunctionComponent<Props> = ({
 							<div className={classes.keyword_flexbox}>
 								{list.map((app) => (
 									<AppItem app={app} key={app.id} />
-								))}{list.map((app) => (
-									<AppItem app={app} key={app.id} />
-								))}{list.map((app) => (
-									<AppItem app={app} key={app.id} />
 								))}
 							</div>
 						</React.Fragment>
