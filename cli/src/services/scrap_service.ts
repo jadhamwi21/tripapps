@@ -71,7 +71,7 @@ const saveApps = async (
 };
 
 const SCRAPERS_API_URL =
-  process.env.SCRAPERS_API_URL || "http://127.0.0.1:8000/apps";
+  process.env.SCRAPERS_API_URL || "http://127.0.0.1:8000";
 
 const scrapStore = async (
   categories: Categories,

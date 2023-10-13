@@ -1,7 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
-		domains: ["play-lh.googleusercontent.com", "apps.apple.com/assets/artwork"],
+		remotePatterns: [
+			{
+				hostname: "play-lh.googleusercontent.com",
+			},
+			{
+				hostname: "apps.apple.com",
+			},
+		],
 	},
 	typescript: { ignoreBuildErrors: true },
 

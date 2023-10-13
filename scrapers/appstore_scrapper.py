@@ -22,7 +22,7 @@ class AppstoreScraper:
             try:
                 driver.get(link)
                 image = driver.find_element(
-                    By.XPATH, IMAGE_XPATH).get_attribute("src")
+                    By.XPATH, IMAGE_XPATH).get_attribute("currentSrc")
                 nameHtml = driver.find_element(
                     By.XPATH, APP_NAME_XPATH).get_attribute("innerHTML")
 
