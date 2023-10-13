@@ -13,12 +13,15 @@ import playstore_scrapper
 import appstore_scrapper
 
 
+WEBDRIVER_SERVICE = Service(ChromeDriverManager().install())
+
+
 WEBDRIVER_OPTIONS = Options()
 # proxy_server_url = "202.61.227.73:3128"
 # WEBDRIVER_OPTIONS.add_argument(f'--proxy-server={proxy_server_url}')
 WEBDRIVER_OPTIONS.add_argument('--no-sandbox')
 WEBDRIVER_OPTIONS.add_argument('--disable-dev-shm-usage')
-# WEBDRIVER_OPTIONS.add_argument("--headless")
+WEBDRIVER_OPTIONS.add_argument("--headless")
 
 
 def createWebdriver():
