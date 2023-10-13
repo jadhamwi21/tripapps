@@ -29,7 +29,7 @@ pipeline {
             def COMMANDS = """
             docker pull $DockerHubRepo:scrapers;
             docker rm --force tripapps-scrapers 2> /dev/null || echo 'No Container';
-            docker run --name tripapps-scrapers --hostname scrapper -d --network $TripAppsDockerNetwork $DockerHubRepo:scrapers;
+            docker run --name tripapps-scrapers --hostname scrapers -d --network $TripAppsDockerNetwork $DockerHubRepo:scrapers;
             """
             sh "ssh -o StrictHostKeyChecking=no $TripAppsVpsIpAddress -l jad $COMMANDS"
           }

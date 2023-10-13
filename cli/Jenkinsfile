@@ -7,7 +7,7 @@ pipeline {
     TripAppsDockerNetwork = 'tripapps_network'
     TripAppsVpsIpAddress = '212.227.47.195'
     MongodbUrl = "mongodb://db:27017/tripapps"
-    ScrapersApiUrl = "http://scrapper:8000"
+    ScrapersApiUrl = "http://scrapers:8000"
   }
   stages {
     stage("build") {
