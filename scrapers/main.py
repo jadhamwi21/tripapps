@@ -11,20 +11,25 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 import playstore_scrapper
 import appstore_scrapper
-from fake_useragent import UserAgent
+from selenium_stealth import stealth
 
 WEBDRIVER_SERVICE = Service(ChromeDriverManager().install())
 
 
 def createWebdriver():
-    ua = UserAgent()
-    user_agent = ua.random
     WEBDRIVER_OPTIONS = Options()
     WEBDRIVER_OPTIONS.add_argument('--no-sandbox')
-    WEBDRIVER_OPTIONS.add_argument(f'--user-agent={user_agent}')
     WEBDRIVER_OPTIONS.add_argument('--disable-dev-shm-usage')
     WEBDRIVER_OPTIONS.add_argument("--headless")
     webDriver = webdriver.Chrome(options=WEBDRIVER_OPTIONS)
+    stealth(webDriver,
+            languages=["en-US", "en"],
+            vendor="Google Inc.",
+            platform="Win32",
+            webgl_vendor="Intel Inc.",
+            renderer="Intel Iris OpenGL Engine",
+            fix_hairline=True,
+            )
     webDriver.maximize_window()
     return webDriver
 
