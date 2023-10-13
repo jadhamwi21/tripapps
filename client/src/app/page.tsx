@@ -10,7 +10,8 @@ import { getAllApps } from "@/api/apps";
 
 const HomePage = async () => {
 	const seeds = await getSeeds();
-	const apps = await getAllApps();
+	const appstoreApps = await getAllApps('Appstore');
+	const playstoreApps = await getAllApps("Playstore");
 	const numberOfCategories = (() => {
 		const { categories } = seeds;
 		const mainCategories = Object.keys(categories);
@@ -29,7 +30,7 @@ const HomePage = async () => {
 			<Headline />
 			<Achievements
 				categoriesSize={numberOfCategories}
-				appsSize={apps.length}
+				appsSize={playstoreApps.length + appstoreApps.length}
 				countriesSize={countriesSize}
 				citiesSize={citiesSize}
 			/>

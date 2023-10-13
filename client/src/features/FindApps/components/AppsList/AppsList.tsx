@@ -6,8 +6,6 @@ import Carousel from "react-bootstrap/Carousel";
 import classes from "./AppsList.module.css";
 type Props = { apps: IApp[]; isPortfolio?: boolean; category?: string };
 
-const ITEM_SIZE = 300;
-
 const AppsList: FunctionComponent<Props> = ({
 	apps,
 	isPortfolio = false,
@@ -28,17 +26,19 @@ const AppsList: FunctionComponent<Props> = ({
 		<div className={classes.container}>
 			{isPortfolio ? (
 				allKeywords.map((keyword) => {
-					const list = apps.filter((app) => app.keywords.includes(keyword));
-
+					const _list = apps.filter((app) => app.keywords.includes(keyword));
+					const list = [..._list, ..._list];
 					return (
 						<React.Fragment key={keyword}>
 							<div className={classes.keyword}>{keyword}</div>
 							<div className={classes.keyword_flexbox}>
-								<Carousel>
-									{list.map((app) => (
-										<AppItem app={app} key={app.id} />
-									))}
-								</Carousel>
+								{list.map((app) => (
+									<AppItem app={app} key={app.id} />
+								))}{list.map((app) => (
+									<AppItem app={app} key={app.id} />
+								))}{list.map((app) => (
+									<AppItem app={app} key={app.id} />
+								))}
 							</div>
 						</React.Fragment>
 					);

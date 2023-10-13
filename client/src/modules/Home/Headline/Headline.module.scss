@@ -1,9 +1,10 @@
 .container {
-	height: calc(100vh - 75px);
+	height: auto;
 	width: 100%;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	grid-template-rows: 1fr;
+	position: relative;
 }
 
 @keyframes travelling_man_animation {

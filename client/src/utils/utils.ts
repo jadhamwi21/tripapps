@@ -16,6 +16,8 @@ export const titlize = (str?: string) => {
 
 export const fixParams = <T extends object>(obj: T): T => {
 	return Object.fromEntries(
-		Object.entries(obj).map(([k, v]) => [k, titlize(decodeURI(v))])
+		Object.entries(obj).map(([k, v]) =>
+			[k, titlize(decodeURI(v))]
+		)
 	) as T;
 };

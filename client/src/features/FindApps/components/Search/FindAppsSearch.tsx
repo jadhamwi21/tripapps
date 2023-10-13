@@ -7,6 +7,11 @@ import { FunctionComponent, useMemo, useState } from "react";
 import classes from "./FindAppsSearch.module.scss";
 import Button from "@/components/Button/Button";
 import Link from "next/link";
+import { faAppStoreIos } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { StoreType } from "@/api/apps";
+import AppstoreIcon from "../../../../../public/appstore.svg";
+import PlaystoreIcon from "../../../../../public/playstore.svg";
 
 type Props = {
 	seeds: ISeeds;
@@ -15,15 +20,23 @@ type Props = {
 		initialCity?: string;
 		initialCategory?: string;
 		initialSubcategory?: string;
+		initialStore?: StoreType;
 	};
 };
 
 const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
-	const { cityOnChange, countryOnChange, search, countries, cities } =
-		useLocationFilters(seeds.locations, {
-			country: initials?.initialCountry,
-			city: initials?.initialCity,
-		});
+	const {
+		cityOnChange,
+		countryOnChange,
+		search,
+		countries,
+		cities,
+		storeOnChange,
+	} = useLocationFilters(seeds.locations, {
+		country: initials?.initialCountry,
+		city: initials?.initialCity,
+		store: initials?.initialStore,
+	});
 
 	const [filter, setFilter] = useState({
 		category: initials?.initialCategory || "",
@@ -39,16 +52,21 @@ const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
 			search.city ||
 			search.country ||
 			filter.subcategory ||
-			filter.category
+			filter.category ||
+			search.store
 		) {
 			if (!search.country && !search.city) {
-				if (filter.subcategory) {
-					return `/apps/category/${filter.category.toLowerCase()}/${filter.subcategory.toLowerCase()}`;
-				} else {
-					return `/apps/category/${filter.category.toLowerCase()}`;
+				if (search.store) {
+					if (filter.subcategory) {
+						return `/apps/${search.store.toLowerCase()}/category/${filter.category.toLowerCase()}/${filter.subcategory.toLowerCase()}`;
+					} else if (filter.category) {
+						return `/apps/${search.store.toLowerCase()}/category/${filter.category.toLowerCase()}`;
+					} else {
+						return `/apps/${search.store.toLowerCase()}`;
+					}
 				}
 			} else {
-				const routePathArray = ["/apps"];
+				const routePathArray = [`/apps/${search.store.toLowerCase()}/`];
 				const { country, city } = search;
 				const { category, subcategory } = filter;
 				if (city) {
@@ -70,6 +88,19 @@ const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
 
 	return (
 		<div className={classes.container}>
+			<Select
+				label={"Store"}
+				list={[
+					{
+						name: "Playstore",
+						value: "Playstore",
+						image: PlaystoreIcon,
+					},
+					{ name: "Appstore", value: "Appstore", image: AppstoreIcon },
+				]}
+				onChange={storeOnChange}
+				value={search.store}
+			/>
 			<Select
 				label={"Country"}
 				list={countries.map((country) => ({

@@ -12,7 +12,8 @@ interface OwnProps {}
 interface IListItem {
 	name: string;
 	value: any;
-	icon?: string;
+	icon?: any;
+	image?:any;
 }
 
 type Props = {
@@ -59,6 +60,9 @@ const Select: FunctionComponent<Props> = ({
 						{selectedItem.icon && (
 							<ReactSVG className={classes.icon} src={selectedItem.icon} />
 						)}
+						{selectedItem.image && (
+							<Image className={classes.image} src={selectedItem.image}  alt={selectedItem.image}/>
+						)}
 						<div>{selectedItem.value}</div>
 					</p>
 				)}
@@ -89,6 +93,9 @@ const Select: FunctionComponent<Props> = ({
 					>
 						{listItem.icon && (
 							<ReactSVG className={classes.icon} src={listItem.icon} />
+						)}
+						{listItem.image && (
+							<Image className={classes.image} src={listItem.image}  alt={listItem.name}/>
 						)}
 						<div>{listItem.name}</div>
 					</div>

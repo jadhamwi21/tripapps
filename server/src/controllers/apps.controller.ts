@@ -5,7 +5,7 @@ import { StoreType } from "../ts/types/store.types";
 import { LocationType } from "../ts/types/locations.types";
 
 const GET_APPS_SCHEMA = z.object({
-	store: z.enum(["playstore", "appstore"]),
+	store: z.enum(["Playstore", "Appstore"]),
 	locationType: z.enum(["countries", "cities"]),
 	location: z.string().optional(),
 });
@@ -40,7 +40,7 @@ interface IGetStoreAppsParams {
 }
 
 const GET_STOREAPPS_SCHEMA = z.object({
-	store: z.enum(["playstore", "appstore"]),
+	store: z.enum(["Playstore", "Appstore"]),
 });
 
 const getStoreApps = async (

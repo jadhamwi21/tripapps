@@ -1,0 +1,22 @@
+.nav {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: var(--black);
+	justify-content: center;
+	position: fixed;
+	top: 0;
+	right: 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	transition: all 0.2s ease;
+}
+
+.hamburger {
+	z-index: 100;
+}
+
+.toggled {
+	opacity: 1;
+}

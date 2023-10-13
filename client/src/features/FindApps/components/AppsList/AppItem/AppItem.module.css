@@ -1,8 +1,7 @@
 .card {
 	background-color: var(--light-black);
 	color: var(--grey);
-	height: 300px;
-	width: 250px;
+
 	border-radius: 5px;
 	padding: 1em;
 	display: flex;
@@ -38,10 +37,11 @@
 	color: var(--grey);
 	transition: all 0.1s ease;
 	border-bottom: solid 1px var(--grey);
-	padding-bottom: 0;
+	padding-bottom: 0.1em;
 	margin: 0 auto;
 	font-size: 14px;
 }
 .link:hover {
-	padding-bottom: 0.2em;
+	color:var(--blue);
+	border-bottom-color:var(--blue);
 }

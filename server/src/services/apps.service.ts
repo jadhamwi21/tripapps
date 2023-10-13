@@ -14,10 +14,10 @@ import { StoreType } from "../ts/types/store.types";
 
 const getStoreAllApps = async (store: StoreType, category?: string) => {
 	let apps: IApp[] = [];
-	if (store === "playstore") {
+	if (store === "Playstore") {
 		apps = await PlaystoreApp.find().lean();
 	}
-	if (store === "appstore") {
+	if (store === "Appstore") {
 		apps = await AppstoreApp.find().lean();
 	}
 	if (category) {
@@ -32,15 +32,15 @@ const getAllAppsInLocation = async (
 	locationType: LocationType,
 	location?: string
 ) => {
-	const StoreAppsModel = store === "playstore" ? PlaystoreApp : AppstoreApp;
+	const StoreAppsModel = store === "Playstore" ? PlaystoreApp : AppstoreApp;
 	const LocationTypeAppsModel = (function () {
 		if (locationType === "countries") {
-			return store === "playstore"
+			return store === "Playstore"
 				? CountriesPlaystoreApps
 				: CountriesAppstoreApps;
 		}
 		if (locationType === "cities") {
-			return store === "playstore" ? CitiesPlaystoreApps : CitiesAppstoreApps;
+			return store === "Playstore" ? CitiesPlaystoreApps : CitiesAppstoreApps;
 		}
 	})();
 	const allAppsReferences = Array.from(
@@ -68,15 +68,15 @@ const getAllAppsInLocationWithQuery = async (
 	location: string,
 	category: string
 ) => {
-	const StoreAppsModel = store === "playstore" ? PlaystoreApp : AppstoreApp;
+	const StoreAppsModel = store === "Playstore" ? PlaystoreApp : AppstoreApp;
 	const LocationTypeAppsModel = (function () {
 		if (locationType === "countries") {
-			return store === "playstore"
+			return store === "Playstore"
 				? CountriesPlaystoreApps
 				: CountriesAppstoreApps;
 		}
 		if (locationType === "cities") {
-			return store === "playstore" ? CitiesPlaystoreApps : CitiesAppstoreApps;
+			return store === "Playstore" ? CitiesPlaystoreApps : CitiesAppstoreApps;
 		}
 	})();
 
