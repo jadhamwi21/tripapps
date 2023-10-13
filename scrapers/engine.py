@@ -37,7 +37,7 @@ class AppsEngine:
         site = STORES_SITES[store]
         query = quote("site:{} {} apps in {}".format(site, category, location))
         url = "{}?q={}".format(GOOGLE_SEARCH_URL, query)
-        print(url)
+
         self.__driver.get(url)
         anchorLinks = ''
         while not anchorLinks:
@@ -48,8 +48,6 @@ class AppsEngine:
                 continue
         links = map(lambda x: x.get_attribute(
             "href"), anchorLinks)
-
-        print(links)
 
         links_related_to_site = self.getRelatedLinks(links, site)
         return list(set(links_related_to_site))

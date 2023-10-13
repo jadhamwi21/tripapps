@@ -94,7 +94,10 @@ const scrapStore = async (
   })();
   storeType === EnStores.PLAYSTORE ? CitiesPlaystoreApps : CitiesAppstoreApps;
   for (const location of locations) {
+    console.log(`Scrapping Apps in ${location}`);
+
     for (const [category, subcategories] of Object.entries(categories)) {
+      console.log(`Scrapping ${category} Apps in ${location}`);
       const apps: IApp[] = await axios
         .get(
           `${SCRAPERS_API_URL}/apps?category=${category}&store=${storeType}&location=${location}`
@@ -102,6 +105,7 @@ const scrapStore = async (
         .then((res) => res.data);
       await saveApps(location, category, apps, appsModel, locationAppsModel!);
       for (const subcategory of subcategories) {
+        console.log(`Scrapping ${subcategory} Apps in ${location}`);
         const apps: IApp[] = await axios
           .get(
             `${SCRAPERS_API_URL}/apps?category=${subcategory}&store=${storeType}&location=${location}`
@@ -122,6 +126,7 @@ const scrapStore = async (
 export const scrap = async (scrapAnswers: ScrapAnswers) => {
   const { stores, categories, locations, locationType } = scrapAnswers;
   for (const store of stores) {
+    console.log(`Scrapping ${store} Apps`);
     await scrapStore(categories, locations, locationType, store);
   }
 };
