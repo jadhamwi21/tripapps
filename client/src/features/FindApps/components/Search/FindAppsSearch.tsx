@@ -66,7 +66,7 @@ const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
 					}
 				}
 			} else {
-				const routePathArray = [`/apps/${search.store.toLowerCase()}/`];
+				const routePathArray = [`/apps/${search.store.toLowerCase()}`];
 				const { country, city } = search;
 				const { category, subcategory } = filter;
 				if (city) {
