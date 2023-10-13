@@ -81,7 +81,7 @@ pipeline {
             def COMMANDS = """
             docker pull $DockerHubRepo:cli;
             docker rm --force tripapps-cli 2> /dev/null || echo 'No Container';
-            docker run --name tripapps-cli -e SCRAPERS_API_URL=$ScrapersApiUrl MONGODB_URL=$MongodbUrl -d --network $TripAppsDockerNetwork $DockerHubRepo:cli;
+            docker run --name tripapps-cli -e SCRAPERS_API_URL=$ScrapersApiUrl -e MONGODB_URL=$MongodbUrl -d --network $TripAppsDockerNetwork $DockerHubRepo:cli;
             """
             sh "ssh -o StrictHostKeyChecking=no $TripAppsVpsIpAddress -l jad $COMMANDS"
           }
