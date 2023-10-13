@@ -13,9 +13,6 @@ import playstore_scrapper
 import appstore_scrapper
 
 
-WEBDRIVER_SERVICE = Service(ChromeDriverManager().install())
-
-
 WEBDRIVER_OPTIONS = Options()
 # proxy_server_url = "202.61.227.73:3128"
 # WEBDRIVER_OPTIONS.add_argument(f'--proxy-server={proxy_server_url}')
@@ -25,8 +22,7 @@ WEBDRIVER_OPTIONS.add_argument("--headless")
 
 
 def createWebdriver():
-    webDriver = webdriver.Chrome(
-        service=WEBDRIVER_SERVICE, options=WEBDRIVER_OPTIONS)
+    webDriver = webdriver.Chrome(options=WEBDRIVER_OPTIONS)
     webDriver.maximize_window()
     return webDriver
 
