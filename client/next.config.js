@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
-		domains: ["play-lh.googleusercontent.com", "apps.apple.com"],
+		domains: ["play-lh.googleusercontent.com", "apps.apple.com/assets/artwork"],
 	},
 	typescript: { ignoreBuildErrors: true },
 
