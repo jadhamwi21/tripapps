@@ -105,7 +105,7 @@ const scrapStore = async (
         .then((res) => res.data);
       await saveApps(location, category, apps, appsModel, locationAppsModel!);
       for (const subcategory of subcategories) {
-        console.log(`Scrapping ${subcategory} Apps in ${location}`);
+        console.log(`Scrapping ${subcategory} ${category} Apps in ${location}`);
         const apps: IApp[] = await axios
           .get(
             `${SCRAPERS_API_URL}/apps?category=${subcategory}&store=${storeType}&location=${location}`
