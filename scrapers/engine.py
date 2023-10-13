@@ -9,6 +9,10 @@ from urllib.parse import quote
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
+from selenium_recaptcha_solver import RecaptchaSolver
+from selenium.webdriver.common.by import By
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
 import main
 
@@ -42,8 +46,12 @@ class AppsEngine:
         query = quote("site:{} {} apps in {}".format(site, category, location))
         url = "{}?q={}".format(GOOGLE_SEARCH_URL, query)
 
+        solver = RecaptchaSolver(driver=self.__driver)
         self.__driver.get(url)
-        print(self.__driver.page_source)
+        recaptcha_iframe = self.__driver.find_element(
+            By.XPATH, '//iframe[@title="reCAPTCHA"]')
+        if recaptcha_iframe:
+            solver.click_recaptcha_v2(iframe=recaptcha_iframe)
         anchorLinks = self.__driver.find_elements(
             By.CSS_SELECTOR, "#search a")
 
