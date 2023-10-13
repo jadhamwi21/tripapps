@@ -1,4 +1,6 @@
 from enum import Enum
+import profile
+import random
 from time import sleep
 from typing import Annotated
 from fastapi import HTTPException, Query, FastAPI
@@ -7,6 +9,8 @@ from urllib.parse import quote
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
+
+import main
 
 GOOGLE_SEARCH_URL = "https://www.google.com/search"
 
@@ -23,8 +27,8 @@ STORES_SITES = {STORESENUM.PLAYSTORE: "play.google.com",
 
 
 class AppsEngine:
-    def __init__(self, webdriver: webdriver.Chrome):
-        self.__driver = webdriver
+    def __init__(self):
+        self.__driver = main.createWebdriver()
 
     def getRelatedLinks(self, links: list[str], site: str):
         relatedLinks = []
@@ -39,9 +43,6 @@ class AppsEngine:
         url = "{}?q={}".format(GOOGLE_SEARCH_URL, query)
 
         self.__driver.get(url)
-        for _ in range(100):
-            self.__driver.execute_script(
-                "window.scrollTo(0, document.body.scrollHeight);")
         print(self.__driver.page_source)
         anchorLinks = self.__driver.find_elements(
             By.CSS_SELECTOR, "#search a")
