@@ -1,14 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
-		remotePatterns: [
-			{
-				hostname: "play-lh.googleusercontent.com",
-			},
-			{
-				hostname: "s1-ssl.mzstatic.com",
-			},
-		],
+		domains: ["play-lh.googleusercontent.com", "s1-ssl.mzstatic.com"],
 	},
 	typescript: { ignoreBuildErrors: true },
 
