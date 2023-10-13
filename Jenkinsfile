@@ -11,7 +11,7 @@ pipeline {
     NginxPort = 80
     NextjsServerSideApiUrl = "http://node:5000"
     NextjsClientSideApiUrl = "/api"
-    ScrapersApiUrl = "http://scrapers:5000"
+    ScrapersApiUrl = "http://scrapers:8000"
   }
   stages {
     stage("build:cli") {
@@ -20,6 +20,20 @@ pipeline {
           script {
             docker.withTool('docker') {
               def dockerImage = docker.build "$DockerHubRepo:cli"
+              docker.withRegistry('', DockerHubCredentialsID) {
+                dockerImage.push()
+              }
+            }
+          }
+        }
+      }
+    }
+    stage("build:scrapers") {
+      steps {
+        dir("./scrapers") {
+          script {
+            docker.withTool('docker') {
+              def dockerImage = docker.build "$DockerHubRepo:scrapers"
               docker.withRegistry('', DockerHubCredentialsID) {
                 dockerImage.push()
               }
@@ -82,6 +96,15 @@ pipeline {
             docker pull $DockerHubRepo:cli;
             docker rm --force tripapps-cli 2> /dev/null || echo 'No Container';
             docker run --name tripapps-cli -e SCRAPERS_API_URL=$ScrapersApiUrl -e MONGODB_URL=$MongodbUrl -d --network $TripAppsDockerNetwork $DockerHubRepo:cli;
+            """
+            sh "ssh -o StrictHostKeyChecking=no $TripAppsVpsIpAddress -l jad $COMMANDS"
+          }
+          // Scrapers Deployment
+          script {
+            def COMMANDS = """
+            docker pull $DockerHubRepo:scrapers;
+            docker rm --force tripapps-scrapers 2> /dev/null || echo 'No Container';
+            docker run --hostname scrapers --name tripapps-scrapers -d --network $TripAppsDockerNetwork $DockerHubRepo:scrapers;
             """
             sh "ssh -o StrictHostKeyChecking=no $TripAppsVpsIpAddress -l jad $COMMANDS"
           }
