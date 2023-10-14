@@ -68,6 +68,7 @@ const CategoryFilterItem: FunctionComponent<Props> = ({
 								key={subcategory}
 								onClick={() => {
 									onClick(name, subcategory);
+									setShowSubcategories(false);
 								}}
 								style={{
 									backgroundColor:
