@@ -1,5 +1,4 @@
 import { Category } from "../models/category.model";
-import { Location } from "../models/location.model";
 
 export const getSubcategories = async () => {
   const categories = await Category.find();
@@ -13,10 +12,10 @@ export const addSubcategories = async (
   subcategories: string[] = []
 ) => {
   if (!category) {
-    throw new Error("country is required");
+    throw new Error("category is required");
   }
   const categoryDocument = await Category.findOne({ category });
-  if (!categoryDocument) throw new Error("country not found");
+  if (!categoryDocument) throw new Error("category not found");
   if (subcategories.length === 0) {
     throw new Error("you should pass at least one subcategory");
   }
@@ -31,12 +30,12 @@ export const deleteSubcategories = async (
   subcategories: string[] = []
 ) => {
   if (!category) {
-    throw new Error("country is required");
+    throw new Error("category is required");
   }
   const categoryDocument = await Category.findOne({ category });
-  if (!categoryDocument) throw new Error("country not found");
+  if (!categoryDocument) throw new Error("category not found");
   if (subcategories.length === 0) {
-    throw new Error("you should pass at least one city");
+    throw new Error("you should pass at least one subcategory");
   }
   categoryDocument.subcategories = categoryDocument.subcategories.filter(
     (subcategory) => subcategories.indexOf(subcategory) < 0
