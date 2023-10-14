@@ -35,11 +35,10 @@ async def getApps(category: str, location: str, store: str):
     if store not in engine.STORES:
         raise HTTPException(
             status_code=422, detail="invalid value for store parameter, it's 'playstore' or 'appstore'")
-
-    appsEngine = engine.AppsEngine()
-    links = appsEngine.getAppsLinks(category, store, location)
-    webDriver = createWebdriver()
     try:
+        appsEngine = engine.AppsEngine()
+        links = appsEngine.getAppsLinks(category, store, location)
+        webDriver = createWebdriver()
         apps = []
         if store == engine.STORESENUM.PLAYSTORE:
             playstoreScraper = playstore_scrapper.PlaystoreScraper(

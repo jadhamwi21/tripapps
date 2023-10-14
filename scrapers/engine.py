@@ -41,7 +41,7 @@ class AppsEngine:
 
     def getAppsLinks(self, category: str, store: str, location: str):
         site = STORES_SITES[store]
-        query = quote("site:{} {} apps in {}".format(site, category, location))
+        query = quote("site:{} {} apps {}".format(site, category, location))
         response = requests.get('{}?q={}&key={}&cx={}'.format(
             BASE_URL, query, API_KEY, SEARCH_ENGINE_ID))
 
