@@ -2,7 +2,7 @@ import Image from "next/image";
 import { FunctionComponent, useEffect, useRef, useState } from "react";
 import classes from "./CategoryFilterItem.module.scss";
 import { ReactSVG } from "react-svg";
-import { useHover } from "usehooks-ts";
+import { useHover, useOnClickOutside } from "usehooks-ts";
 
 type Props = {
 	name: string;
@@ -27,6 +27,7 @@ const CategoryFilterItem: FunctionComponent<Props> = ({
 	useEffect(() => {
 		setShowSubcategories(categorySelected === name);
 	}, [categorySelected]);
+	useOnClickOutside(wrapperRef, () => setShowSubcategories(false));
 	return (
 		<div ref={wrapperRef} className={classes.wrapper}>
 			<div
