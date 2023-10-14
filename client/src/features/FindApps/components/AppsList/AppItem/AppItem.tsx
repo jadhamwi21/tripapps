@@ -8,23 +8,21 @@ type Props = { app: IApp; style?: React.CSSProperties };
 
 const AppItem: FunctionComponent<Props> = ({ app, style }) => {
 	return (
-		<div style={style}>
-			<div className={classes.card}>
-				{!_.isUndefined(app.image) && (
-					<Image
-						className={classes.image}
-						src={`/imageProxy?imageUrl=${app.image!}`}
-						height={60}
-						width={60}
-						alt={`${app.name}-icon`}
-					/>
-				)}
-				<p className={classes.app_name}>{app.name}</p>
-				<div className={classes.text}>
-					<a href={app.link} target="_blank" className={classes.link}>
-						Download
-					</a>
-				</div>
+		<div className={classes.card} style={style}>
+			{!_.isUndefined(app.image) && (
+				<Image
+					className={classes.image}
+					src={`/imageProxy?imageUrl=${app.image!}`}
+					height={60}
+					width={60}
+					alt={`${app.name}-icon`}
+				/>
+			)}
+			<p className={classes.app_name}>{app.name}</p>
+			<div className={classes.text}>
+				<a href={app.link} target="_blank" className={classes.link}>
+					Download
+				</a>
 			</div>
 		</div>
 	);
