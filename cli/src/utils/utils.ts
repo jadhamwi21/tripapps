@@ -3,7 +3,7 @@ export const titlize = (str: string) => {
   if (hasSpace) {
     return str
       .split(" ")
-      .map((str) => str[0].toUpperCase() + str.slice(1).toLowerCase())
+      .map((str) => str[0].toUpperCase() + str.slice(1))
       .join(" ");
   } else {
     return str[0].toUpperCase() + str.slice(1).toLowerCase();
