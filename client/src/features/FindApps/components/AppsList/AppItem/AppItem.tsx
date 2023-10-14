@@ -10,13 +10,15 @@ const AppItem: FunctionComponent<Props> = ({ app, style }) => {
 	return (
 		<div className={classes.card} style={style}>
 			{!_.isUndefined(app.image) && (
-				<Image
-					className={classes.image}
-					src={`/imageProxy?imageUrl=${app.image!}`}
-					height={60}
-					width={60}
-					alt={`${app.name}-icon`}
-				/>
+				<div className={classes.image}>
+					<Image
+						className={classes.image}
+						src={`/imageProxy?imageUrl=${app.image!}`}
+						height={60}
+						width={60}
+						alt={`${app.name}-icon`}
+					/>
+				</div>
 			)}
 			<p className={classes.app_name}>{app.name.replaceAll("&amp;", "&")}</p>
 			<div className={classes.text}>
