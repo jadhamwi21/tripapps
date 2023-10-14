@@ -1,10 +1,8 @@
-import React, { FunctionComponent } from "react";
 import { IApp } from "@/ts/interfaces/apps.interfaces";
-import classes from "./AppItem.module.css";
-import { Rating } from "@mui/material";
 import * as _ from "lodash";
-import { abbreviateNumber } from "js-abbreviation-number";
 import Image from "next/image";
+import React, { FunctionComponent } from "react";
+import classes from "./AppItem.module.css";
 
 type Props = { app: IApp; style?: React.CSSProperties };
 
@@ -15,7 +13,7 @@ const AppItem: FunctionComponent<Props> = ({ app, style }) => {
 				{!_.isUndefined(app.image) && (
 					<Image
 						className={classes.image}
-						src={app.image!}
+						src={`/imageProxy?imageUrl=${app.image!}`}
 						height={60}
 						width={60}
 						alt={`${app.name}-icon`}
@@ -24,7 +22,7 @@ const AppItem: FunctionComponent<Props> = ({ app, style }) => {
 				<p className={classes.app_name}>{app.name}</p>
 				<div className={classes.text}>
 					<a href={app.link} target="_blank" className={classes.link}>
-						View
+						Download
 					</a>
 				</div>
 			</div>

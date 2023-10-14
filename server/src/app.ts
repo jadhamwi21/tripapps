@@ -1,9 +1,11 @@
-import express from "express";
+import express, { Request } from "express";
 import dotenv from "dotenv";
 import * as path from "path";
 import { connectToDatabase } from "./models";
 import { SeedsController } from "./controllers/seeds.controller";
 import { ErrorMiddleware } from "./middlewares/error.middleware";
+
+import fetch from "node-fetch";
 
 import cors from "cors";
 
