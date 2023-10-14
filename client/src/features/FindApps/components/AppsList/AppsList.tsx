@@ -2,8 +2,7 @@
 import AppItem from "@/features/FindApps/components/AppsList/AppItem/AppItem";
 import { IApp } from "@/ts/interfaces/apps.interfaces";
 import React, { FunctionComponent, useMemo, useRef } from "react";
-import Carousel from "react-bootstrap/Carousel";
-import classes from "./AppsList.module.css";
+import classes from "./AppsList.module.scss";
 type Props = { apps: IApp[]; isPortfolio?: boolean; category?: string };
 
 const AppsList: FunctionComponent<Props> = ({
