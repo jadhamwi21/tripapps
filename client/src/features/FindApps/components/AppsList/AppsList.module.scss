@@ -1,5 +1,5 @@
 .container {
-	padding-bottom: 2em;
+	padding: 1em;
 }
 
 .grid {
@@ -9,7 +9,7 @@
 	place-items: center;
 	margin: 0 auto;
 	width: min-content;
-	gap: 2em;
+	gap: 1em;
 	height: 100%;
 	@media screen and (max-width: 768px) {
 		display: flex;
@@ -36,7 +36,6 @@
 	align-items: center;
 	justify-content: flex-start;
 	margin: 0 auto;
-	width: 80%;
 	overflow-x: auto;
 	gap: 1em;
 

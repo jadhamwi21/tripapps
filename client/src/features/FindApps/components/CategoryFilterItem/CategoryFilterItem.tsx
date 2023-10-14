@@ -19,20 +19,17 @@ const CategoryFilterItem: FunctionComponent<Props> = ({
 	categorySelected,
 	subcategorySelected,
 }) => {
-	const [showSubcategories, setShowSubcategories] = useState(
-		categorySelected === name
-	);
+	const [showSubcategories, setShowSubcategories] = useState(false);
 
 	const wrapperRef = useRef<HTMLDivElement>(null);
-	useEffect(() => {
-		setShowSubcategories(categorySelected === name);
-	}, [categorySelected]);
+
 	return (
 		<div ref={wrapperRef} className={classes.wrapper}>
 			<div
 				className={classes.container}
 				onClick={() => {
 					onClick(name);
+					setShowSubcategories(true);
 				}}
 				style={{
 					backgroundColor:
