@@ -5,6 +5,7 @@
 	width: 100%;
 	@media screen and (max-width: 768px) {
 		display: flex;
+		grid-template-columns: initial;
 		flex-direction: column;
 		align-items: center;
 		gap: 1em;
