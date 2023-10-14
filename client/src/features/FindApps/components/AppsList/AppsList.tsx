@@ -22,6 +22,7 @@ const AppsList: FunctionComponent<Props> = ({
 		}
 		return keywords;
 	}, []);
+	apps = [...apps, ...apps, ...apps];
 	return (
 		<div className={classes.container}>
 			{isPortfolio ? (
