@@ -26,7 +26,7 @@ const Achievements: FunctionComponent<Props> = ({
 	return (
 		<div className={classes.container}>
 			<AchievementCard icon={faCubes}>
-				we have came up with a rich database, with over
+				we have came up with a rich database, with over{" "}
 				<span className={classes.highlight}>{appsSize}</span> distinctive apps!
 			</AchievementCard>{" "}
 			<AchievementCard icon={faLayerGroup}>
@@ -38,8 +38,8 @@ const Achievements: FunctionComponent<Props> = ({
 				we have gathered apps for{" "}
 				<span className={classes.highlight}>{countriesSize}</span> countries and{" "}
 				<span className={classes.highlight}>{citiesSize}</span> cities, allowing
-				you to pick the right appropriate application for your need, that people
-				use in these locations.
+				you to pick the right, appropriate application for your need, that
+				people use in these locations.
 			</AchievementCard>
 		</div>
 	);

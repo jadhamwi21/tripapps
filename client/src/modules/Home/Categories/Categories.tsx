@@ -15,16 +15,12 @@ const Categories: FunctionComponent<Props> = ({ categories }: Props) => {
 		<Section title={"Search By Category"}>
 			<div className={classes.container}>
 				{categories.map((category) => (
-					<Link
-						href={`/apps/category/${category.toLowerCase()}`}
+					<Card
+						name={category}
+						icon={`${process.env.NEXT_PUBLIC_API_URL}/icons/categories/${category}.svg`}
+						type={"category"}
 						key={category}
-					>
-						<Card
-							name={category}
-							icon={`${process.env.NEXT_PUBLIC_API_URL}/icons/categories/${category}.svg`}
-							type={"category"}
-						/>
-					</Link>
+					/>
 				))}
 			</div>
 		</Section>

@@ -40,6 +40,11 @@
 	left: 0;
 	z-index: 5;
 	width: 100%;
+	@media screen and (max-width: 768px) {
+		position: initial;
+		top: initial;
+		left: initial;
+	}
 }
 
 .list {

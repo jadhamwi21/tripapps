@@ -26,8 +26,14 @@
 		height: 100%;
 		width: 100%;
 	}
-	@media screen and (max-width: 400px) {
-		width: 50vw;
-		grid-template-columns: 1fr;
+	@media screen and (max-width: 768px) {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+		& > div {
+			max-width: 250px;
+			min-width: 100px;
+		}
 	}
 }

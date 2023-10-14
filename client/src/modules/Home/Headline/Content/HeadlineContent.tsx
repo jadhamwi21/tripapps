@@ -18,6 +18,7 @@ const HeadlineContent = () => {
 						discover popular apps used in many aspects
 					</span>
 					, with ease.
+					<br />
 					<Link href={"/apps"}>
 						<Button variant={"primary"} styles={{ marginTop: "0.75em" }}>
 							Start Packing

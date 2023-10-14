@@ -13,13 +13,12 @@ const Countries: FunctionComponent<Props> = ({ countries }: Props) => {
 		<Section title={"Search By Country"}>
 			<div className={classes.container}>
 				{countries.map((country) => (
-					<Link href={`/apps/country/${country.toLowerCase()}`} key={country}>
-						<Card
-							name={country}
-							icon={`${process.env.NEXT_PUBLIC_API_URL}/icons/countries/${country}.svg`}
-							type={"flag"}
-						/>
-					</Link>
+					<Card
+						name={country}
+						icon={`${process.env.NEXT_PUBLIC_API_URL}/icons/countries/${country}.svg`}
+						type={"flag"}
+						key={country}
+					/>
 				))}
 			</div>
 		</Section>

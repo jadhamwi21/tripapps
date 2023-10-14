@@ -19,24 +19,16 @@ const CategoryFilterItem: FunctionComponent<Props> = ({
 	categorySelected,
 	subcategorySelected,
 }) => {
-	const [showSubcategories, setShowSubcategories] = useState(false);
-	const showSubcategoriesTimerRef = useRef<NodeJS.Timer>();
-	const wrapperRef = useRef<HTMLDivElement>(null);
+	const [showSubcategories, setShowSubcategories] = useState(
+		categorySelected === name
+	);
 
+	const wrapperRef = useRef<HTMLDivElement>(null);
+	useEffect(() => {
+		setShowSubcategories(categorySelected === name);
+	}, [categorySelected]);
 	return (
-		<div
-			ref={wrapperRef}
-			className={classes.wrapper}
-			onMouseEnter={() => {
-				showSubcategoriesTimerRef.current = setTimeout(() => {
-					setShowSubcategories(true);
-				}, 200);
-			}}
-			onMouseLeave={() => {
-				if (showSubcategories) setShowSubcategories(false);
-				clearTimeout(showSubcategoriesTimerRef.current);
-			}}
-		>
+		<div ref={wrapperRef} className={classes.wrapper}>
 			<div
 				className={classes.container}
 				onClick={() => {
@@ -76,7 +68,6 @@ const CategoryFilterItem: FunctionComponent<Props> = ({
 								key={subcategory}
 								onClick={() => {
 									onClick(name, subcategory);
-									setShowSubcategories(false);
 								}}
 								style={{
 									backgroundColor:
