@@ -52,12 +52,10 @@
 	outline: none;
 	color: var(--grey);
 	transition: all 0.1s ease;
-	border-bottom: solid 1px var(--grey);
 	padding-bottom: 0.1em;
 	margin: 0 auto;
 	font-size: 16px;
 	color: var(--blue);
-	border-bottom-color: var(--blue);
 
 	display: grid;
 	place-items: center;

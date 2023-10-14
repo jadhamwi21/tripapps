@@ -3,6 +3,7 @@ import * as _ from "lodash";
 import Image from "next/image";
 import React, { FunctionComponent } from "react";
 import classes from "./AppItem.module.css";
+import Button from "@/components/Button/Button";
 
 type Props = { app: IApp; style?: React.CSSProperties };
 
@@ -22,9 +23,11 @@ const AppItem: FunctionComponent<Props> = ({ app, style }) => {
 			)}
 			<p className={classes.app_name}>{app.name.replaceAll("&amp;", "&")}</p>
 			<div className={classes.text}>
-				<a href={app.link} target="_blank" className={classes.link}>
-					Download
-				</a>
+				<Button variant="primary">
+					<a href={app.link} target="_blank" className={classes.link}>
+						Download
+					</a>
+				</Button>
 			</div>
 		</div>
 	);
