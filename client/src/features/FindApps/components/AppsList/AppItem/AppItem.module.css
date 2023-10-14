@@ -9,7 +9,6 @@
 	align-items: center;
 	justify-content: flex-start;
 	gap: 0.5em;
-	height: fit-content;
 
 	min-width: 250px;
 	width: auto;

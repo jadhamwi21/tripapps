@@ -18,7 +18,7 @@ const AppItem: FunctionComponent<Props> = ({ app, style }) => {
 					alt={`${app.name}-icon`}
 				/>
 			)}
-			<p className={classes.app_name}>{app.name}</p>
+			<p className={classes.app_name}>{app.name.replaceAll("&amp;", "&")}</p>
 			<div className={classes.text}>
 				<a href={app.link} target="_blank" className={classes.link}>
 					Download
