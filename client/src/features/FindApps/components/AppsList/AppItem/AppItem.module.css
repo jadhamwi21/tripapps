@@ -23,25 +23,12 @@
 	border-radius: 5px;
 }
 
-.text {
-	width: 100%;
-	display: grid;
-	place-items: center;
-	gap: 0.5em;
-	height: 100%;
-	white-space: nowrap;
-	@media screen and (max-width: 768px) {
-		flex-direction: column;
-		width: 100%;
-		padding: 1em;
-	}
-}
-
 .app_name {
 	width: 100%;
 	color: var(--yellow);
 	font-weight: 500;
 	font-size: 16px;
+	white-space: nowrap;
 
 	text-align: center;
 }
@@ -56,4 +43,8 @@
 	font-size: 16px;
 	color: var(--blue);
 	border-bottom-color: var(--blue);
+	height: 100%;
+	width: 100%;
+	display: grid;
+	place-items: center;
 }

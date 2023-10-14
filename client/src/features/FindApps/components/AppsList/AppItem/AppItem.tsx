@@ -19,11 +19,10 @@ const AppItem: FunctionComponent<Props> = ({ app, style }) => {
 				/>
 			)}
 			<p className={classes.app_name}>{app.name}</p>
-			<div className={classes.text}>
-				<a href={app.link} target="_blank" className={classes.link}>
-					Download
-				</a>
-			</div>
+
+			<a href={app.link} target="_blank" className={classes.link}>
+				Download
+			</a>
 		</div>
 	);
 };
