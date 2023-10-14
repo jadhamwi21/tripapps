@@ -10,7 +10,7 @@
 	justify-content: flex-start;
 	gap: 0.5em;
 	height: fit-content;
-	min-height: 200px;
+
 	width: 200px;
 	@media screen and (max-width: 768px) {
 		width: 100%;
