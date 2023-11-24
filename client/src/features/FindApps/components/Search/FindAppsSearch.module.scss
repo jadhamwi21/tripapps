@@ -37,3 +37,21 @@
 		}
 	}
 }
+
+.query_text {
+	color: var(--yellow);
+	font-size: 13px;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.5em;
+}
+
+.query_category {
+	cursor: pointer;
+	transition: all 0.15s ease;
+	&:hover {
+		transform: translateY(-0.1em);
+	}
+}

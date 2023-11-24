@@ -122,19 +122,55 @@ const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
 				onChange={cityOnChange}
 				value={search.city}
 			/>
-
-			<div className={classes.filters_container}>
-				{Object.keys(seeds.categories).map((category, index) => (
-					<CategoryFilterItem
-						name={category}
-						key={category}
-						onClick={categoryOnClick}
-						subcategories={seeds.categories[category] ?? []}
-						categorySelected={filter.category}
-						subcategorySelected={filter.subcategory}
-					/>
-				))}
+			<div className={classes.query_text}>
+				{filter.category && (
+					<span
+						className={classes.query_category}
+						onClick={() => {
+							setFilter({ category: "", subcategory: "" });
+						}}
+					>
+						{filter.category}
+					</span>
+				)}
+				{filter.subcategory && (
+					<>
+						<span style={{ color: "var(--grey)" }}>/</span>
+						<span
+							className={classes.query_category}
+							onClick={() => {
+								setFilter({ ...filter, subcategory: "" });
+							}}
+						>
+							{filter.subcategory}
+						</span>
+					</>
+				)}
 			</div>
+
+			{(!filter.category || !filter.subcategory) && (
+				<div className={classes.filters_container}>
+					{!filter.category
+						? Object.keys(seeds.categories).map((category) => (
+								<CategoryFilterItem
+									name={category}
+									key={category}
+									onClick={categoryOnClick}
+								/>
+						  ))
+						: seeds.categories[filter.category]
+						? seeds.categories[filter.category].map((subcategory) => (
+								<CategoryFilterItem
+									name={subcategory}
+									key={subcategory}
+									onClick={(subcategory) =>
+										categoryOnClick(filter.category, subcategory)
+									}
+								/>
+						  ))
+						: null}
+				</div>
+			)}
 			<Link href={linkTo}>
 				<Button variant="primary">Find</Button>
 			</Link>
