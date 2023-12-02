@@ -6,6 +6,8 @@ const playstoreAppSchema = new Schema({
   link: String,
   image: String,
   keywords: [String],
+  reviews: [Object],
+  score: Number,
 });
 
 const appstoreAppSchema = new Schema({
@@ -14,6 +16,8 @@ const appstoreAppSchema = new Schema({
   link: String,
   image: String,
   keywords: [String],
+  reviews: [Object],
+  score: Number,
 });
 
 export const PlaystoreApp = model("playstore_apps", appstoreAppSchema);

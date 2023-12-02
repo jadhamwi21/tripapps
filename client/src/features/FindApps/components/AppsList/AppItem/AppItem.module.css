@@ -60,3 +60,15 @@
 	display: grid;
 	place-items: center;
 }
+
+.write_review_text {
+	font-size: 12px;
+	border-bottom: solid 1px transparent;
+	padding-bottom: 0.1em;
+	transition: all 0.15s ease;
+	cursor: pointer;
+}
+
+.write_review_text:hover {
+	border-color: var(--grey);
+}

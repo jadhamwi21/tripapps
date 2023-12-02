@@ -12,7 +12,7 @@ import { EnLocation, EnStores } from "../ts/enums";
 import { IApp } from "../ts/interfaces";
 import { Categories, LocationsType, ScrapAnswers } from "../ts/types";
 const SCRAPERS_API_URL =
-  process.env.SCRAPERS_API_URL || "http://127.0.0.1:8000";
+  process.env.SCRAPERS_API_URL || "http://localhost:8000";
 
 type AppsModelType = typeof PlaystoreApp | typeof AppstoreApp;
 
@@ -38,7 +38,12 @@ const saveApps = async (
         keywords: Array.from(new Set([...appDoc.keywords, category])),
       });
     } else {
-      const newApp = new appsModel({ ...app, keywords: [category] });
+      const newApp = new appsModel({
+        ...app,
+        keywords: [category],
+        score: 0,
+        reviews: [],
+      });
       await newApp.save();
     }
     const locationAppsDoc = await locationAppsModel?.findOne({
