@@ -1,0 +1,114 @@
+.container {
+	height: 100vh;
+	width: 100%;
+	display: grid;
+	place-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	transition: all 0.2s ease;
+	opacity: 0.5;
+	background-color: rgba(0, 0, 0, 0.6);
+	z-index: 20;
+}
+
+.opened {
+	opacity: 1;
+	pointer-events: all;
+}
+
+.closed {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.content {
+	height: 75%;
+	width: 45%;
+	border-radius: 4px;
+	background-color: var(--black);
+	overflow-y: auto;
+	display: grid;
+	gap: 1em;
+	grid-template-rows: 0.6fr 1fr;
+	padding: 1em;
+	@media screen and (max-width: 768px) {
+		grid-template-columns: auto;
+		grid-template-rows: repeat(2, 1fr);
+		width: 75%;
+	}
+}
+
+.content > div {
+	overflow-y: auto;
+}
+
+.content > div:first-child > textarea {
+	height: 100%;
+	width: 100%;
+	resize: none;
+	outline: none;
+	background-color: var(--light-black);
+	border: none;
+	color: var(--grey);
+	border-radius: 4px;
+	padding: 0.25em;
+	font-size: 12px;
+	&::placeholder {
+		color: rgba(255, 255, 255, 0.6);
+		font-size: 12px;
+	}
+}
+
+.content > div:first-child {
+	display: grid;
+	grid-template-columns: 1fr 0.5fr;
+	align-items: center;
+	width: 100%;
+	gap: 1em;
+	padding-bottom: 1em;
+	border-bottom: solid 1px var(--grey);
+	@media screen and (max-width: 768px) {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+}
+
+.content > div:first-child > div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.5em;
+}
+
+.review {
+	height: fit-content;
+	width: 100%;
+	background-color: var(--light-black);
+	padding: 1em;
+	border-radius: 4px;
+	position: relative;
+	max-height: 250px;
+	overflow-y: auto;
+}
+
+.date {
+	position: absolute;
+	top: 0.25em;
+	right: 0.25em;
+	font-size: 10px;
+	color: vaR(--yellow);
+}
+
+.reviews {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1em;
+	overflow-y: auto;
+}
+
+.review > p {
+	font-size: 14px;
+}

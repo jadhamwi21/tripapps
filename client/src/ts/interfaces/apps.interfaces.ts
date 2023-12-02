@@ -1,5 +1,5 @@
 export interface IAppReview {
-	personName: string;
+	date: number;
 	review: string;
 }
 

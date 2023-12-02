@@ -1,15 +1,17 @@
 import { IApp } from "@/ts/interfaces/apps.interfaces";
 import * as _ from "lodash";
 import Image from "next/image";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import classes from "./AppItem.module.css";
 import Button from "@/components/Button/Button";
 import { Rating } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
+import ReviewModal from "../ReviewModal/ReviewModal";
 
 type Props = { app: IApp; style?: React.CSSProperties };
 
 const AppItem: FunctionComponent<Props> = ({ app, style }) => {
+	const [opened, setOpened] = useState(false);
 	return (
 		<div className={classes.card} style={style}>
 			{!_.isUndefined(app.image) && (
@@ -33,7 +35,12 @@ const AppItem: FunctionComponent<Props> = ({ app, style }) => {
 				}
 				precision={0.5}
 			/>
-			<div className={classes.write_review_text}>Write a review</div>
+			<div
+				className={classes.write_review_text}
+				onClick={() => setOpened(true)}
+			>
+				Write a review
+			</div>
 			<div className={classes.text}>
 				<Button variant="primary">
 					<a href={app.link} target="_blank" className={classes.link}>
@@ -41,6 +48,11 @@ const AppItem: FunctionComponent<Props> = ({ app, style }) => {
 					</a>
 				</Button>
 			</div>
+			<ReviewModal
+				reviews={app.reviews}
+				opened={opened}
+				closeHandler={() => setOpened(false)}
+			/>
 		</div>
 	);
 };
