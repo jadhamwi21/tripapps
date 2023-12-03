@@ -30,6 +30,7 @@ class PlaystoreScraper:
                 if not any(app['name'] == name for app in apps):
                     apps.append({"image": image, "name": name,
                                 "id": id, "link": link})
-            except:
+            except Exception as e:
+                print(e)
                 print("Error scraping link {} from playstore".format(link))
         return apps

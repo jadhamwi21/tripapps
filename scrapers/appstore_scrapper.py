@@ -39,5 +39,6 @@ class AppstoreScraper:
                     apps.append({"image": image, "name": name,
                                 "id": id, "link": link})
             except Exception as e:
-                print("Error scraping link {} from appstore".format(link), e)
+                print(e)
+                print("Error scraping link {} from appstore".format(link))
         return apps
