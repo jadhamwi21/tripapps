@@ -4,11 +4,11 @@ import { IApp } from "@/ts/interfaces/apps.interfaces";
 import React, { FunctionComponent, useMemo, useRef, useState } from "react";
 import classes from "./AppsList.module.scss";
 import { log } from "console";
-type Props = { apps: IApp[]; isPortfolio?: boolean; category?: string };
+type Props = { apps: IApp[]; portfolio?: boolean; category?: string };
 
 const AppsList: FunctionComponent<Props> = ({
 	apps,
-	isPortfolio = false,
+	portfolio = false,
 	category,
 }) => {
 	const allKeywords = useMemo(() => {
@@ -28,7 +28,7 @@ const AppsList: FunctionComponent<Props> = ({
 
 	return (
 		<div className={classes.container}>
-			{isPortfolio ? (
+			{portfolio ? (
 				allKeywords.map((keyword) => {
 					const list = apps.filter((app) => app.keywords.includes(keyword));
 

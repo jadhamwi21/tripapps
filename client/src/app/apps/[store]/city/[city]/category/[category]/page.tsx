@@ -3,12 +3,12 @@ import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import { getSeeds } from "@/api/seeds";
 import FindAppsSearch from "@/features/FindApps/components/Search/FindAppsSearch";
 import AppsList from "@/features/FindApps/components/AppsList/AppsList";
-import {getCityAppsInCategory, StoreType} from "@/api/apps";
+import { getCityAppsInCategory, StoreType } from "@/api/apps";
 import { fixParams } from "@/utils/utils";
 import "server-only";
 
 interface Props {
-	params: { category: string; city: string,store:StoreType };
+	params: { category: string; city: string; store: StoreType };
 }
 
 const page = async ({ params }: Props) => {
@@ -35,10 +35,11 @@ const page = async ({ params }: Props) => {
 				initials={{
 					initialCity: paramsFixed.city,
 					initialCategory: paramsFixed.category,
-					initialCountry: country,initialStore:paramsFixed.store,
+					initialCountry: country,
+					initialStore: paramsFixed.store,
 				}}
 			/>
-			<AppsList apps={apps} isPortfolio category={paramsFixed.category} />
+			<AppsList apps={apps} portfolio category={paramsFixed.category} />
 		</PageWrapper>
 	);
 };

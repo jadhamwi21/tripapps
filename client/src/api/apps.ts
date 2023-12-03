@@ -1,7 +1,7 @@
 import "server-only";
 import { AxiosResponse } from "axios";
 import { IApp, IAppReview } from "@/ts/interfaces/apps.interfaces";
-import { axiosServerInstance } from "@/api/index";
+import { axiosServerInstance } from "@/api/index.server";
 
 export type StoreType = "Playstore" | "Appstore";
 

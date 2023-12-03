@@ -1,6 +1,7 @@
 import { IAppReview } from "@/ts/interfaces/apps.interfaces";
-import { axiosClientInstance } from ".";
+
 import { StoreType } from "./apps";
+import { axiosClientInstance } from "./index.client";
 
 export const addAppReview = async (
 	store: StoreType,

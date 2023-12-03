@@ -30,7 +30,7 @@ const page = async ({ params }: Props) => {
 					initialCategory: paramsFixed.category,
 				}}
 			/>
-			<AppsList apps={apps} isPortfolio category={paramsFixed.category} />
+			<AppsList apps={apps} portfolio category={paramsFixed.category} />
 		</PageWrapper>
 	);
 };

@@ -24,7 +24,7 @@ const page = async ({ params }: Props) => {
 					initialStore: paramsFixed.store,
 				}}
 			/>
-			<AppsList apps={apps} isPortfolio />
+			<AppsList apps={apps} portfolio />
 		</PageWrapper>
 	);
 };
