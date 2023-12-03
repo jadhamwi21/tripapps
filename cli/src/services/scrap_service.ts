@@ -36,8 +36,6 @@ const saveApps = async (
       await appDoc.updateOne({
         ...app,
         keywords: Array.from(new Set([...appDoc.keywords, category])),
-        reviews: appDoc.reviews,
-        score: appDoc.score,
       });
     } else {
       const newApp = new appsModel({
