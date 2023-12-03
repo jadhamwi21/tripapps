@@ -51,5 +51,7 @@ async def getApps(category: str, location: str, store: str):
             apps = appstoreScraper.scrap()
             return apps
     except Exception as e:
-        print(e)
         raise HTTPException(status_code=500, detail="Internal Server Error")
+    finally:
+        if webDriver:
+            webDriver.quit()
