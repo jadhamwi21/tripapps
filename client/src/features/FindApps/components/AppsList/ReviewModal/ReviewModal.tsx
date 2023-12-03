@@ -91,30 +91,31 @@ const ReviewModal = ({ reviews, opened, closeHandler, appId }: Props) => {
 					</div>
 				</div>
 				<div className={styles.reviews}>
-					{reviews
-						.sort((a, b) => b.date - a.date)
-						.map((review, i) => (
-							<div
-								className={styles.review}
-								key={review.date + review.score + review.review + i}
-							>
-								<div className={styles.date}>
-									{moment.unix(review.date).format("D MMM YYYY | hh:mm")}
+					{reviews &&
+						reviews
+							.sort((a, b) => b.date - a.date)
+							.map((review, i) => (
+								<div
+									className={styles.review}
+									key={review.date + review.score + review.review + i}
+								>
+									<div className={styles.date}>
+										{moment.unix(review.date).format("D MMM YYYY | hh:mm")}
+									</div>
+									<Rating
+										value={review.score}
+										readOnly
+										size="small"
+										emptyIcon={
+											<StarIcon
+												style={{ color: "var(--grey)" }}
+												fontSize="inherit"
+											/>
+										}
+									/>
+									<p>{review.review}</p>
 								</div>
-								<Rating
-									value={review.score}
-									readOnly
-									size="small"
-									emptyIcon={
-										<StarIcon
-											style={{ color: "var(--grey)" }}
-											fontSize="inherit"
-										/>
-									}
-								/>
-								<p>{review.review}</p>
-							</div>
-						))}
+							))}
 				</div>
 			</div>
 		</div>
