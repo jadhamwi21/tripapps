@@ -32,6 +32,7 @@ app = FastAPI()
 
 @app.get("/apps")
 async def getApps(category: str, location: str, store: str):
+    webDriver = None
     if store not in engine.STORES:
         raise HTTPException(
             status_code=422, detail="invalid value for store parameter, it's 'playstore' or 'appstore'")
@@ -53,5 +54,5 @@ async def getApps(category: str, location: str, store: str):
     except:
         raise HTTPException(status_code=500, detail="Internal Server Error")
     finally:
-        if webDriver:
+        if webDriver != None:
             webDriver.quit()
