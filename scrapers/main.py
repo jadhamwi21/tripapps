@@ -53,4 +53,5 @@ async def getApps(category: str, location: str, store: str):
     except:
         raise HTTPException(status_code=500, detail="Internal Server Error")
     finally:
-        webDriver.quit()
+        if webDriver:
+            webDriver.quit()
