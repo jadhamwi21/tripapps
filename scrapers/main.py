@@ -17,7 +17,7 @@ WEBDRIVER_SERVICE = Service(ChromeDriverManager().install())
 WEBDRIVER_OPTIONS = Options()
 WEBDRIVER_OPTIONS.add_argument('--no-sandbox')
 WEBDRIVER_OPTIONS.add_argument('--disable-dev-shm-usage')
-# WEBDRIVER_OPTIONS.add_argument("--headless")
+WEBDRIVER_OPTIONS.add_argument("--headless")
 
 
 def createWebdriver():
@@ -50,5 +50,6 @@ async def getApps(category: str, location: str, store: str):
                 links, webDriver)
             apps = appstoreScraper.scrap()
             return apps
-    except:
+    except Exception as e:
+        print(e)
         raise HTTPException(status_code=500, detail="Internal Server Error")
