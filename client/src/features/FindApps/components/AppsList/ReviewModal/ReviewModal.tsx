@@ -1,19 +1,26 @@
-import React, { useEffect, useState } from "react";
-import Modal from "@mui/material/Modal";
-import { IApp, IAppReview } from "@/ts/interfaces/apps.interfaces";
-import styles from "./ReviewModal.module.scss";
-import { Rating } from "@mui/material";
-import StarIcon from "@mui/icons-material/Star";
+"use client";
+import { StoreType } from "@/api/apps";
+import { addAppReview } from "@/api/reviews";
 import Button from "@/components/Button/Button";
+import { IAppReview } from "@/ts/interfaces/apps.interfaces";
+import { titlize } from "@/utils/utils";
+import StarIcon from "@mui/icons-material/Star";
+import { Rating } from "@mui/material";
 import moment from "moment";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import styles from "./ReviewModal.module.scss";
+import { toast } from "react-toastify";
 
 type Props = {
 	reviews: IAppReview[];
 	opened: boolean;
 	closeHandler: () => void;
+	appId: string;
 };
 
-const ReviewModal = ({ reviews, opened, closeHandler }: Props) => {
+const ReviewModal = ({ reviews, opened, closeHandler, appId }: Props) => {
+	const params = useParams();
 	const [score, setScore] = useState(0);
 	const [review, setReview] = useState("");
 	useEffect(() => {
@@ -23,12 +30,24 @@ const ReviewModal = ({ reviews, opened, closeHandler }: Props) => {
 			document.body.style.overflow = "auto";
 		}
 	}, [opened]);
-	const _reviews: IAppReview[] = [
-		{ date: 1701465869, review: "Old" },
-		{ date: 1701548669, review: "New" },
-	].sort((a, b) => b.date - a.date);
+	const router = useRouter();
 
-	const onSubmit = () => {};
+	const onSubmit = () => {
+		const { store: _store } = params as { store: string };
+		const store = titlize(_store) as StoreType;
+		toast.promise(
+			addAppReview(store, appId, { score, review }).then(() => {
+				router.refresh();
+				setScore(0);
+				setReview("");
+			}),
+			{
+				pending: "Adding Review...",
+				success: "Review Added",
+				error: "Something went wrong, try again later...",
+			}
+		);
+	};
 	return (
 		<div
 			className={[
@@ -72,14 +91,30 @@ const ReviewModal = ({ reviews, opened, closeHandler }: Props) => {
 					</div>
 				</div>
 				<div className={styles.reviews}>
-					{_reviews.map((review) => (
-						<div className={styles.review}>
-							<div className={styles.date}>
-								{moment.unix(review.date).format("D MMM YYYY | HH:MM")}
+					{reviews
+						.sort((a, b) => b.date - a.date)
+						.map((review, i) => (
+							<div
+								className={styles.review}
+								key={review.date + review.score + review.review + i}
+							>
+								<div className={styles.date}>
+									{moment.unix(review.date).format("D MMM YYYY | hh:mm")}
+								</div>
+								<Rating
+									value={review.score}
+									readOnly
+									size="small"
+									emptyIcon={
+										<StarIcon
+											style={{ color: "var(--grey)" }}
+											fontSize="inherit"
+										/>
+									}
+								/>
+								<p>{review.review}</p>
 							</div>
-							<p>{review.review}</p>
-						</div>
-					))}
+						))}
 				</div>
 			</div>
 		</div>

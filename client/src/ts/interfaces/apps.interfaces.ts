@@ -1,6 +1,7 @@
 export interface IAppReview {
 	date: number;
 	review: string;
+	score: number;
 }
 
 export interface IApp {

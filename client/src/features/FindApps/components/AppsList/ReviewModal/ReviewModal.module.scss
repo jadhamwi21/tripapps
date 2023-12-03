@@ -83,20 +83,17 @@
 }
 
 .review {
-	height: fit-content;
 	width: 100%;
 	background-color: var(--light-black);
 	padding: 1em;
 	border-radius: 4px;
 	position: relative;
-	max-height: 250px;
-	overflow-y: auto;
 }
 
 .date {
 	position: absolute;
-	top: 0.25em;
-	right: 0.25em;
+	top: 0.5em;
+	right: 0.5em;
 	font-size: 10px;
 	color: vaR(--yellow);
 }

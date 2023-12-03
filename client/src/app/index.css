@@ -32,6 +32,7 @@ a {
 	--yellow: #ffd369;
 	--grey: #eeeeee;
 	--blue: #3282ff;
+	--toastify-color-dark: var(--black) !important;
 }
 
 ::-webkit-scrollbar {

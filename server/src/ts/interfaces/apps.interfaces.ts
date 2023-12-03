@@ -5,3 +5,9 @@ export interface IApp {
 	image: string;
 	keywords: string[];
 }
+
+export interface IAppReview {
+	score: number;
+	review: string;
+	date: number;
+}

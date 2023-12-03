@@ -13,7 +13,7 @@ interface IListItem {
 	name: string;
 	value: any;
 	icon?: any;
-	image?:any;
+	image?: any;
 }
 
 type Props = {
@@ -56,15 +56,19 @@ const Select: FunctionComponent<Props> = ({
 				onClick={() => setToggled((prev) => !prev)}
 			>
 				{selectedItem && (
-					<p className={classes.value}>
+					<div className={classes.value}>
 						{selectedItem.icon && (
 							<ReactSVG className={classes.icon} src={selectedItem.icon} />
 						)}
 						{selectedItem.image && (
-							<Image className={classes.image} src={selectedItem.image}  alt={selectedItem.image}/>
+							<Image
+								className={classes.image}
+								src={selectedItem.image}
+								alt={selectedItem.image}
+							/>
 						)}
 						<div>{selectedItem.value}</div>
-					</p>
+					</div>
 				)}
 				<div className={classes.toggler_container}>
 					{toggled ? (
@@ -95,7 +99,11 @@ const Select: FunctionComponent<Props> = ({
 							<ReactSVG className={classes.icon} src={listItem.icon} />
 						)}
 						{listItem.image && (
-							<Image className={classes.image} src={listItem.image}  alt={listItem.name}/>
+							<Image
+								className={classes.image}
+								src={listItem.image}
+								alt={listItem.name}
+							/>
 						)}
 						<div>{listItem.name}</div>
 					</div>

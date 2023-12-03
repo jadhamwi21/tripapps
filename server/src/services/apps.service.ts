@@ -4,13 +4,16 @@ import {
 	CitiesAppstoreApps,
 	CitiesPlaystoreApps,
 } from "../models/cities_apps.model";
+import moment from "moment";
 import {
 	CountriesAppstoreApps,
 	CountriesPlaystoreApps,
 } from "../models/countries_apps.model";
-import { IApp } from "../ts/interfaces/apps.interfaces";
+import { CustomError } from "../models/error.models";
+import { IApp, IAppReview } from "../ts/interfaces/apps.interfaces";
 import { LocationType } from "../ts/types/locations.types";
 import { StoreType } from "../ts/types/store.types";
+import { getAppModelByStore } from "../utils/utils";
 
 const getStoreAllApps = async (store: StoreType, category?: string) => {
 	let apps: IApp[] = [];
@@ -111,4 +114,30 @@ const getApps = async (params: IGetAppsParams, query: IGetAppsQuery) => {
 	}
 };
 
-export const AppsService = { getApps, getStoreAllApps };
+const addNewAppReview = async (
+	store: StoreType,
+	appId: string,
+	review: Omit<IAppReview, "date">
+) => {
+	const appModel = getAppModelByStore(store);
+	const app = await appModel.findOne({ id: appId });
+	if (app) {
+		const prevReviews: IAppReview[] = app.reviews;
+		const appReview: IAppReview = {
+			...review,
+			date: moment().unix(),
+		};
+		const newReviews = [...prevReviews, appReview];
+		const newScore =
+			newReviews.reduce((prev, current) => prev + current.score, 0) /
+			newReviews.length;
+		app.reviews = newReviews;
+		app.score = newScore;
+		await app.save();
+		return { review: appReview, score: newScore };
+	} else {
+		throw new CustomError(404, `App with id ${appId} is not found`, "App");
+	}
+};
+
+export const AppsService = { getApps, getStoreAllApps, addNewAppReview };

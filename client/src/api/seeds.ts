@@ -1,10 +1,10 @@
 import "server-only";
 import { AxiosResponse } from "axios";
 import { ISeeds } from "@/ts/interfaces/seeds.interfaces";
-import { axiosInstance } from "@/api/index";
+import { axiosServerInstance } from "@/api/index";
 
 export const getSeeds = async () => {
-	const seeds = await axiosInstance
+	const seeds = await axiosServerInstance
 		.get<{}, AxiosResponse<ISeeds>>("/seeds")
 		.then(({ data }) => data);
 

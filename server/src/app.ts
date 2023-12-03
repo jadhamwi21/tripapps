@@ -1,4 +1,4 @@
-import express, { Request } from "express";
+import express, { Request, json } from "express";
 import dotenv from "dotenv";
 import * as path from "path";
 import { connectToDatabase } from "./models";
@@ -18,6 +18,7 @@ import morgan from "morgan";
 	await connectToDatabase();
 	const app = express();
 
+	app.use(json());
 	app.use(morgan("combined"));
 	app.use(cors({ origin: "http://localhost:3000" }));
 

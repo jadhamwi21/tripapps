@@ -3,5 +3,6 @@ import { AppsController } from "../controllers/apps.controller";
 
 export const AppsRouter = Router();
 
-AppsRouter.use("/:store/:locationType/:location?", AppsController.getApps);
-AppsRouter.use("/:store", AppsController.getStoreApps);
+AppsRouter.get("/:store/:locationType/:location?", AppsController.getApps);
+AppsRouter.put("/:store/:appId/reviews", AppsController.addAppReview);
+AppsRouter.get("/:store", AppsController.getStoreApps);

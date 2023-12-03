@@ -1,8 +1,9 @@
 "use client";
 import AppItem from "@/features/FindApps/components/AppsList/AppItem/AppItem";
 import { IApp } from "@/ts/interfaces/apps.interfaces";
-import React, { FunctionComponent, useMemo, useRef } from "react";
+import React, { FunctionComponent, useMemo, useRef, useState } from "react";
 import classes from "./AppsList.module.scss";
+import { log } from "console";
 type Props = { apps: IApp[]; isPortfolio?: boolean; category?: string };
 
 const AppsList: FunctionComponent<Props> = ({
@@ -21,6 +22,9 @@ const AppsList: FunctionComponent<Props> = ({
 		}
 		return keywords;
 	}, []);
+	const [appsState, setAppsState] = useState(
+		Object.fromEntries(apps.map((app) => [app.id, app]))
+	);
 
 	return (
 		<div className={classes.container}>
@@ -41,7 +45,7 @@ const AppsList: FunctionComponent<Props> = ({
 				})
 			) : (
 				<div className={classes.grid}>
-					{apps.map((app) => (
+					{Object.values(appsState).map((app) => (
 						<AppItem app={app} key={app.id} />
 					))}
 				</div>

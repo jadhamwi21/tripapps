@@ -1,3 +1,4 @@
+"use client";
 import { IApp } from "@/ts/interfaces/apps.interfaces";
 import * as _ from "lodash";
 import Image from "next/image";
@@ -8,7 +9,10 @@ import { Rating } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import ReviewModal from "../ReviewModal/ReviewModal";
 
-type Props = { app: IApp; style?: React.CSSProperties };
+type Props = {
+	app: IApp;
+	style?: React.CSSProperties;
+};
 
 const AppItem: FunctionComponent<Props> = ({ app, style }) => {
 	const [opened, setOpened] = useState(false);
@@ -52,6 +56,7 @@ const AppItem: FunctionComponent<Props> = ({ app, style }) => {
 				reviews={app.reviews}
 				opened={opened}
 				closeHandler={() => setOpened(false)}
+				appId={app.id}
 			/>
 		</div>
 	);
