@@ -26,18 +26,22 @@ STORES = [STORESENUM.PLAYSTORE, STORESENUM.APPSTORE]
 STORES_SITES = {STORESENUM.PLAYSTORE: "play.google.com",
                 STORESENUM.APPSTORE: "apps.apple.com"}
 
-API_KEY = "AIzaSyA0SpQPGycUm8qNxZgzwXp1_wHF6pVIYEE"
+API_KEY = "AIzaSyDJqmfCYjKbz1Z2M8qT106ZWV21a3aHpjk"
 SEARCH_ENGINE_ID = "86402455ad31331ee"
 BASE_URL = "https://www.googleapis.com/customsearch/v1"
 
 
 class AppsEngine:
     def getAppsLinks(self, category: str, store: str, location: str):
-        site = STORES_SITES[store]
-        query = quote("site:{} {} apps \"{}\"".format(
-            site, category, location))
-        response = requests.get('{}?q={}&key={}&cx={}'.format(
-            BASE_URL, query, API_KEY, SEARCH_ENGINE_ID))
+        try:
+            site = STORES_SITES[store]
+            query = quote("site:{} {} apps \"{}\"".format(
+                site, category, location))
+            response = requests.get('{}?q={}&key={}&cx={}'.format(
+                BASE_URL, query, API_KEY, SEARCH_ENGINE_ID))
 
-        links = [x["link"] for x in response.json()["items"]]
-        return links
+            links = [x["link"] for x in response.json()["items"]]
+            return links
+        except Exception as e:
+            print(e)
+            return []
