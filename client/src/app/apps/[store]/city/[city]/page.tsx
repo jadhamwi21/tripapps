@@ -7,6 +7,7 @@ import AppsList from "@/features/FindApps/components/AppsList/AppsList";
 import { getCityApps, StoreType } from "@/api/apps";
 import { fixParams } from "@/utils/utils";
 import "server-only";
+import Meta from "@/components/Meta/Meta";
 
 interface Props {
 	params: { city: string; store: StoreType };
@@ -26,17 +27,19 @@ const page = async ({ params }: Props) => {
 		return "";
 	})();
 	return (
-		<PageWrapper>
-			<FindAppsSearch
-				seeds={seeds}
-				initials={{
-					initialCity: paramsFixed.city,
-					initialCountry: country,
-					initialStore: paramsFixed.store,
-				}}
-			/>
-			<AppsList apps={apps} portfolio />
-		</PageWrapper>
+		<Meta title={`${paramsFixed.store} Apps | ${paramsFixed.city}`}>
+			<PageWrapper>
+				<FindAppsSearch
+					seeds={seeds}
+					initials={{
+						initialCity: paramsFixed.city,
+						initialCountry: country,
+						initialStore: paramsFixed.store,
+					}}
+				/>
+				<AppsList apps={apps} portfolio />
+			</PageWrapper>
+		</Meta>
 	);
 };
 

@@ -6,6 +6,7 @@ import FindAppsSearch from "@/features/FindApps/components/Search/FindAppsSearch
 import AppsList from "@/features/FindApps/components/AppsList/AppsList";
 import { StoreType, getAllApps, getCountryApps } from "@/api/apps";
 import { fixParams } from "@/utils/utils";
+import Meta from "@/components/Meta/Meta";
 
 interface Props {
 	params: { store: StoreType };
@@ -17,15 +18,17 @@ const page = async ({ params }: Props) => {
 
 	const apps = await getAllApps(paramsFixed.store);
 	return (
-		<PageWrapper>
-			<FindAppsSearch
-				seeds={seeds}
-				initials={{
-					initialStore: paramsFixed.store,
-				}}
-			/>
-			<AppsList apps={apps} portfolio />
-		</PageWrapper>
+		<Meta title={`${paramsFixed.store} Apps`}>
+			<PageWrapper>
+				<FindAppsSearch
+					seeds={seeds}
+					initials={{
+						initialStore: paramsFixed.store,
+					}}
+				/>
+				<AppsList apps={apps} portfolio />
+			</PageWrapper>
+		</Meta>
 	);
 };
 

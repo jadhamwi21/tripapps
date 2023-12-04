@@ -6,6 +6,7 @@ import { getSeeds } from "@/api/seeds";
 import { getAppsInCategory, StoreType } from "@/api/apps";
 import { fixParams } from "@/utils/utils";
 import "server-only";
+import Meta from "@/components/Meta/Meta";
 
 interface IProps {
 	params: {
@@ -20,13 +21,15 @@ const page = async ({ params }: IProps) => {
 	const apps = await getAppsInCategory(paramsFixed.store, paramsFixed.category);
 
 	return (
-		<PageWrapper>
-			<FindAppsSearch
-				seeds={seeds}
-				initials={{ initialCategory: paramsFixed.category }}
-			/>
-			<AppsList apps={apps} portfolio category={paramsFixed.category} />
-		</PageWrapper>
+		<Meta title={`${params.store} | ${params.category} Apps`}>
+			<PageWrapper>
+				<FindAppsSearch
+					seeds={seeds}
+					initials={{ initialCategory: paramsFixed.category }}
+				/>
+				<AppsList apps={apps} portfolio category={paramsFixed.category} />
+			</PageWrapper>
+		</Meta>
 	);
 };
 

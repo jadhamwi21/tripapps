@@ -5,28 +5,36 @@ import FindAppsSearch from "@/features/FindApps/components/Search/FindAppsSearch
 import AppsList from "@/features/FindApps/components/AppsList/AppsList";
 import { fixParams } from "@/utils/utils";
 import "server-only";
-import {getAppsInCategory, StoreType} from "@/api/apps";
+import { getAppsInCategory, StoreType } from "@/api/apps";
+import Meta from "@/components/Meta/Meta";
 
 interface Props {
-	params: { subcategory: string; category: string;store:StoreType};
+	params: { subcategory: string; category: string; store: StoreType };
 }
 
 const page = async ({ params }: Props) => {
 	const paramsFixed = fixParams(params);
 	const seeds = await getSeeds();
-	const apps = await getAppsInCategory(paramsFixed.store,paramsFixed.subcategory);
+	const apps = await getAppsInCategory(
+		paramsFixed.store,
+		paramsFixed.subcategory
+	);
 
 	return (
-		<PageWrapper>
-			<FindAppsSearch
-				seeds={seeds}
-				initials={{
-					initialSubcategory: paramsFixed.subcategory,
-					initialCategory: paramsFixed.category,
-				}}
-			/>
-			<AppsList apps={apps} />
-		</PageWrapper>
+		<Meta
+			title={`${params.store} | ${params.subcategory} ${params.category} Apps`}
+		>
+			<PageWrapper>
+				<FindAppsSearch
+					seeds={seeds}
+					initials={{
+						initialSubcategory: paramsFixed.subcategory,
+						initialCategory: paramsFixed.category,
+					}}
+				/>
+				<AppsList apps={apps} />
+			</PageWrapper>
+		</Meta>
 	);
 };
 

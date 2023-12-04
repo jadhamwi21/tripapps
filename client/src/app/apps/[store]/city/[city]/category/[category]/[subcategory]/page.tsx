@@ -6,10 +6,16 @@ import AppsList from "@/features/FindApps/components/AppsList/AppsList";
 
 import { fixParams } from "@/utils/utils";
 import "server-only";
-import {getCityAppsInCategory, StoreType} from "@/api/apps";
+import { getCityAppsInCategory, StoreType } from "@/api/apps";
+import Meta from "@/components/Meta/Meta";
 
 interface Props {
-	params: { category: string; city: string; subcategory: string,store:StoreType };
+	params: {
+		category: string;
+		city: string;
+		subcategory: string;
+		store: StoreType;
+	};
 }
 
 const page = async ({ params }: Props) => {
@@ -31,18 +37,23 @@ const page = async ({ params }: Props) => {
 	})();
 
 	return (
-		<PageWrapper>
-			<FindAppsSearch
-				seeds={seeds}
-				initials={{
-					initialCity: paramsFixed.city,
-					initialCategory: paramsFixed.category,
-					initialSubcategory: paramsFixed.subcategory,
-					initialCountry: country,initialStore:paramsFixed.store,
-				}}
-			/>
-			<AppsList apps={apps} />
-		</PageWrapper>
+		<Meta
+			title={`${paramsFixed.store} | ${paramsFixed.subcategory} ${paramsFixed.category} Apps | ${paramsFixed.city}`}
+		>
+			<PageWrapper>
+				<FindAppsSearch
+					seeds={seeds}
+					initials={{
+						initialCity: paramsFixed.city,
+						initialCategory: paramsFixed.category,
+						initialSubcategory: paramsFixed.subcategory,
+						initialCountry: country,
+						initialStore: paramsFixed.store,
+					}}
+				/>
+				<AppsList apps={apps} />
+			</PageWrapper>
+		</Meta>
 	);
 };
 
