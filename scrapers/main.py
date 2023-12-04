@@ -17,7 +17,7 @@ WEBDRIVER_SERVICE = Service(ChromeDriverManager().install())
 WEBDRIVER_OPTIONS = Options()
 WEBDRIVER_OPTIONS.add_argument('--no-sandbox')
 WEBDRIVER_OPTIONS.add_argument('--disable-dev-shm-usage')
-# WEBDRIVER_OPTIONS.add_argument("--headless")
+WEBDRIVER_OPTIONS.add_argument("--headless")
 
 
 def createWebdriver():
