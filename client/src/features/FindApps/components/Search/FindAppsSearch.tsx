@@ -55,7 +55,7 @@ const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
 			filter.category ||
 			search.store
 		) {
-			if (!search.country && !search.city) {
+			if (search.country === "None" && search.city === "None") {
 				if (search.store) {
 					if (filter.subcategory) {
 						return `/apps/${search.store.toLowerCase()}/category/${filter.category.toLowerCase()}/${filter.subcategory.toLowerCase()}`;
@@ -69,7 +69,7 @@ const FindAppsSearch: FunctionComponent<Props> = ({ seeds, initials }) => {
 				const routePathArray = [`/apps/${search.store.toLowerCase()}`];
 				const { country, city } = search;
 				const { category, subcategory } = filter;
-				if (city) {
+				if (city !== "None") {
 					routePathArray.push(...["city", city.toLowerCase()]);
 				} else {
 					routePathArray.push(...["country", country.toLowerCase()]);

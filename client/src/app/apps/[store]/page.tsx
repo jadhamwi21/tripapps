@@ -24,6 +24,8 @@ const page = async ({ params }: Props) => {
 					seeds={seeds}
 					initials={{
 						initialStore: paramsFixed.store,
+						initialCountry: "None",
+						initialCity: "None",
 					}}
 				/>
 				<AppsList apps={apps} portfolio />

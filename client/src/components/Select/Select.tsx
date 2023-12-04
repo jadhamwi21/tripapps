@@ -88,7 +88,11 @@ const Select: FunctionComponent<Props> = ({
 			>
 				{list.map((listItem) => (
 					<div
-						className={classes.list_item}
+						className={
+							listItem.value === value
+								? [classes.list_item, classes.list_item_selected].join(" ")
+								: classes.list_item
+						}
 						key={listItem.value}
 						onClick={() => {
 							onChange(listItem.value);

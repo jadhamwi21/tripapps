@@ -25,7 +25,11 @@ const page = async ({ params }: IProps) => {
 			<PageWrapper>
 				<FindAppsSearch
 					seeds={seeds}
-					initials={{ initialCategory: paramsFixed.category }}
+					initials={{
+						initialCategory: paramsFixed.category,
+						initialCountry: "None",
+						initialCity: "None",
+					}}
 				/>
 				<AppsList apps={apps} portfolio category={paramsFixed.category} />
 			</PageWrapper>

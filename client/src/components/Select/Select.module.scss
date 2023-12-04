@@ -13,6 +13,11 @@
 	transition: all 0.5s ease;
 }
 
+.list_item_selected {
+	background-color: var(--black) !important;
+	color: var(--yellow) !important;
+}
+
 .disabled {
 	opacity: 0.4;
 	pointer-events: none;
@@ -82,8 +87,8 @@
 
 	&:hover {
 		cursor: pointer;
-		background-color: var(--black);
-		color: var(--yellow);
+		background-color: rgba(0, 0, 0, 0.2);
+		color: var(--grey);
 	}
 }
 
@@ -103,9 +108,7 @@
 	}
 }
 
-
 .image {
-		height: 20px;
-		width: 20px;
-
+	height: 20px;
+	width: 20px;
 }

@@ -16,7 +16,10 @@ const page = async () => {
 			description="Discover the top-rated mobile apps in countries and cities worldwide, categorized for your convenience. Find the best apps for various interests and needs, from productivity to entertainment. Explore a curated selection of applications tailored to your location and preferences. Stay updated on the latest and most popular apps, ensuring you have the perfect tool for every occasion."
 		>
 			<PageWrapper>
-				<FindAppsSearch seeds={seeds} />
+				<FindAppsSearch
+					seeds={seeds}
+					initials={{ initialCountry: "None", initialCity: "None" }}
+				/>
 				<AppsList apps={[]} />
 			</PageWrapper>
 		</Meta>

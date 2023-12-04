@@ -29,7 +29,7 @@ export const useSearch = (
 	const isFirstRender = useIsFirstRender();
 
 	useEffect(() => {
-		if (!isFirstRender) cityOnChange("");
+		if (!isFirstRender) cityOnChange("None");
 	}, [search.country]);
 
 	const storeOnChange = (val: StoreType) => {
@@ -40,8 +40,8 @@ export const useSearch = (
 		countryOnChange,
 		cityOnChange,
 		search,
-		countries,
-		cities,
+		countries: ["None", ...countries],
+		cities: ["None", ...cities],
 
 		storeOnChange,
 	};

@@ -24,6 +24,8 @@ const page = async ({ params }: Props) => {
 					initials={{
 						initialCountry: paramsFixed.country,
 						initialStore: paramsFixed.store,
+
+						initialCity: "None",
 					}}
 				/>
 				<AppsList apps={apps} portfolio />

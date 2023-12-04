@@ -30,6 +30,8 @@ const page = async ({ params }: Props) => {
 					initials={{
 						initialSubcategory: paramsFixed.subcategory,
 						initialCategory: paramsFixed.category,
+						initialCountry: "None",
+						initialCity: "None",
 					}}
 				/>
 				<AppsList apps={apps} />
