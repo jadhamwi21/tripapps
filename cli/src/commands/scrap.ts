@@ -11,15 +11,14 @@ const inquirer = require("inquirer");
 
 export default class Scrap extends Command {
   static description = "scrap command";
-
+  static strict = false;
   static flags = {
     countries: Flags.boolean(),
     cities: Flags.boolean(),
-    filter: Flags.string(),
   };
 
   public async run(): Promise<void> {
-    const { flags, args } = await this.parse(Scrap);
+    const { flags, argv } = await this.parse(Scrap);
     const { countries, cities } = flags;
     if (!countries && !cities) {
       throw new Error("pass country or city");
@@ -34,8 +33,8 @@ export default class Scrap extends Command {
       if (countries) {
         return locationsDocs.map((loc) => loc.country);
       } else {
-        if (args) {
-          const countriesFilter = Object.values(args);
+        if (argv) {
+          const countriesFilter = argv;
           return locationsDocs
             .filter((doc) => countriesFilter.indexOf(doc.country) >= 0)
             .map((loc) => loc.cities)
