@@ -1,10 +1,15 @@
 .nav {
 	display: flex;
+	visibility: visible;
 	flex-direction: row;
 	align-items: center;
 	justify-content: flex-end;
 	gap: 2.5em;
 	width: 100%;
+	@media screen and (max-width: 500px) {
+		visibility: hidden;
+		position: fixed;
+	}
 }
 
 @keyframes fade_in {

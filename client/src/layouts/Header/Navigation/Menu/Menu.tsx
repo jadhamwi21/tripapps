@@ -1,11 +1,10 @@
 "use client";
 import { Fade as Hamburger } from "hamburger-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import navstyles from "../Navigation.module.scss";
 import styles from "./Menu.module.scss";
-import { useRouter } from "next/router";
-import { usePathname } from "next/navigation";
 
 type Props = {
 	isLinkSelected: (linkRoute: string, partial?: boolean) => boolean;

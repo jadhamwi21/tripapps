@@ -50,11 +50,20 @@ const ReviewModal = ({
 					reviews: [res.data.review, ...reviews],
 					score: res.data.score,
 				});
+				return res.message;
 			}),
 			{
 				pending: "Adding Review...",
-				success: "Review Added",
-				error: "Something went wrong, try again later...",
+				success: {
+					render: (props: any) => {
+						return <>{props.data}</>;
+					},
+				},
+				error: {
+					render: (props: any) => {
+						return <>{props.data.message}</>;
+					},
+				},
 			}
 		);
 	};

@@ -26,4 +26,8 @@
 	animation-timing-function: ease-in-out;
 	animation-iteration-count: infinite;
 	transition: opacity 0.7s ease;
+	@media screen and (max-width: 768px) {
+		visibility: hidden;
+		position: fixed;
+	}
 }

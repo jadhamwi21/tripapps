@@ -13,5 +13,14 @@ export const addAppReview = async (
 }> => {
 	return await axiosClientInstance
 		.put(`/apps/${store}/${appId}/reviews`, review)
-		.then(({ data }) => data);
+		.then(({ data }) => {
+			return data;
+		})
+		.catch((e) => {
+			if (e.response.data.code === 400) {
+				throw new Error("Invalid Review");
+			} else {
+				throw new Error(e.response.data.message);
+			}
+		});
 };
