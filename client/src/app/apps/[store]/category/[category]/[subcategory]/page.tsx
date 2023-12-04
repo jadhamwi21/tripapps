@@ -22,7 +22,7 @@ const page = async ({ params }: Props) => {
 
 	return (
 		<Meta
-			title={`${params.store} | ${params.subcategory} ${params.category} Apps`}
+			title={`${paramsFixed.store} | ${paramsFixed.subcategory} ${paramsFixed.category} Apps`}
 		>
 			<PageWrapper>
 				<FindAppsSearch

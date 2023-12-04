@@ -21,7 +21,7 @@ const page = async ({ params }: IProps) => {
 	const apps = await getAppsInCategory(paramsFixed.store, paramsFixed.category);
 
 	return (
-		<Meta title={`${params.store} | ${params.category} Apps`}>
+		<Meta title={`${paramsFixed.store} | ${paramsFixed.category} Apps`}>
 			<PageWrapper>
 				<FindAppsSearch
 					seeds={seeds}
