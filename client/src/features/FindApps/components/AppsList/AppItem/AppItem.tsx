@@ -16,22 +16,25 @@ type Props = {
 
 const AppItem: FunctionComponent<Props> = ({ app, style }) => {
 	const [opened, setOpened] = useState(false);
+	const [appState, setAppState] = useState(app);
 	return (
 		<div className={classes.card} style={style}>
-			{!_.isUndefined(app.image) && (
+			{!_.isUndefined(appState.image) && (
 				<div className={classes.image}>
 					<Image
 						className={classes.image}
-						src={`/imageProxy?imageUrl=${app.image!}`}
+						src={`/imageProxy?imageUrl=${appState.image!}`}
 						height={60}
 						width={60}
-						alt={`${app.name}-icon`}
+						alt={`${appState.name}-icon`}
 					/>
 				</div>
 			)}
-			<p className={classes.app_name}>{app.name.replaceAll("&amp;", "&")}</p>
+			<p className={classes.app_name}>
+				{appState.name.replaceAll("&amp;", "&")}
+			</p>
 			<Rating
-				value={app.score}
+				value={appState.score}
 				size="small"
 				readOnly
 				emptyIcon={
@@ -47,16 +50,19 @@ const AppItem: FunctionComponent<Props> = ({ app, style }) => {
 			</div>
 			<div className={classes.text}>
 				<Button variant="primary">
-					<a href={app.link} target="_blank" className={classes.link}>
+					<a href={appState.link} target="_blank" className={classes.link}>
 						Download
 					</a>
 				</Button>
 			</div>
 			<ReviewModal
-				reviews={app.reviews}
+				reviews={appState.reviews}
 				opened={opened}
 				closeHandler={() => setOpened(false)}
-				appId={app.id}
+				appId={appState.id}
+				updateApp={(app: Partial<IApp>) =>
+					setAppState((prev) => ({ ...prev, ...app }))
+				}
 			/>
 		</div>
 	);

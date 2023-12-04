@@ -2,7 +2,7 @@
 import { StoreType } from "@/api/apps";
 import { addAppReview } from "@/api/reviews";
 import Button from "@/components/Button/Button";
-import { IAppReview } from "@/ts/interfaces/apps.interfaces";
+import { IApp, IAppReview } from "@/ts/interfaces/apps.interfaces";
 import { titlize } from "@/utils/utils";
 import StarIcon from "@mui/icons-material/Star";
 import { Rating } from "@mui/material";
@@ -17,9 +17,16 @@ type Props = {
 	opened: boolean;
 	closeHandler: () => void;
 	appId: string;
+	updateApp: (app: Partial<IApp>) => void;
 };
 
-const ReviewModal = ({ reviews, opened, closeHandler, appId }: Props) => {
+const ReviewModal = ({
+	reviews,
+	opened,
+	closeHandler,
+	appId,
+	updateApp,
+}: Props) => {
 	const params = useParams();
 	const [score, setScore] = useState(0);
 	const [review, setReview] = useState("");
@@ -30,16 +37,19 @@ const ReviewModal = ({ reviews, opened, closeHandler, appId }: Props) => {
 			document.body.style.overflow = "auto";
 		}
 	}, [opened]);
-	const router = useRouter();
 
 	const onSubmit = () => {
 		const { store: _store } = params as { store: string };
 		const store = titlize(_store) as StoreType;
 		toast.promise(
-			addAppReview(store, appId, { score, review }).then(() => {
-				router.refresh();
+			addAppReview(store, appId, { score, review }).then((res) => {
 				setScore(0);
 				setReview("");
+
+				updateApp({
+					reviews: [res.data.review, ...reviews],
+					score: res.data.score,
+				});
 			}),
 			{
 				pending: "Adding Review...",
