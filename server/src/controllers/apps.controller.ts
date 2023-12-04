@@ -73,8 +73,8 @@ const ADD_APP_REVIEW_SCHEMA = z.object({
 		appId: z.string(),
 	}),
 	body: z.object({
-		score: z.number(),
-		review: z.string(),
+		score: z.number().min(1).max(5),
+		review: z.string().min(1),
 	}),
 });
 
@@ -93,7 +93,7 @@ const addAppReview = async (
 		const data = await AppsService.addNewAppReview(store, appId, review);
 		return res.status(200).send({ message: "Review added successfully", data });
 	} catch (e) {
-		next(e);
+		return next(e);
 	}
 };
 
