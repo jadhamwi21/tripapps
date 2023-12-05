@@ -33,7 +33,7 @@ export default class Scrap extends Command {
       if (countries) {
         return locationsDocs.map((loc) => loc.country);
       } else {
-        if (argv) {
+        if (argv.length !== 0) {
           const countriesFilter = argv;
           return locationsDocs
             .filter((doc) => countriesFilter.indexOf(doc.country) >= 0)
