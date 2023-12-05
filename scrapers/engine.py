@@ -26,7 +26,7 @@ STORES = [STORESENUM.PLAYSTORE, STORESENUM.APPSTORE]
 STORES_SITES = {STORESENUM.PLAYSTORE: "play.google.com",
                 STORESENUM.APPSTORE: "apps.apple.com"}
 
-API_KEY = "AIzaSyCsI9gjA70uyqO3d_LzGvtQdPpvRoXDm6g"
+API_KEY = "AIzaSyAlOArQskxns63mCXNlyfdoJLDawOp5STs"
 SEARCH_ENGINE_ID = "86402455ad31331ee"
 BASE_URL = "https://www.googleapis.com/customsearch/v1"
 
