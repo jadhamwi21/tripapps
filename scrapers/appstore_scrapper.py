@@ -40,5 +40,5 @@ class AppstoreScraper:
                                 "id": id, "link": link})
             except Exception as e:
                 print(e)
-                print("Error scraping link {} from appstore".format(link))
+                print("Error Scraping link {} from appstore".format(link))
         return apps

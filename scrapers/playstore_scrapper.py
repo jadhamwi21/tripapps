@@ -32,5 +32,5 @@ class PlaystoreScraper:
                                 "id": id, "link": link})
             except Exception as e:
                 print(e)
-                print("Error scraping link {} from playstore".format(link))
+                print("Error Scraping link {} from playstore".format(link))
         return apps
